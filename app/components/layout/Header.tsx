@@ -48,16 +48,12 @@ export default function Header() {
 
             {/* Logo in Center */}
             <Link href="/" className="mx-4">
-              <svg
-                viewBox="0 0 100 100"
-                className="w-12 h-12 text-neon-pink hover:text-neon-cyan transition-colors"
-                fill="currentColor"
-              >
-                {/* K&J Monogram - Simple representation */}
-                <text x="50" y="60" fontSize="48" fontWeight="bold" textAnchor="middle" fontFamily="serif">
-                  K&J
-                </text>
-              </svg>
+              <img
+                src="/images/kj-logo.svg"
+                alt="K&J Monogram"
+                className="w-14 h-14 text-neon-pink hover:opacity-80 transition-opacity"
+                style={{ filter: 'drop-shadow(0 0 8px rgba(255, 105, 180, 0.3))' }}
+              />
             </Link>
 
             <a

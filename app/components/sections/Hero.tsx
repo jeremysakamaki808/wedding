@@ -73,37 +73,28 @@ export default function Hero({ data }: HeroProps) {
       ref={containerRef}
       className="relative w-full min-h-screen bg-dark-navy overflow-hidden flex flex-col items-center justify-center pt-32 pb-20"
       style={{
-        backgroundImage: `url('/images/hero-background.jpg')`,
+        backgroundImage: `url('/images/hero-background.png')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed',
       }}
     >
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/50"></div>
+      <div className="absolute inset-0 bg-black/40"></div>
 
       {/* Hero Content */}
       <div className="relative z-10 w-full px-4 flex flex-col items-center justify-center">
         {/* K&J Monogram Logo */}
         <div ref={logoRef} className="mb-8 opacity-0">
-          <div className="w-20 h-20 md:w-28 md:h-28 flex items-center justify-center">
-            <svg
-              viewBox="0 0 100 100"
-              className="w-full h-full text-neon-pink"
-              fill="currentColor"
-            >
-              <text
-                x="50"
-                y="65"
-                fontSize="48"
-                fontWeight="bold"
-                textAnchor="middle"
-                fontFamily="serif"
-              >
-                K&J
-              </text>
-            </svg>
-          </div>
+          <img
+            src="/images/kj-logo.svg"
+            alt="K&J Monogram"
+            className="w-20 h-20 md:w-28 md:h-28 text-neon-pink"
+            style={{
+              filter: 'drop-shadow(0 0 12px rgba(255, 105, 180, 0.4))',
+              color: '#FF69B4',
+            }}
+          />
         </div>
 
         {/* Main Title */}

@@ -1,0 +1,23 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <!-- Left botanical leaf accent -->
+  <path d="M 30 60 Q 25 70 28 85 Q 30 95 35 100" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M 28 65 L 20 68" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M 27 75 L 18 80" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M 28 85 L 20 92" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M 32 95 L 26 105" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+  <!-- Right botanical leaf accent -->
+  <path d="M 170 60 Q 175 70 172 85 Q 170 95 165 100" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M 172 65 L 180 68" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M 173 75 L 182 80" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M 172 85 L 180 92" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M 168 95 L 174 105" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+  <!-- Main monogram text -->
+  <text x="100" y="115" font-family="serif" font-size="72" font-weight="300" text-anchor="middle" fill="currentColor">K</text>
+  <text x="100" y="115" font-family="serif" font-size="48" font-weight="300" text-anchor="middle" fill="currentColor" dominant-baseline="middle" dy="15">&amp;</text>
+  <text x="100" y="135" font-family="serif" font-size="72" font-weight="300" text-anchor="middle" fill="currentColor">J</text>
+
+  <!-- Decorative bottom line -->
+  <path d="M 60 150 Q 100 155 140 150" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+</svg>
