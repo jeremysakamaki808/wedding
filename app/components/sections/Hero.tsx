@@ -1,7 +1,13 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 import type { WeddingData } from '@/types';
+import GradientText from '@/components/animation/GradientText';
+import ParallaxElement from '@/components/animation/ParallaxElement';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface HeroProps {
   data: WeddingData;
@@ -9,6 +15,10 @@ interface HeroProps {
 
 export default function Hero({ data }: HeroProps) {
   const { couple, tagline } = data.event;
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const dateRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLAnchorElement>(null);
+
   const eventDate = new Date(couple.date);
   const formattedDate = eventDate.toLocaleDateString('en-US', {
     weekday: 'long',
@@ -17,27 +27,90 @@ export default function Hero({ data }: HeroProps) {
     day: 'numeric',
   });
 
+  useEffect(() => {
+    const timeline = gsap.timeline();
+
+    // Subtitle fade-in + slide up
+    if (subtitleRef.current) {
+      timeline.fromTo(
+        subtitleRef.current,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 1, delay: 0.3 },
+        0
+      );
+    }
+
+    // Date fade-in + scale
+    if (dateRef.current) {
+      timeline.fromTo(
+        dateRef.current,
+        { opacity: 0, scale: 0.9 },
+        { opacity: 1, scale: 1, duration: 0.8 },
+        0.5
+      );
+    }
+
+    // Button entrance + hover animation
+    if (buttonRef.current) {
+      timeline.fromTo(
+        buttonRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.8 },
+        0.7
+      );
+
+      // Hover animation
+      buttonRef.current.addEventListener('mouseenter', () => {
+        gsap.to(buttonRef.current, {
+          scale: 1.05,
+          boxShadow: '0 0 30px rgba(200, 90, 124, 0.7)',
+          duration: 0.3,
+        });
+      });
+
+      buttonRef.current.addEventListener('mouseleave', () => {
+        gsap.to(buttonRef.current, {
+          scale: 1,
+          boxShadow: '0 0 20px rgba(200, 90, 124, 0.5)',
+          duration: 0.3,
+        });
+      });
+    }
+
+    return () => {
+      timeline.kill();
+    };
+  }, []);
+
   return (
     <section className="relative w-full h-screen bg-gradient-hero overflow-hidden flex items-center justify-center">
-      {/* Hero Background - Placeholder */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute inset-0 bg-gradient-neon animate-pulse"></div>
-      </div>
+      {/* Hero Background - Parallax */}
+      <ParallaxElement
+        className="absolute inset-0 opacity-30 -z-10"
+        offset={150}
+        scale={false}
+        opacity={false}
+      >
+        <div className="absolute inset-0 bg-gradient-neon"></div>
+      </ParallaxElement>
 
       {/* Hero Content */}
       <div className="relative z-10 text-center px-4 max-w-4xl">
-        {/* Main Title */}
-        <h1 className="gradient-text text-5xl md:text-7xl font-bold mb-6 leading-tight">
+        {/* Main Title - Gradient Reveal */}
+        <GradientText className="text-5xl md:text-7xl font-bold mb-6 leading-tight" scrub={1}>
           {couple.names.join(' & ')}
-        </h1>
+        </GradientText>
 
         {/* Tagline */}
-        <p className="text-xl md:text-2xl text-gray-300 mb-8 font-light">
+        <p
+          ref={subtitleRef}
+          className="text-xl md:text-2xl text-gray-300 mb-8 font-light opacity-0"
+        >
           {tagline}
         </p>
 
         {/* Date and Time */}
-        <div className="space-y-2 mb-12">
+        <div ref={dateRef} className="space-y-2 mb-12 opacity-0">
           <p className="text-lg text-neon-cyan font-semibold">{formattedDate}</p>
           <p className="text-lg text-neon-orange font-semibold">
             {couple.time} {couple.timezone}
@@ -46,8 +119,12 @@ export default function Hero({ data }: HeroProps) {
 
         {/* CTA Button */}
         <a
+          ref={buttonRef}
           href="#rsvp"
-          className="inline-block px-8 py-4 bg-neon-pink text-white text-lg font-bold rounded-lg hover:shadow-glow hover:scale-105 transition-all duration-300"
+          className="inline-block px-8 py-4 bg-neon-pink text-white text-lg font-bold rounded-lg transition-all duration-300 opacity-0"
+          style={{
+            boxShadow: '0 0 20px rgba(200, 90, 124, 0.5)',
+          }}
         >
           ↓ RSVP Now ↓
         </a>

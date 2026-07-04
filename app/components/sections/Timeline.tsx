@@ -1,7 +1,11 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 import type { WeddingData } from '@/types';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface TimelineProps {
   data: WeddingData;
@@ -9,6 +13,40 @@ interface TimelineProps {
 
 export default function Timeline({ data }: TimelineProps) {
   const { timeline } = data;
+
+  useEffect(() => {
+    const items = gsap.utils.toArray('.timeline-item') as HTMLElement[];
+
+    if (items.length === 0) return;
+
+    const timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.timeline-container',
+        start: 'top center',
+      },
+    });
+
+    items.forEach((item, index) => {
+      timeline.fromTo(
+        item,
+        {
+          opacity: 0,
+          x: index % 2 === 0 ? -60 : 60,
+        },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.6,
+        },
+        index * 0.15
+      );
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach(st => st.kill());
+      timeline.kill();
+    };
+  }, []);
 
   return (
     <section id="timeline" className="py-20 bg-dark-navy">
@@ -22,7 +60,7 @@ export default function Timeline({ data }: TimelineProps) {
         </div>
 
         {/* Timeline Items */}
-        <div className="relative">
+        <div className="timeline-container relative">
           {/* Vertical Line */}
           <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-neon"></div>
 
@@ -31,7 +69,9 @@ export default function Timeline({ data }: TimelineProps) {
             {timeline.map((item, index) => (
               <div
                 key={index}
-                className={`flex flex-col md:flex-row gap-8 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
+                className={`timeline-item flex flex-col md:flex-row gap-8 opacity-0 ${
+                  index % 2 === 0 ? 'md:flex-row-reverse' : ''
+                }`}
               >
                 {/* Content */}
                 <div className="md:w-1/2 flex flex-col justify-center">

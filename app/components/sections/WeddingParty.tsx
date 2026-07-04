@@ -1,7 +1,11 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 import type { WeddingData } from '@/types';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface WeddingPartyProps {
   data: WeddingData;
@@ -9,6 +13,61 @@ interface WeddingPartyProps {
 
 export default function WeddingParty({ data }: WeddingPartyProps) {
   const { wedding_party } = data;
+
+  useEffect(() => {
+    const cards = gsap.utils.toArray('.party-card') as HTMLElement[];
+
+    if (cards.length === 0) return;
+
+    const timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.party-grid',
+        start: 'top center',
+      },
+    });
+
+    cards.forEach((card, index) => {
+      timeline.fromTo(
+        card,
+        {
+          opacity: 0,
+          scale: 0.8,
+          y: 30,
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.5,
+        },
+        index * 0.1
+      );
+    });
+
+    // Hover animation
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        gsap.to(card, {
+          y: -10,
+          boxShadow: '0 20px 40px rgba(200, 90, 124, 0.4)',
+          duration: 0.3,
+        });
+      });
+
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, {
+          y: 0,
+          boxShadow: 'none',
+          duration: 0.3,
+        });
+      });
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach(st => st.kill());
+      timeline.kill();
+    };
+  }, []);
 
   return (
     <section id="party" className="py-20 bg-dark-charcoal">
@@ -22,11 +81,11 @@ export default function WeddingParty({ data }: WeddingPartyProps) {
         </div>
 
         {/* Party Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="party-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {wedding_party.map((member) => (
             <div
               key={member.id}
-              className="group relative bg-dark-navy rounded-lg overflow-hidden border border-dark-slate hover:border-neon-pink transition-all duration-300 hover:shadow-glow"
+              className="party-card group relative bg-dark-navy rounded-lg overflow-hidden border border-dark-slate hover:border-neon-pink transition-all duration-300 cursor-pointer opacity-0"
             >
               {/* Image Placeholder */}
               <div className="w-full h-64 bg-gradient-sunset flex items-center justify-center overflow-hidden">
