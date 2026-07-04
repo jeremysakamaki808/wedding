@@ -8,24 +8,24 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Primary neon (GTA 6 style Hawaiian)
+        // Victorian estate + GTA 6 style blend
         neon: {
-          pink: '#FF1493',      // Hot pink primary
-          cyan: '#00CED1',       // Aqua/turquoise
-          purple: '#9D00FF',     // Vibrant purple
-          orange: '#FFA500',     // Sunset orange
-          lime: '#ADFF2F',       // Electric lime accent
+          pink: '#C85A7C',       // Burgundy-rose (wedding primary)
+          cyan: '#7DB5B0',       // Sage green accent
+          purple: '#1B3B4D',     // Deep navy-blue
+          orange: '#D4845E',     // Terracotta
+          lime: '#E8DCC8',       // Cream accent
         },
         // Dark backgrounds (for contrast)
         dark: {
-          navy: '#0A0E27',       // Deep navy (hero background)
-          charcoal: '#1A1A2E',   // Charcoal
-          slate: '#2D2D44',      // Slate for secondary backgrounds
+          navy: '#1B3B4D',       // Deep navy (hero background)
+          charcoal: '#2B4A5C',   // Charcoal
+          slate: '#3D5A6F',      // Slate for secondary backgrounds
         },
         // Semantic colors
-        success: '#00FF41',      // Bright green
-        warning: '#FFB81C',      // Warm yellow
-        error: '#FF006E',        // Neon pink (error state)
+        success: '#7DB5B0',      // Sage green
+        warning: '#D4845E',      // Terracotta
+        error: '#C85A7C',        // Burgundy (error state)
       },
       backgroundImage: {
         'gradient-hero': 'linear-gradient(135deg, #0A0E27 0%, #1A0033 50%, #0A1A2E 100%)',

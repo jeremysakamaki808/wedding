@@ -20,7 +20,7 @@ export default function Button({
 
   const variants = {
     primary: 'bg-neon-pink text-white hover:shadow-glow hover:scale-105 active:scale-95',
-    secondary: 'bg-neon-cyan text-dark-navy hover:shadow-glow-cyan hover:scale-105 active:scale-95',
+    secondary: 'bg-neon-cyan text-white hover:shadow-glow-cyan hover:scale-105 active:scale-95',
     outline: 'border-2 border-neon-pink text-neon-pink hover:shadow-glow active:scale-95',
   };
 

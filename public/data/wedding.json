@@ -1,82 +1,88 @@
 {
   "event": {
     "couple": {
-      "names": ["Name A", "Name B"],
-      "pronouns": ["they/them", "she/her"],
-      "date": "2025-06-21",
-      "time": "4:00 PM",
+      "names": ["Jeremy", "Kelsey"],
+      "pronouns": ["he/him", "she/her"],
+      "date": "2026-10-16",
+      "time": "3:30 PM",
       "timezone": "HST"
     },
     "tagline": "Two souls, one island, forever aloha",
-    "description": "Join us as we celebrate love against the golden Oahu backdrop, where turquoise waters meet endless sky."
+    "description": "Welcome! We're so excited to celebrate with you. We've created this website to share details about our wedding and help you make the most of the weekend. We can't wait to spend this special day with our favorite people."
   },
 
   "venue": {
-    "name": "Venue Name",
-    "address": "Address, Oahu, HI",
-    "mapEmbed": "https://maps.google.com/maps?q=Oahu,+Hawaii&output=embed",
-    "description": "A stunning tropical venue with pristine views and aloha spirit.",
-    "arrival": "3:30 PM – Cocktails & photos",
-    "ceremony": "4:00 PM – Beach ceremony",
-    "reception": "5:30 PM – Dinner & dancing",
-    "parking": "Free parking available",
+    "name": "Kaimea Estates",
+    "address": "Aina Haina, Honolulu, HI",
+    "mapEmbed": "https://maps.google.com/maps?q=Kaimea+Estates,+Aina+Haina,+Honolulu,+HI&output=embed",
+    "description": "Kaimea Estates captures the timeless charm of historic estates with lush grounds and a stunning coastal setting. The venue perfectly balances elegance and relaxation—creating an atmosphere where guests can truly enjoy themselves.",
+    "arrival": "2:30 PM – Shuttle pickup from designated locations",
+    "ceremony": "3:30 PM – Ceremony",
+    "reception": "5:00 PM – Reception with self-guided dining and mingling",
+    "parking": "No parking at venue. Complimentary shuttle service provided from Kahala Mall, Mānoa Marketplace, and Ala Moana Shopping Center.",
     "images": [
       {
         "id": "venue-1",
         "url": "/images/placeholder-venue-1.jpg",
-        "alt": "Venue view with ocean backdrop",
-        "prompt": "Hyper-stylized GTA VI cover aesthetic: pristine turquoise Hawaiian beach with white sand, neon-pink horizon gradient, digital art style, high contrast, vibrant ocean greens and blues, cinematic lighting"
+        "alt": "Kaimea Estates lush gardens with coastal views",
+        "prompt": "Hyper-stylized GTA VI cover aesthetic: Kaimea Estates historic estate with lush tropical gardens and ocean views in golden afternoon light, neon-pink horizon, digital art style, high contrast, vibrant greens and teals, cinematic composition, trending on ArtStation"
       },
       {
         "id": "venue-2",
         "url": "/images/placeholder-venue-2.jpg",
-        "alt": "Sunset pavilion setup",
-        "prompt": "GTA VI neon noir style: beach venue decorated with tropical flowers and ambient lighting at golden hour, cyberpunk color grading, dramatic volumetric lighting, digital illustration style"
+        "alt": "Elegant estate garden decorated for celebration",
+        "prompt": "GTA VI neon noir aesthetic: Kaimea Estates garden pavilion decorated with Victorian-inspired florals and elegant setup at golden hour, cyberpunk color grading with deep blues and warm terracotta accents, dramatic lighting, digital painting style"
+      },
+      {
+        "id": "venue-3",
+        "url": "/images/placeholder-venue-3.jpg",
+        "alt": "Ceremony lawn at Kaimea Estates",
+        "prompt": "GTA VI hyper-stylized estate landscape: expansive lawn ceremony space at Kaimea Estates surrounded by lush greenery, dramatic sky with warm orange and pink tones, neon accents, high-contrast digital illustration"
       }
     ]
   },
 
   "timeline": [
     {
-      "time": "3:30 PM",
-      "event": "Arrival & Cocktails",
-      "description": "Welcome drinks on the beach. Let's get this party started.",
-      "icon": "🍹"
+      "time": "2:30 PM",
+      "event": "Shuttle Pickup",
+      "description": "Please arrive at your designated shuttle location. Pickups from Kahala Mall, Mānoa Marketplace, and Ala Moana Shopping Center.",
+      "icon": "🚗"
     },
     {
-      "time": "4:00 PM",
+      "time": "3:00 PM",
+      "event": "Guest Arrival",
+      "description": "Welcome to Kaimea Estates. Settle in and enjoy the beautiful grounds.",
+      "icon": "👋"
+    },
+    {
+      "time": "3:30 PM",
       "event": "Ceremony",
-      "description": "The big moment. Vows, rings, tears of joy.",
+      "description": "The big moment. Two become one.",
       "icon": "💍"
     },
     {
-      "time": "5:15 PM",
-      "event": "Family Photos",
-      "description": "Capture the memories with our photographer.",
-      "icon": "📸"
-    },
-    {
-      "time": "5:45 PM",
+      "time": "4:00 PM",
       "event": "Cocktail Hour",
-      "description": "Mingling, appetizers, and ocean views.",
-      "icon": "🌊"
+      "description": "Celebrate with champagne, appetizers, and toasts.",
+      "icon": "🥂"
     },
     {
-      "time": "6:30 PM",
-      "event": "Dinner Service",
-      "description": "Seated dinner with toasts and celebration.",
-      "icon": "🍽️"
+      "time": "5:00 PM",
+      "event": "Reception",
+      "description": "Self-guided dining with small plates, open bar, lawn games, and mingling.",
+      "icon": "🎉"
     },
     {
       "time": "8:00 PM",
-      "event": "Dancing & Celebration",
-      "description": "DJ sets the mood. Let's dance all night.",
-      "icon": "🎵"
+      "event": "Evening Celebration",
+      "description": "Special dances, good company, and lasting memories.",
+      "icon": "✨"
     },
     {
-      "time": "11:00 PM",
-      "event": "Last Call",
-      "description": "Farewell drinks and midnight goodbyes.",
+      "time": "8:00 PM",
+      "event": "Shuttle Departure",
+      "description": "Return shuttles available to your original pickup location.",
       "icon": "🌙"
     }
   ],
@@ -84,67 +90,59 @@
   "wedding_party": [
     {
       "id": "party-1",
-      "name": "Wedding Party Member 1",
-      "role": "Maid of Honor",
+      "name": "Wedding Party Member",
+      "role": "Maid of Honor / Best Man",
       "side": "bride",
       "image": "/images/placeholder-party-1.jpg",
-      "bio": "Best friend and biggest cheerleader."
-    },
-    {
-      "id": "party-2",
-      "name": "Wedding Party Member 2",
-      "role": "Best Man",
-      "side": "groom",
-      "image": "/images/placeholder-party-2.jpg",
-      "bio": "Supportive and always there when it counts."
-    },
-    {
-      "id": "party-3",
-      "name": "Wedding Party Member 3",
-      "role": "Bridesmaid",
-      "side": "bride",
-      "image": "/images/placeholder-party-3.jpg",
-      "bio": "Lifelong friend and trusted confidant."
-    },
-    {
-      "id": "party-4",
-      "name": "Wedding Party Member 4",
-      "role": "Groomsman",
-      "side": "groom",
-      "image": "/images/placeholder-party-4.jpg",
-      "bio": "Brother in arms and partner in crime."
+      "bio": "To be announced. Our trusted friend and supporter."
     }
   ],
 
   "faqs": [
     {
-      "question": "What's the dress code?",
-      "answer": "Tropical formal. Think linen, Hawaiian shirts optional, barefoot is welcome. More island chic than black tie."
+      "question": "What should I wear?",
+      "answer": "Estate Garden Attire: polished, comfortable attire appropriate for an outdoor celebration. Dresses, jumpsuits, dress shirts, slacks, suits, and dressy aloha wear are all welcome. Since the ceremony and reception take place outdoors on grass, we recommend choosing footwear accordingly."
     },
     {
-      "question": "Will there be transportation?",
-      "answer": "Free parking on-site. Details about any shuttle service will be included in your welcome packet."
+      "question": "How do I get to the venue?",
+      "answer": "Parking is not available at Kaimea Estates. Complimentary shuttle service will be provided to and from the venue. Shuttles depart from: Kahala Mall, Mānoa Marketplace, and Ala Moana Shopping Center. Please arrive at your shuttle location by 2:30 PM. We recommend using Uber, Lyft, taxi, or a designated driver to reach the shuttle locations."
     },
     {
       "question": "Can I bring a plus-one?",
-      "answer": "Invitations are personalized. Check your invite to see your +1 status. If you have questions, please reach out!"
+      "answer": "If your invitation includes a plus-one, your guest is welcome to attend. Due to venue capacity limitations, we are unfortunately unable to accommodate additional guests beyond those listed on the invitation."
+    },
+    {
+      "question": "Are children invited?",
+      "answer": "We kindly encourage guests to arrange childcare if possible. However, if you plan to bring your child, please let us know as soon as possible due to our strict guest capacity."
     },
     {
       "question": "What time should I arrive?",
-      "answer": "Arrive by 3:30 PM for cocktails. The ceremony begins promptly at 4:00 PM."
+      "answer": "Please plan to arrive at your designated shuttle pickup location by 2:30 PM on October 16th. Shuttle schedules and detailed pickup instructions will be provided closer to the wedding date."
     },
     {
-      "question": "Is the venue beachside?",
-      "answer": "Yes! We've chosen a stunning beachfront location. Bring your sunscreen and prepare for stunning views."
+      "question": "Will the ceremony and reception be outdoors?",
+      "answer": "Yes, the ceremony will take place entirely outdoors. The majority of the reception will also be outdoors, with covered dining areas available. Please plan for an outdoor celebration."
     },
     {
-      "question": "What if it rains?",
-      "answer": "Aloha weather is unpredictable. We have covered areas and backup plans. Mahalo for your flexibility!"
+      "question": "What's the weather like in October?",
+      "answer": "October is typically warm and pleasant, with daytime temperatures ranging from the mid-70s to mid-80s. While sunshine is common, brief rain showers are always a possibility. We recommend dressing comfortably and being prepared for a little bit of everything!"
+    },
+    {
+      "question": "Is there an open bar?",
+      "answer": "Yes! An open bar will be available throughout the evening, featuring beer, wine, cocktails, and our signature drinks."
+    },
+    {
+      "question": "What kind of food will be served?",
+      "answer": "Rather than a traditional seated dinner, we're offering a relaxed dining experience with a variety of small plates and shared bites throughout the evening. Guests can sample, mingle, and enjoy the celebration at their own pace."
+    },
+    {
+      "question": "Will there be dancing?",
+      "answer": "We'll be sharing a few special dances, but don't expect a packed dance floor! We're designed this celebration to be more about spending quality time with the people we love. Expect lawn games, comfortable lounge spaces, and plenty of opportunities to mingle."
     }
   ],
 
   "rsvp": {
-    "deadline": "2025-05-21",
+    "deadline": "2026-09-16",
     "endpoint": "/api/rsvp",
     "questions": [
       {
