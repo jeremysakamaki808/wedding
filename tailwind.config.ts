@@ -8,29 +8,29 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Victorian estate + GTA 6 style blend
+        // Sunset wedding palette
         neon: {
-          pink: '#C85A7C',       // Burgundy-rose (wedding primary)
-          cyan: '#7DB5B0',       // Sage green accent
-          purple: '#1B3B4D',     // Deep navy-blue
-          orange: '#D4845E',     // Terracotta
-          lime: '#E8DCC8',       // Cream accent
+          pink: '#FF69B4',       // Hot pink primary
+          cyan: '#FF8C42',       // Warm orange
+          purple: '#FF1493',     // Deep pink
+          orange: '#FFB84D',     // Sunset orange
+          lime: '#FFE4B5',       // Moccasin/warm cream
         },
         // Dark backgrounds (for contrast)
         dark: {
-          navy: '#1B3B4D',       // Deep navy (hero background)
-          charcoal: '#2B4A5C',   // Charcoal
-          slate: '#3D5A6F',      // Slate for secondary backgrounds
+          navy: '#1A0F2E',       // Very dark purple-navy
+          charcoal: '#2D1B3D',   // Dark plum
+          slate: '#3D2850',      // Dark slate-plum
         },
         // Semantic colors
-        success: '#7DB5B0',      // Sage green
-        warning: '#D4845E',      // Terracotta
-        error: '#C85A7C',        // Burgundy (error state)
+        success: '#FF69B4',      // Hot pink
+        warning: '#FFB84D',      // Sunset orange
+        error: '#FF1493',        // Deep pink (error state)
       },
       backgroundImage: {
-        'gradient-hero': 'linear-gradient(135deg, #0A0E27 0%, #1A0033 50%, #0A1A2E 100%)',
-        'gradient-neon': 'linear-gradient(90deg, #FF1493, #FF006E, #9D00FF)',
-        'gradient-sunset': 'linear-gradient(135deg, #FFA500, #FF1493, #00CED1)',
+        'gradient-hero': 'linear-gradient(135deg, rgba(26, 15, 46, 0.7) 0%, rgba(45, 27, 61, 0.7) 100%)',
+        'gradient-neon': 'linear-gradient(90deg, #FF69B4, #FF1493, #FFB84D)',
+        'gradient-sunset': 'linear-gradient(135deg, #FFB84D, #FF69B4, #FF8C42)',
       },
       boxShadow: {
         'glow': '0 0 20px rgba(255, 20, 147, 0.5)',
