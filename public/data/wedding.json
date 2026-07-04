@@ -1,0 +1,198 @@
+{
+  "event": {
+    "couple": {
+      "names": ["Name A", "Name B"],
+      "pronouns": ["they/them", "she/her"],
+      "date": "2025-06-21",
+      "time": "4:00 PM",
+      "timezone": "HST"
+    },
+    "tagline": "Two souls, one island, forever aloha",
+    "description": "Join us as we celebrate love against the golden Oahu backdrop, where turquoise waters meet endless sky."
+  },
+
+  "venue": {
+    "name": "Venue Name",
+    "address": "Address, Oahu, HI",
+    "mapEmbed": "https://maps.google.com/maps?q=Oahu,+Hawaii&output=embed",
+    "description": "A stunning tropical venue with pristine views and aloha spirit.",
+    "arrival": "3:30 PM – Cocktails & photos",
+    "ceremony": "4:00 PM – Beach ceremony",
+    "reception": "5:30 PM – Dinner & dancing",
+    "parking": "Free parking available",
+    "images": [
+      {
+        "id": "venue-1",
+        "url": "/images/placeholder-venue-1.jpg",
+        "alt": "Venue view with ocean backdrop",
+        "prompt": "Hyper-stylized GTA VI cover aesthetic: pristine turquoise Hawaiian beach with white sand, neon-pink horizon gradient, digital art style, high contrast, vibrant ocean greens and blues, cinematic lighting"
+      },
+      {
+        "id": "venue-2",
+        "url": "/images/placeholder-venue-2.jpg",
+        "alt": "Sunset pavilion setup",
+        "prompt": "GTA VI neon noir style: beach venue decorated with tropical flowers and ambient lighting at golden hour, cyberpunk color grading, dramatic volumetric lighting, digital illustration style"
+      }
+    ]
+  },
+
+  "timeline": [
+    {
+      "time": "3:30 PM",
+      "event": "Arrival & Cocktails",
+      "description": "Welcome drinks on the beach. Let's get this party started.",
+      "icon": "🍹"
+    },
+    {
+      "time": "4:00 PM",
+      "event": "Ceremony",
+      "description": "The big moment. Vows, rings, tears of joy.",
+      "icon": "💍"
+    },
+    {
+      "time": "5:15 PM",
+      "event": "Family Photos",
+      "description": "Capture the memories with our photographer.",
+      "icon": "📸"
+    },
+    {
+      "time": "5:45 PM",
+      "event": "Cocktail Hour",
+      "description": "Mingling, appetizers, and ocean views.",
+      "icon": "🌊"
+    },
+    {
+      "time": "6:30 PM",
+      "event": "Dinner Service",
+      "description": "Seated dinner with toasts and celebration.",
+      "icon": "🍽️"
+    },
+    {
+      "time": "8:00 PM",
+      "event": "Dancing & Celebration",
+      "description": "DJ sets the mood. Let's dance all night.",
+      "icon": "🎵"
+    },
+    {
+      "time": "11:00 PM",
+      "event": "Last Call",
+      "description": "Farewell drinks and midnight goodbyes.",
+      "icon": "🌙"
+    }
+  ],
+
+  "wedding_party": [
+    {
+      "id": "party-1",
+      "name": "Wedding Party Member 1",
+      "role": "Maid of Honor",
+      "side": "bride",
+      "image": "/images/placeholder-party-1.jpg",
+      "bio": "Best friend and biggest cheerleader."
+    },
+    {
+      "id": "party-2",
+      "name": "Wedding Party Member 2",
+      "role": "Best Man",
+      "side": "groom",
+      "image": "/images/placeholder-party-2.jpg",
+      "bio": "Supportive and always there when it counts."
+    },
+    {
+      "id": "party-3",
+      "name": "Wedding Party Member 3",
+      "role": "Bridesmaid",
+      "side": "bride",
+      "image": "/images/placeholder-party-3.jpg",
+      "bio": "Lifelong friend and trusted confidant."
+    },
+    {
+      "id": "party-4",
+      "name": "Wedding Party Member 4",
+      "role": "Groomsman",
+      "side": "groom",
+      "image": "/images/placeholder-party-4.jpg",
+      "bio": "Brother in arms and partner in crime."
+    }
+  ],
+
+  "faqs": [
+    {
+      "question": "What's the dress code?",
+      "answer": "Tropical formal. Think linen, Hawaiian shirts optional, barefoot is welcome. More island chic than black tie."
+    },
+    {
+      "question": "Will there be transportation?",
+      "answer": "Free parking on-site. Details about any shuttle service will be included in your welcome packet."
+    },
+    {
+      "question": "Can I bring a plus-one?",
+      "answer": "Invitations are personalized. Check your invite to see your +1 status. If you have questions, please reach out!"
+    },
+    {
+      "question": "What time should I arrive?",
+      "answer": "Arrive by 3:30 PM for cocktails. The ceremony begins promptly at 4:00 PM."
+    },
+    {
+      "question": "Is the venue beachside?",
+      "answer": "Yes! We've chosen a stunning beachfront location. Bring your sunscreen and prepare for stunning views."
+    },
+    {
+      "question": "What if it rains?",
+      "answer": "Aloha weather is unpredictable. We have covered areas and backup plans. Mahalo for your flexibility!"
+    }
+  ],
+
+  "rsvp": {
+    "deadline": "2025-05-21",
+    "endpoint": "/api/rsvp",
+    "questions": [
+      {
+        "id": "name",
+        "type": "text",
+        "label": "Your Name",
+        "required": true,
+        "placeholder": "First and Last"
+      },
+      {
+        "id": "email",
+        "type": "email",
+        "label": "Email Address",
+        "required": true,
+        "placeholder": "you@example.com"
+      },
+      {
+        "id": "attendance",
+        "type": "radio",
+        "label": "Will you be attending?",
+        "required": true,
+        "options": ["Yes, I'll be there!", "No, I can't make it"]
+      },
+      {
+        "id": "party_size",
+        "type": "select",
+        "label": "How many guests (including yourself)?",
+        "required": true,
+        "options": ["1", "2", "3", "4", "5+"],
+        "conditional_on": "attendance",
+        "show_if": "Yes, I'll be there!"
+      },
+      {
+        "id": "dietary",
+        "type": "checkbox",
+        "label": "Any dietary restrictions? (select all that apply)",
+        "options": ["Vegetarian", "Vegan", "Gluten-free", "Shellfish allergy", "Other"],
+        "conditional_on": "attendance",
+        "show_if": "Yes, I'll be there!"
+      },
+      {
+        "id": "message",
+        "type": "textarea",
+        "label": "Leave a message for the happy couple",
+        "required": false,
+        "placeholder": "Well wishes, funny stories, whatever you want...",
+        "max_length": 500
+      }
+    ]
+  }
+}

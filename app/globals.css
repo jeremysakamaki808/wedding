@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Space Mono', monospace;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Global body styles */
+body {
+  @apply bg-dark-navy text-gray-100;
+}
+
+/* Gradient text reveal effect */
+.gradient-text {
+  background: linear-gradient(90deg, #FFA500 0%, #FF1493 50%, #00CED1 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glow effect on hover */
+.btn-glow {
+  @apply transition-all duration-300;
+}
+
+.btn-glow:hover {
+  @apply shadow-glow scale-105;
+}
+
+/* Neon border glow */
+.neon-border {
+  @apply border-2 border-neon-cyan;
+  box-shadow: inset 0 0 10px rgba(0, 206, 209, 0.2);
+}
+
+.neon-border:focus {
+  @apply shadow-glow-cyan;
+}
+
+/* Parallax depth layer */
+.parallax-layer {
+  will-change: transform;
+}
+
+/* Form focus state with neon glow */
+input:focus,
+textarea:focus,
+select:focus {
+  @apply border-neon-cyan ring-0 outline-none shadow-glow-cyan;
+}
+
+/* Typography scale */
+h1 {
+  @apply text-5xl md:text-6xl font-bold tracking-tighter;
+}
+
+h2 {
+  @apply text-4xl md:text-5xl font-bold tracking-tight;
+}
+
+h3 {
+  @apply text-2xl md:text-3xl font-bold tracking-tight;
+}
+
+p {
+  @apply text-base md:text-lg leading-relaxed text-gray-300;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
