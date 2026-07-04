@@ -8,7 +8,7 @@ interface RSVPSectionProps {
 }
 
 export default function RSVPSection({ data }: RSVPSectionProps) {
-  const { rsvp, event } = data;
+  const { rsvp } = data;
   const deadlineDate = new Date(rsvp.deadline);
   const formattedDeadline = deadlineDate.toLocaleDateString('en-US', {
     month: 'long',
