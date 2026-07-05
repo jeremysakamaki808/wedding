@@ -19,7 +19,7 @@ export default function Venue({ data }: VenueProps) {
   const { venue } = data;
 
   return (
-    <section id="venue" className="relative z-10 px-4 sm:px-6 lg:px-8 pb-24">
+    <section id="venue" className="relative z-30 px-4 sm:px-6 lg:px-8 pb-24">
       {/* GTA-style rounded card floating over the pinned hero artwork */}
       <div className="relative max-w-7xl mx-auto rounded-3xl bg-gradient-venue-card overflow-hidden shadow-[0_24px_80px_rgba(19,26,48,0.6)]">
         {/* Palm silhouette accents */}
