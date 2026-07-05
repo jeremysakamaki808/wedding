@@ -9,10 +9,14 @@ export default function Hero() {
   return (
     <section id="home" className="sticky top-0 h-screen overflow-hidden">
       {/* Background artwork layer — scaled by HeroScrollStage on scroll.
-          A transformable layer (not bg-fixed) so the zoom works everywhere, incl. iOS. */}
+          A transformable layer (not bg-fixed) so the zoom works everywhere, incl. iOS.
+          Portrait phones crop the wide artwork to 62% 38% — the couple's faces,
+          the same point the scroll zoom anchors to, so the push-in stays locked
+          on them. Landscape/desktop keeps the full centered composition; the
+          background-position transition makes device rotation reframe smoothly. */}
       <div
         data-hero-bg
-        className="absolute inset-0 bg-hero-art bg-cover bg-center bg-no-repeat will-change-transform"
+        className="absolute inset-0 bg-hero-art bg-cover bg-no-repeat will-change-transform bg-[position:62%_38%] landscape:bg-center transition-[background-position] duration-500 ease-out"
       />
 
       {/* Subtle dark overlays: stronger behind the left text column, light elsewhere */}
