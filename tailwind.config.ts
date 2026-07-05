@@ -56,7 +56,7 @@ const config: Config = {
         error: '#9C4257',
       },
       backgroundImage: {
-        'hero-art': "url('/images/hero/hero-background-v2.png')",
+        'hero-art-v3': "url('/images/hero/hero-background-v3.png')",
         'gradient-hero': 'linear-gradient(135deg, rgba(19, 26, 48, 0.7) 0%, rgba(27, 36, 64, 0.7) 100%)',
         'gradient-neon': 'linear-gradient(90deg, #D98BA3, #9C4257, #C96F4A)',
         'gradient-sunset': 'linear-gradient(135deg, #DA8E6B, #D98BA3, #C96F4A)',
