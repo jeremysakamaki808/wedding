@@ -8,7 +8,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative w-full min-h-screen bg-hero-art-v3 bg-cover bg-center bg-no-repeat overflow-hidden"
+      className="relative w-full min-h-screen bg-hero-art bg-cover bg-center bg-no-repeat overflow-hidden"
     >
       {/* Subtle dark overlays: stronger behind the left text column, light elsewhere */}
       <div className="absolute inset-0 bg-gradient-to-r from-navy-dark/50 via-navy-dark/20 to-transparent" />
