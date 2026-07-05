@@ -2,8 +2,10 @@ import React from 'react';
 import { venueFrames } from '@/app/config/venueFrames';
 
 /**
- * Full-screen animated venue scene. Slides into view after "Our Story",
- * pins to the viewport, then HeroScrollStage scrubs it:
+ * Animated venue scene layer, rendered INSIDE the pinned hero viewport so the
+ * hero artwork can dissolve seamlessly into it (no hard section edge).
+ * Starts fully transparent; HeroScrollStage fades it in through the thinning
+ * color overlay, then scrubs it:
  *  - flip-book frame sequence ([data-venue-frame] src swaps with scroll)
  *  - dolly-forward + tilt-down camera move ([data-venue-cam] transform)
  *
@@ -12,11 +14,7 @@ import { venueFrames } from '@/app/config/venueFrames';
  */
 export default function VenueBackdrop() {
   return (
-    <section
-      data-venue-stage
-      aria-hidden
-      className="sticky top-0 z-20 h-screen overflow-hidden bg-navy-dark"
-    >
+    <div data-venue-layer aria-hidden className="absolute inset-0 opacity-0 overflow-hidden bg-navy-dark">
       <div data-venue-cam className="absolute inset-0 will-change-transform">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -30,6 +28,6 @@ export default function VenueBackdrop() {
 
       {/* Soft vignette so overlaid text/cards stay readable at the edges */}
       <div className="absolute inset-0 bg-gradient-to-b from-navy-dark/30 via-transparent to-navy-dark/20 pointer-events-none" />
-    </section>
+    </div>
   );
 }

@@ -3,6 +3,7 @@ import HeroTitle from '@/components/sections/hero/HeroTitle';
 import HeroCards from '@/components/sections/hero/HeroCards';
 import HeroCTA from '@/components/sections/hero/HeroCTA';
 import OahuBadge from '@/components/sections/hero/OahuBadge';
+import VenueBackdrop from '@/components/sections/VenueBackdrop';
 
 export default function Hero() {
   return (
@@ -18,7 +19,10 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-navy-dark/50 via-navy-dark/20 to-transparent" />
       <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/35 via-transparent to-navy-dark/25" />
 
-      {/* GTA-style color overlay — fades in as you scroll toward the Venue card */}
+      {/* Animated venue scene — dissolves in through the color overlay below */}
+      <VenueBackdrop />
+
+      {/* GTA-style color overlay — deepens to near-solid, then thins out to reveal the venue scene */}
       <div data-hero-overlay className="absolute inset-0 bg-gta-overlay opacity-0 pointer-events-none" />
 
       {/* Left-aligned hero content */}
