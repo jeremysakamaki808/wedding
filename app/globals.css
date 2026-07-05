@@ -10,6 +10,15 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Hard clamp against sideways panning on mobile: no stray element (entrance
+   animations, decorative accents) may widen the document. Must be `clip`,
+   not `hidden` — `hidden` creates a scroll container, which would break the
+   position:sticky pinning the hero scroll experience depends on. */
+html,
+body {
+  overflow-x: clip;
+}
+
 /* Global body styles */
 body {
   @apply bg-navy-dark text-cream;

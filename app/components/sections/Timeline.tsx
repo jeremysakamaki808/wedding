@@ -49,7 +49,9 @@ export default function Timeline({ data }: TimelineProps) {
   }, []);
 
   return (
-    <section id="timeline" className="py-20 bg-dark-navy">
+    // overflow-x-clip: items enter from x:±60, which would otherwise widen
+    // the page and allow sideways panning on mobile while they wait offscreen
+    <section id="timeline" className="py-20 bg-dark-navy overflow-x-clip">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
