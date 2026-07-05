@@ -74,10 +74,14 @@ export default function WeddingParty({ data }: WeddingPartyProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
+          <p className="label-text text-sage mb-3">With love and gratitude</p>
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-charcoal mb-4">
             Wedding Party
           </h2>
           <p className="text-charcoal/70 text-lg">The people who made this day possible</p>
+          <div className="relative mx-auto mt-5 h-px w-16 bg-terracotta/50">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rotate-45 bg-terracotta/60" />
+          </div>
         </div>
 
         {/* Party Grid */}
@@ -88,10 +92,10 @@ export default function WeddingParty({ data }: WeddingPartyProps) {
               className="party-card group relative bg-ivory rounded-lg overflow-hidden border border-sage/30 hover:border-sage transition-all duration-300 cursor-pointer opacity-0"
             >
               {/* Image Placeholder */}
-              <div className="w-full h-64 bg-gradient-cta flex items-center justify-center overflow-hidden">
+              <div className="w-full h-64 bg-garden-mist border-b border-cream-dark flex items-center justify-center overflow-hidden">
                 <div className="text-center">
-                  <p className="text-ivory text-lg font-bold">Photo</p>
-                  <p className="text-ivory/70 text-sm">(Placeholder)</p>
+                  <p className="text-sage uppercase tracking-[0.18em] text-sm font-semibold">Photo</p>
+                  <p className="text-brown/50 text-xs mt-1 uppercase tracking-[0.14em]">Placeholder</p>
                 </div>
               </div>
 

@@ -55,16 +55,20 @@ export default function Timeline({ data }: TimelineProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
+          <p className="label-text text-sage mb-3">October 16, 2026</p>
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-charcoal mb-4">
             Day Timeline
           </h2>
           <p className="text-charcoal/70 text-lg">How the celebration unfolds</p>
+          <div className="relative mx-auto mt-5 h-px w-16 bg-terracotta/50">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rotate-45 bg-terracotta/60" />
+          </div>
         </div>
 
         {/* Timeline Items */}
         <div className="timeline-container relative">
           {/* Vertical Line */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-cta"></div>
+          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-px h-full bg-cream-dark"></div>
 
           {/* Timeline Items Grid */}
           <div className="space-y-12">
@@ -89,7 +93,7 @@ export default function Timeline({ data }: TimelineProps) {
 
                 {/* Timeline Dot */}
                 <div className="hidden md:flex md:w-1/2 justify-center items-start pt-6">
-                  <div className="w-6 h-6 bg-burgundy rounded-full border-4 border-ivory"></div>
+                  <div className="w-4 h-4 bg-burgundy rounded-full border-2 border-ivory"></div>
                 </div>
               </div>
             ))}

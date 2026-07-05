@@ -22,18 +22,25 @@ function NavLink({
   href,
   label,
   onClick,
+  light = false,
   className = '',
 }: {
   href: string;
   label: string;
   onClick?: () => void;
+  light?: boolean;
   className?: string;
 }) {
+  // Over the dark hero (transparent bar) the links must be light; once the
+  // bar gains its ivory background they flip to dark charcoal.
+  const palette = light
+    ? 'text-cream hover:text-terracotta-light [text-shadow:0_1px_8px_rgba(23,34,67,0.7)]'
+    : 'text-charcoal hover:text-burgundy';
   return (
     <a
       href={href}
       onClick={onClick}
-      className={`uppercase tracking-[0.18em] font-semibold text-charcoal hover:text-burgundy transition-colors duration-300 ${className}`}
+      className={`uppercase tracking-[0.18em] font-semibold transition-colors duration-300 ${palette} ${className}`}
     >
       {label}
     </a>
@@ -56,7 +63,7 @@ export default function Navbar() {
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-500 animate-fade-down ${
         isScrolled
-          ? 'bg-ivory/98 backdrop-blur-md border-b border-cream-dark shadow-soft py-2'
+          ? 'bg-ivory/95 backdrop-blur-md border-b border-cream-dark shadow-soft py-2'
           : 'bg-transparent py-4'
       }`}
     >
@@ -65,17 +72,21 @@ export default function Navbar() {
         <div className="hidden md:grid grid-cols-[1fr_auto_1fr] items-center">
           <nav className="flex items-center justify-end gap-8 lg:gap-12 text-xs lg:text-sm pr-8 lg:pr-12">
             {LEFT_LINKS.map(link => (
-              <NavLink key={link.href} {...link} />
+              <NavLink key={link.href} {...link} light={!isScrolled} />
             ))}
           </nav>
 
           <Link href="/" aria-label="Home" className="justify-self-center">
-            <KJLogo className="w-16 h-16 text-charcoal hover:text-burgundy transition-colors duration-300" />
+            <KJLogo
+              className={`w-16 h-16 transition-colors duration-300 ${
+                isScrolled ? 'text-charcoal hover:text-burgundy' : 'text-cream hover:text-terracotta-light'
+              }`}
+            />
           </Link>
 
           <nav className="flex items-center justify-start gap-8 lg:gap-12 text-xs lg:text-sm pl-8 lg:pl-12">
             {RIGHT_LINKS.map(link => (
-              <NavLink key={link.href} {...link} />
+              <NavLink key={link.href} {...link} light={!isScrolled} />
             ))}
           </nav>
         </div>
@@ -83,7 +94,7 @@ export default function Navbar() {
         {/* Mobile: logo + hamburger */}
         <div className="flex md:hidden items-center justify-between">
           <Link href="/" aria-label="Home">
-            <KJLogo className="w-12 h-12 text-charcoal" />
+            <KJLogo className={`w-12 h-12 ${isScrolled ? 'text-charcoal' : 'text-cream'}`} />
           </Link>
 
           <button
@@ -91,7 +102,9 @@ export default function Navbar() {
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isMenuOpen}
             onClick={() => setIsMenuOpen(open => !open)}
-            className="p-2 text-charcoal hover:text-burgundy transition-colors"
+            className={`p-2 transition-colors ${
+              isScrolled ? 'text-charcoal hover:text-burgundy' : 'text-cream hover:text-terracotta-light'
+            }`}
           >
             <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
               {isMenuOpen ? (

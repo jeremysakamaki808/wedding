@@ -21,6 +21,7 @@ export default function RSVPSection({ data }: RSVPSectionProps) {
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12">
+          <p className="label-text text-sage mb-3">Kindly reply</p>
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-charcoal mb-4">
             RSVP
           </h2>
@@ -30,6 +31,9 @@ export default function RSVPSection({ data }: RSVPSectionProps) {
           <p className="text-burgundy font-semibold">
             Please respond by {formattedDeadline}
           </p>
+          <div className="relative mx-auto mt-5 h-px w-16 bg-terracotta/50">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rotate-45 bg-terracotta/60" />
+          </div>
         </div>
 
         {/* Form Placeholder */}

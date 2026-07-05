@@ -8,19 +8,19 @@ export default function OurStory() {
   return (
     <section id="our-story" className="relative z-10 min-h-screen flex items-center px-5 sm:px-8 lg:px-12 py-24">
       <div data-story-content className="max-w-6xl mx-auto w-full">
-        {/* Header */}
+        {/* Header — sits over the darkened hero artwork, so text stays light */}
         <div className="max-w-2xl mb-12 md:mb-16">
-          <p className="font-script text-4xl md:text-5xl text-burgundy -rotate-2 mb-3 [text-shadow:0_2px_12px_rgba(43,27,16,0.3)]">
+          <p className="font-script text-4xl md:text-5xl text-terracotta-light -rotate-2 mb-3 [text-shadow:0_2px_12px_rgba(19,26,48,0.6)]">
             How we got here
           </p>
-          <h2 className="font-serif uppercase text-6xl md:text-7xl lg:text-8xl text-charcoal leading-[0.9] [text-shadow:0_6px_24px_rgba(43,27,16,0.15)]">
+          <h2 className="font-serif uppercase text-5xl md:text-6xl lg:text-7xl text-cream leading-[1.05] [text-shadow:0_6px_24px_rgba(19,26,48,0.55)]">
             Our Story
           </h2>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Story copy — generic placeholder */}
-          <div className="space-y-5 text-charcoal/85 text-base md:text-lg leading-relaxed">
+          <div className="space-y-5 text-cream/90 text-base md:text-lg leading-relaxed">
             <p>
               Every love story is beautiful, but ours is our favorite. From the moment we
               met, we knew there was something special between us — a spark that grew into
@@ -31,7 +31,7 @@ export default function OurStory() {
               become each other&rsquo;s favorite person. And now, surrounded by the people we
               love most, we&rsquo;re ready for our biggest adventure yet.
             </p>
-            <p className="font-script text-3xl md:text-4xl text-burgundy pt-2">
+            <p className="font-script text-3xl md:text-4xl text-terracotta-light pt-2 [text-shadow:0_2px_12px_rgba(19,26,48,0.6)]">
               And so, we&rsquo;re headed to the island&hellip;
             </p>
           </div>

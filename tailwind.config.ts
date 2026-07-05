@@ -76,10 +76,10 @@ const config: Config = {
         'gradient-cta': 'linear-gradient(135deg, #B16A4C 0%, #8B4A6B 55%, #560216 100%)',
         // Warm botanical scroll overlay with terracotta-to-burgundy transition
         'gta-overlay': 'linear-gradient(160deg, rgba(43, 27, 16, 0.95) 0%, rgba(86, 2, 22, 0.85) 45%, rgba(177, 106, 76, 0.75) 100%)',
-        'gradient-venue-card': 'linear-gradient(150deg, #172243 0%, #2E3D5C 30%, #560216 62%, #B16A4C 100%)',
       },
       boxShadow: {
         'soft': '0 2px 8px rgba(43, 27, 16, 0.08)',
+        'card': '0 24px 60px rgba(23, 34, 67, 0.35)',
         'glow': '0 0 20px rgba(139, 74, 107, 0.35)',
         'glow-cyan': '0 0 20px rgba(93, 116, 102, 0.35)',
         'glow-soft': '0 8px 30px rgba(177, 106, 76, 0.25)',
@@ -89,7 +89,7 @@ const config: Config = {
         serif: ['var(--font-serif)', 'Georgia', 'serif'],
         body: ['var(--font-body)', 'Garamond', 'serif'],
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
-        display: ['var(--font-display)', 'Impact', 'sans-serif'],
+        display: ['var(--font-serif)', 'Georgia', 'serif'],
         script: ['var(--font-script)', 'cursive'],
       },
       keyframes: {

@@ -20,16 +20,17 @@ export default function Venue({ data }: VenueProps) {
 
   return (
     <section id="venue" className="relative z-30 px-4 sm:px-6 lg:px-8 pb-24">
-      <div className="relative mx-auto max-w-7xl rounded-3xl bg-gradient-venue-card overflow-hidden shadow-lg">
-        <PalmFrond className="absolute -top-10 -right-10 w-56 h-56 md:w-72 md:h-72 text-plum-light opacity-30 rotate-[18deg] pointer-events-none" />
-        <PalmFrond className="absolute -bottom-14 -left-12 w-64 h-64 md:w-80 md:h-80 text-plum-light opacity-25 -rotate-[24deg] -scale-x-100 pointer-events-none" />
+      {/* Ivory stationery card floating over the animated venue scene */}
+      <div className="relative mx-auto max-w-7xl rounded-3xl bg-ivory border border-cream-dark overflow-hidden shadow-card">
+        <PalmFrond className="absolute -top-10 -right-10 w-56 h-56 md:w-72 md:h-72 text-sage opacity-[0.12] rotate-[18deg] pointer-events-none" />
+        <PalmFrond className="absolute -bottom-14 -left-12 w-64 h-64 md:w-80 md:h-80 text-sage opacity-[0.12] -rotate-[24deg] -scale-x-100 pointer-events-none" />
 
         <div className="relative px-6 py-14 sm:px-10 md:px-14 lg:px-16 md:py-16">
           <div className="max-w-3xl mb-12 md:mb-16">
-            <p className="uppercase tracking-[0.3em] text-burgundy text-xs md:text-sm font-semibold mb-3">
+            <p className="uppercase tracking-[0.3em] text-sage text-xs md:text-sm font-semibold mb-3">
               Where we say "I do"
             </p>
-            <h2 className="font-serif uppercase text-5xl md:text-6xl lg:text-7xl text-charcoal leading-tight mb-5">
+            <h2 className="font-serif uppercase text-4xl md:text-5xl lg:text-6xl text-charcoal leading-[1.05] mb-5">
               The Venue
             </h2>
             <p className="text-charcoal/85 text-base md:text-lg leading-relaxed">
@@ -42,11 +43,11 @@ export default function Venue({ data }: VenueProps) {
               {venue.images.map((image) => (
                 <div
                   key={image.id}
-                  className="w-full h-64 md:h-80 rounded-2xl overflow-hidden flex items-center justify-center border border-sage/30 bg-ivory/70 backdrop-blur-sm"
+                  className="w-full h-64 md:h-80 rounded-2xl overflow-hidden flex items-center justify-center border border-cream-dark bg-garden-mist"
                 >
                   <div className="text-center px-6">
-                    <p className="text-charcoal text-lg font-bold">{image.alt}</p>
-                    <p className="text-brown/60 text-sm mt-2">(Placeholder Image)</p>
+                    <p className="text-sage uppercase tracking-[0.18em] text-sm font-semibold">{image.alt}</p>
+                    <p className="text-brown/50 text-xs mt-2 uppercase tracking-[0.14em]">Placeholder Image</p>
                   </div>
                 </div>
               ))}
@@ -71,13 +72,13 @@ export default function Venue({ data }: VenueProps) {
                   { entry: venue.ceremony, note: 'The moment we say "I do"' },
                   { entry: venue.reception, note: 'Dinner, toasts, dancing, and celebration' },
                 ].map(({ entry, note }) => {
-                  const parts = entry.split(' - ');
-                  const time = parts[0];
-                  const label = parts.slice(1).join(' - ').trim();
+                  // Data strings look like "2:30 PM – Shuttle pickup from ..." (en dash)
+                  const [time, ...rest] = entry.split('–');
+                  const label = rest.join('–').trim();
                   return (
                     <div key={entry} className="flex gap-4">
                       <div className="flex-shrink-0 w-20 md:w-24">
-                        <p className="text-burgundy font-bold whitespace-nowrap">{time}</p>
+                        <p className="text-burgundy font-bold whitespace-nowrap">{time.trim()}</p>
                       </div>
                       <div className="flex-grow border-l-2 border-sage/40 pl-4 pb-2">
                         {label && <p className="text-charcoal font-semibold">{label}</p>}

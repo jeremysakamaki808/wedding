@@ -32,14 +32,14 @@ export default function Footer({ data }: FooterProps) {
 
           {/* Venue */}
           <div>
-            <h4 className="text-sage font-bold mb-2">Location</h4>
+            <h4 className="text-sage-light font-bold mb-2">Location</h4>
             <p className="text-cream">{data.venue.name}</p>
             <p className="text-cream/60 text-sm">{data.venue.address}</p>
           </div>
 
           {/* Countdown */}
           <div>
-            <h4 className="text-burgundy font-bold mb-2">Days Until</h4>
+            <h4 className="text-terracotta-light font-bold mb-2">Days Until</h4>
             <p className="text-4xl font-bold text-cream">{daysLeft}</p>
           </div>
         </div>

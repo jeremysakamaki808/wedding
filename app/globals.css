@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 /* Font variables set on <html> by next/font in app/layout.tsx:
-   --font-serif (Playfair Display), --font-body (Lora), --font-sans (Montserrat),
-   --font-display (Anton), --font-script (Great Vibes) */
+   --font-serif (Playfair Display — headings and display type),
+   --font-body (Lora), --font-sans (Montserrat), --font-script (Great Vibes) */
 
 /* Smooth scroll behavior */
 html {
@@ -23,24 +23,6 @@ body {
 /* Global body styles */
 body {
   @apply bg-navy-dark text-cream;
-}
-
-/* Gradient text reveal effect */
-.gradient-text {
-  background: linear-gradient(90deg, #B16A4C 0%, #8B4A6B 50%, #6F8E78 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Soft hover effect */
-.btn-glow {
-  @apply transition-all duration-300;
-}
-
-.btn-glow:hover {
-  @apply shadow-soft;
 }
 
 /* Soft border glow */

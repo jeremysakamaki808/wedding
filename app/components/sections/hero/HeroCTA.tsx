@@ -13,16 +13,16 @@ export default function HeroCTA() {
     <div className="max-w-[520px] mt-4 md:mt-5 animate-fade-up [animation-delay:0.8s]">
       <a
         href="#rsvp"
-        className="relative block rounded-full border border-burgundy/60 bg-gradient-cta px-6 py-3.5 md:py-4 text-center overflow-hidden transition-all duration-300 hover:shadow-soft hover:border-burgundy/90"
+        className="relative block rounded-full border border-terracotta-light/40 bg-burgundy px-6 py-3.5 md:py-4 text-center overflow-hidden transition-all duration-300 hover:bg-burgundy-light hover:shadow-soft"
       >
       {/* Palm decorations */}
-      <PalmSilhouette className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 text-burgundy opacity-30" />
-      <PalmSilhouette className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 text-burgundy opacity-30 -scale-x-100" />
+      <PalmSilhouette className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 text-ivory opacity-10" />
+      <PalmSilhouette className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 text-ivory opacity-10 -scale-x-100" />
 
-      <span className="block font-display uppercase tracking-[0.2em] text-2xl md:text-3xl text-burgundy">
+      <span className="block font-display uppercase tracking-[0.14em] text-xl md:text-2xl text-ivory">
         RSVP Now
       </span>
-        <span className="block mt-1 uppercase tracking-[0.24em] font-bold text-[10px] md:text-xs text-navy-dark">
+        <span className="block mt-1 uppercase tracking-[0.24em] font-bold text-[10px] md:text-xs text-cream/80">
           We can&rsquo;t wait to celebrate!
         </span>
       </a>
