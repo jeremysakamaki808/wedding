@@ -2,8 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Font variables (--font-sans, --font-display, --font-script) are set on <html>
-   by next/font in app/layout.tsx: Montserrat, Anton, Great Vibes. */
+/* Self-hosted fonts via @fontsource (no external network required at build time) */
+@import '@fontsource/anton/400.css';
+@import '@fontsource/great-vibes/400.css';
+@import '@fontsource/montserrat/400.css';
+@import '@fontsource/montserrat/500.css';
+@import '@fontsource/montserrat/600.css';
+@import '@fontsource/montserrat/700.css';
+
+/* Font CSS variables consumed by Tailwind (font-sans, font-display, font-script) */
+:root {
+  --font-display: Anton;
+  --font-script: Great Vibes;
+  --font-sans: Montserrat;
+}
 
 /* Smooth scroll behavior */
 html {

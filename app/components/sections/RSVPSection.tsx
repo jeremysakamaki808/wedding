@@ -69,7 +69,7 @@ export default function RSVPSection({ data }: RSVPSectionProps) {
                     className="w-4 h-4 text-neon-pink cursor-pointer opacity-50"
                   />
                   <label htmlFor="yes" className="ml-3 text-gray-300 opacity-50">
-                    Yes, I'll be there!
+                    Yes, I&apos;ll be there!
                   </label>
                 </div>
                 <div className="flex items-center">
@@ -80,7 +80,7 @@ export default function RSVPSection({ data }: RSVPSectionProps) {
                     className="w-4 h-4 text-neon-pink cursor-pointer opacity-50"
                   />
                   <label htmlFor="no" className="ml-3 text-gray-300 opacity-50">
-                    No, I can't make it
+                    No, I can&apos;t make it
                   </label>
                 </div>
               </div>
