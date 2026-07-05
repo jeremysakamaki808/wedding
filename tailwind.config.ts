@@ -69,7 +69,9 @@ const config: Config = {
         error: '#8B2E47',
       },
       backgroundImage: {
-        'hero-art': "url('/images/hero/new-background-hero.png')",
+        // First frame of the hero loop video — instant paint + fallback if the
+        // video can't load/autoplay, indistinguishable from the running clip
+        'hero-art': "url('/videos/hero-poster.jpg')",
         'gradient-hero': 'linear-gradient(135deg, rgba(23, 34, 67, 0.7) 0%, rgba(31, 43, 77, 0.7) 100%)',
         'gradient-neon': 'linear-gradient(90deg, #8B4A6B, #8B2E47, #B16A4C)',
         'gradient-sunset': 'linear-gradient(135deg, #D4956B, #8B4A6B, #B16A4C)',
