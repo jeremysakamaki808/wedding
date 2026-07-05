@@ -3,6 +3,7 @@ import path from 'path';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Hero from './components/sections/Hero';
+import HeroScrollStage from './components/sections/HeroScrollStage';
 import Venue from './components/sections/Venue';
 import Timeline from './components/sections/Timeline';
 import WeddingParty from './components/sections/WeddingParty';
@@ -19,8 +20,12 @@ export default function Home() {
   return (
     <main className="w-full bg-dark-navy text-gray-100">
       <Navbar />
-      <Hero />
-      <Venue data={weddingData} />
+      <HeroScrollStage>
+        <Hero />
+        {/* Scroll runway: pure camera push-in before the Venue card arrives */}
+        <div aria-hidden className="h-[50vh]" />
+        <Venue data={weddingData} />
+      </HeroScrollStage>
       <Timeline data={weddingData} />
       <WeddingParty data={weddingData} />
       <Gallery />

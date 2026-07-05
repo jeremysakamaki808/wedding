@@ -37,6 +37,10 @@ const config: Config = {
           DEFAULT: '#D98BA3',
           light: '#E8AFC0',
         },
+        plum: {
+          DEFAULT: '#2A1B3D',
+          light: '#3D2A55',
+        },
         // Legacy aliases (used by existing sections) mapped to muted tones
         neon: {
           pink: '#D98BA3',       // muted rose
@@ -61,6 +65,9 @@ const config: Config = {
         'gradient-neon': 'linear-gradient(90deg, #D98BA3, #9C4257, #C96F4A)',
         'gradient-sunset': 'linear-gradient(135deg, #DA8E6B, #D98BA3, #C96F4A)',
         'gradient-cta': 'linear-gradient(135deg, #DA8E6B 0%, #D98BA3 55%, #C96F4A 100%)',
+        // GTA VI-style scroll overlay + matching Venue card gradient (same color family)
+        'gta-overlay': 'linear-gradient(160deg, rgba(42,27,61,0.95) 0%, rgba(122,46,63,0.85) 45%, rgba(201,111,74,0.75) 100%)',
+        'gradient-venue-card': 'linear-gradient(150deg, #2A1B3D 0%, #3D2A55 30%, #7A2E3F 62%, #C96F4A 100%)',
       },
       boxShadow: {
         'glow': '0 0 20px rgba(217, 139, 163, 0.45)',
