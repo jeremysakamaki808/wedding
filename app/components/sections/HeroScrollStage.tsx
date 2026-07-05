@@ -88,7 +88,55 @@ export default function HeroScrollStage({ children }: { children: React.ReactNod
         );
       }
 
-      // ---- A. Hero intro release: UI fades out, overlay builds ------------
+      // ---- Overlay veil: ONE driver for the whole 0 -> 0.8 -> 0.96 -> 0 arc.
+      // A single piecewise map of absolute scroll position. Never split this
+      // across multiple triggers: two scrubbed tweens on the same property
+      // update in creation order on the same tick, so scrolling back to the
+      // top lets the later trigger re-render its start value (0.8) AFTER the
+      // hero trigger has written 0 — leaving the veil stuck over the hero.
+      if (overlay && transitionZone) {
+        let m = { rampStart: 0, rampEnd: 1, creepStart: 1, creepEnd: 2, fadeStart: 2, fadeEnd: 3 };
+        const measure = () => {
+          const H = window.innerHeight;
+          const sy = window.scrollY;
+          const tz = transitionZone.getBoundingClientRect();
+          const tzTop = tz.top + sy;
+          const st = story?.getBoundingClientRect();
+          m = {
+            rampStart: 0.16 * H, // matches old stage-A timing (pos 0.2 of 80vh)
+            rampEnd: 0.8 * H,
+            creepStart: st ? st.top + sy - 0.3 * H : tzTop, // story top hits 30%
+            creepEnd: st ? st.bottom + sy : tzTop, // story bottom hits top
+            fadeStart: tzTop + 0.35 * tz.height,
+            fadeEnd: tzTop + tz.height,
+          };
+        };
+        const veilAt = (s: number) => {
+          if (s <= m.rampStart) return 0;
+          if (s < m.rampEnd) return 0.8 * ((s - m.rampStart) / (m.rampEnd - m.rampStart));
+          if (s < m.creepStart) return 0.8;
+          if (s < m.creepEnd) return 0.8 + 0.16 * ((s - m.creepStart) / (m.creepEnd - m.creepStart));
+          if (s < m.fadeStart) return 0.96;
+          if (s < m.fadeEnd) return 0.96 * (1 - (s - m.fadeStart) / (m.fadeEnd - m.fadeStart));
+          return 0;
+        };
+        const apply = () => gsap.set(overlay, { opacity: veilAt(window.scrollY) });
+        measure();
+        apply();
+        ScrollTrigger.create({
+          trigger: stage,
+          endTrigger: transitionZone,
+          start: 'top top',
+          end: 'bottom top',
+          onUpdate: apply,
+          onRefresh: () => {
+            measure();
+            apply();
+          },
+        });
+      }
+
+      // ---- A. Hero intro release: UI fades out --------------------------
       {
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -109,13 +157,9 @@ export default function HeroScrollStage({ children }: { children: React.ReactNod
           // intercept clicks while the stage is pinned behind later sections
           tl.to(content, { autoAlpha: 0, y: -60, ease: 'none', duration: 0.45 }, 0);
         }
-
-        if (overlay) {
-          tl.fromTo(overlay, { opacity: 0 }, { opacity: 0.8, ease: 'none', duration: 0.8 }, 0.2);
-        }
       }
 
-      // ---- B. Our Story passes: story fades in, overlay creeps near-solid --
+      // ---- B. Our Story passes: story content fades in ---------------------
       if (story) {
         gsap.fromTo(
           story,
@@ -132,41 +176,24 @@ export default function HeroScrollStage({ children }: { children: React.ReactNod
             },
           }
         );
-
-        if (overlay) {
-          // Continue from trigger A's end value (0.8); immediateRender:false
-          // keeps this from stomping the overlay to 0.8 at page load.
-          gsap.fromTo(
-            overlay,
-            { opacity: 0.8 },
-            {
-              opacity: 0.96,
-              ease: 'none',
-              immediateRender: false,
-              scrollTrigger: {
-                trigger: story,
-                start: 'top 30%', // after trigger A has fully released the overlay
-                end: 'bottom top',
-                scrub: 0.6,
-              },
-            }
-          );
-        }
       }
 
-      // ---- C. Dissolve: scene fades in beneath the veil, veil thins out ----
-      if (transitionZone && venueLayer && overlay) {
-        const dissolve = gsap.timeline({
-          scrollTrigger: {
-            trigger: transitionZone,
-            start: 'top top',
-            end: 'bottom top',
-            scrub: 0.6,
-          },
-        });
-
-        dissolve.fromTo(venueLayer, { opacity: 0 }, { opacity: 1, ease: 'none', duration: 0.45 }, 0);
-        dissolve.to(overlay, { opacity: 0, ease: 'none', duration: 0.65 }, 0.35);
+      // ---- C. Dissolve: venue scene fades in beneath the thinning veil ----
+      if (transitionZone && venueLayer) {
+        gsap.fromTo(
+          venueLayer,
+          { opacity: 0 },
+          {
+            opacity: 1,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: transitionZone,
+              start: 'top top',
+              end: '45% top', // scene fully in by 45% of the zone (veil fade starts at 35%)
+              scrub: 0.6,
+            },
+          }
+        );
       }
 
       // ---- D. Venue scene: dolly-forward + tilt-down + flip-book scrub -----
