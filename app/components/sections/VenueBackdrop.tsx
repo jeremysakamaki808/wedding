@@ -1,31 +1,44 @@
 import React from 'react';
 import { venueFrames } from '@/app/config/venueFrames';
+import { venueVideo } from '@/app/config/venueVideo';
 
 /**
  * Animated venue scene layer, rendered INSIDE the pinned hero viewport so the
  * hero artwork can dissolve seamlessly into it (no hard section edge).
  * Starts fully transparent; HeroScrollStage fades it in through the thinning
- * color overlay, then scrubs it:
- *  - flip-book frame sequence ([data-venue-frame] src swaps with scroll)
- *  - continuous zoom-OUT camera move ([data-venue-cam] transform), the
- *    opposite of the hero's push-in: starts tight on the scene, pulls back
+ * color overlay, then scrubs it GTA VI-style: scroll progress maps straight
+ * to [data-venue-video] currentTime. The drone camera move is baked into the
+ * footage, so this layer gets no extra zoom/pan transform.
  *
- * The frame image is ~135% viewport height so the camera has headroom to
- * translate during the pull-back without exposing edges.
+ * The hidden [data-venue-frame] img is the emergency fallback: if no video
+ * source is playable, HeroScrollStage unhides it and scrubs the SVG
+ * flip-book frames instead.
  */
 export default function VenueBackdrop() {
   return (
     <div data-venue-layer aria-hidden className="absolute inset-0 opacity-0 overflow-hidden bg-navy-dark">
-      <div data-venue-cam className="absolute inset-0 will-change-transform">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          data-venue-frame
-          src={venueFrames.path(0)}
-          alt=""
-          draggable={false}
-          className="absolute top-0 left-0 w-full h-[135%] object-cover select-none"
-        />
-      </div>
+      <video
+        data-venue-video
+        muted
+        playsInline
+        preload="metadata"
+        poster={venueVideo.poster}
+        disablePictureInPicture
+        className="absolute inset-0 h-full w-full object-cover select-none pointer-events-none"
+      >
+        {venueVideo.sources.map(s => (
+          <source key={s.src} src={s.src} type={s.type} />
+        ))}
+      </video>
+
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        data-venue-frame
+        src={venueFrames.path(0)}
+        alt=""
+        draggable={false}
+        className="absolute inset-0 hidden h-full w-full object-cover select-none"
+      />
 
       {/* Soft vignette so overlaid text/cards stay readable at the edges */}
       <div className="absolute inset-0 bg-gradient-to-b from-navy-dark/30 via-transparent to-navy-dark/20 pointer-events-none" />

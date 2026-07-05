@@ -5,6 +5,7 @@ import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { venueFrames } from '@/app/config/venueFrames';
+import { venueVideo } from '@/app/config/venueVideo';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -18,10 +19,11 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
  *  A. Meanwhile the hero UI fades out and the color overlay builds (0 -> 0.8).
  *  B. "Our Story" scrolls over the darkened artwork; the overlay keeps
  *     creeping toward near-solid (0.96 — almost, but not quite).
- *  C. Dissolve: the venue flip-book layer fades in beneath the veil, then the
+ *  C. Dissolve: the venue video layer fades in beneath the veil, then the
  *     overlay thins back out to transparent, revealing the animated scene.
- *  D. Opposite move: the venue camera continuously zooms OUT (1.35 -> 1) while
- *     scroll scrubs the flip-book frames; the Venue card scrolls up over it.
+ *  D. GTA VI scrub: scroll progress maps straight to the venue video's
+ *     currentTime (the drone camera move is baked into the footage, so the
+ *     site adds no transform); the Venue card scrolls up over it.
  *
  * Children contract (queried via data attributes inside this stage):
  *  - [data-hero-bg]           hero background artwork (continuous zoom + pan-up)
@@ -30,10 +32,10 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
  *  - [data-hero-overlay]      color overlay (0 -> 0.8 -> 0.96 -> 0)
  *  - [data-story-content]     Our Story content (fades in on entry)
  *  - [data-venue-layer]       venue scene layer inside the hero (opacity 0 -> 1)
- *  - [data-venue-cam]         camera layer (dolly + tilt transform)
- *  - [data-venue-frame]       <img> whose src is swapped through the frames
+ *  - [data-venue-video]       <video> scrubbed via currentTime
+ *  - [data-venue-frame]       hidden fallback <img>, flip-book if video fails
  *  - [data-venue-transition]  flow marker: dissolve zone
- *  - [data-venue-runway]      flow marker: flip-book/camera runway
+ *  - [data-venue-runway]      flow marker: video-scrub runway
  */
 export default function HeroScrollStage({ children }: { children: React.ReactNode }) {
   const stageRef = useRef<HTMLDivElement>(null);
@@ -50,7 +52,7 @@ export default function HeroScrollStage({ children }: { children: React.ReactNod
       const overlay = stage.querySelector('[data-hero-overlay]');
       const story = stage.querySelector('[data-story-content]');
       const venueLayer = stage.querySelector('[data-venue-layer]');
-      const venueCam = stage.querySelector('[data-venue-cam]');
+      const video = stage.querySelector<HTMLVideoElement>('[data-venue-video]');
       const venueFrame = stage.querySelector<HTMLImageElement>('[data-venue-frame]');
       const transitionZone = stage.querySelector('[data-venue-transition]');
       const runway = stage.querySelector('[data-venue-runway]');
@@ -196,19 +198,46 @@ export default function HeroScrollStage({ children }: { children: React.ReactNod
         );
       }
 
-      // ---- D. Venue scene: dolly-forward + tilt-down + flip-book scrub -----
-      if (transitionZone && runway && venueCam && venueFrame) {
-        // Preload every frame so scrubbing never shows a blank swap
-        const preloaded: HTMLImageElement[] = [];
-        for (let i = 0; i < venueFrames.count; i++) {
-          const im = new Image();
-          im.src = venueFrames.path(i);
-          preloaded.push(im);
-        }
+      // ---- D. Venue scene: GTA VI video scrub ------------------------------
+      // Scroll progress maps straight to video.currentTime. The scrub runs
+      // across the dissolve AND the runway, so the scene is already alive
+      // while it's being revealed. The drone camera move (push-in on the
+      // altar, pull-back to the vista) is baked into the footage — the site
+      // applies no transform of its own.
+      if (transitionZone && runway && video) {
+        let videoFailed = false;
 
+        // Seeks are async: if one is still in flight (or metadata hasn't
+        // arrived yet), remember the latest target and apply it when ready
+        // so fast scrolling never strands the video at a stale time.
+        let pendingTime: number | null = null;
+        const duration = () =>
+          isFinite(video.duration) && video.duration > 0 ? video.duration : venueVideo.duration;
+        const seek = (t: number) => {
+          if (video.readyState < 1 || video.seeking) {
+            pendingTime = t;
+            return;
+          }
+          if (Math.abs(video.currentTime - t) < 0.02) return;
+          video.currentTime = t;
+        };
+        const flushPending = () => {
+          if (pendingTime !== null) {
+            const t = pendingTime;
+            pendingTime = null;
+            seek(t);
+          }
+        };
+        video.addEventListener('seeked', flushPending);
+        video.addEventListener('loadedmetadata', flushPending);
+
+        // Emergency fallback: if no source is playable, unhide the flip-book
+        // img and scrub the SVG frames instead. A failed <source> chain fires
+        // error on the LAST <source>, not the <video>, so listen to both.
         let currentFrame = 0;
         const totalSteps = venueFrames.count * venueFrames.cycles;
         const setFrame = (progress: number) => {
+          if (!venueFrame) return;
           const step = Math.min(totalSteps - 1, Math.floor(progress * totalSteps));
           const idx = venueFrames.cycles > 1 ? step % venueFrames.count : step;
           if (idx !== currentFrame) {
@@ -216,28 +245,52 @@ export default function HeroScrollStage({ children }: { children: React.ReactNod
             venueFrame.src = venueFrames.path(idx);
           }
         };
+        const activateFallback = () => {
+          if (videoFailed) return;
+          videoFailed = true;
+          video.style.display = 'none';
+          venueFrame?.classList.remove('hidden');
+          for (let i = 0; i < venueFrames.count; i++) new Image().src = venueFrames.path(i);
+          console.warn('Venue video failed to load; falling back to SVG flip-book frames');
+        };
+        video.addEventListener('error', activateFallback);
+        video.querySelector('source:last-of-type')?.addEventListener('error', activateFallback);
 
-        // Camera runs across the dissolve AND the runway, so the scene is
-        // already alive while it's being revealed. Opposite of the hero: the
-        // scene starts pushed-in on the foreground and continuously zooms OUT,
-        // pulling back and settling on the full vista as scroll progresses.
-        gsap.fromTo(
-          venueCam,
-          { scale: 1.35, yPercent: -18, transformOrigin: '50% 35%' },
-          {
-            scale: 1,
-            yPercent: 0,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: transitionZone,
-              endTrigger: runway,
-              start: 'top top',
-              end: 'bottom top',
-              scrub: 0.6,
-              onUpdate: self => setFrame(self.progress),
-            },
-          }
-        );
+        // Only metadata loads up-front (kind to first paint and mobile data).
+        // The moment the journey starts scrolling, buffer the whole clip so
+        // seeks land instantly by the time the dissolve reveals the scene.
+        // The muted play()+pause() primes mobile Safari, which won't paint
+        // seeked frames until playback has started once.
+        ScrollTrigger.create({
+          trigger: stage,
+          start: 'top top-=1',
+          once: true,
+          onEnter: () => {
+            video.preload = 'auto';
+            video.load();
+            video.play().then(() => video.pause()).catch(() => {});
+          },
+        });
+
+        // A proxy tween (rather than a bare onUpdate) so scrub's 0.6s easing
+        // smooths the scrub — fast scrolling glides the video instead of
+        // jump-cutting between times.
+        const proxy = { p: 0 };
+        gsap.fromTo(proxy, { p: 0 }, {
+          p: 1,
+          ease: 'none',
+          onUpdate: () => {
+            if (videoFailed) setFrame(proxy.p);
+            else seek(proxy.p * duration());
+          },
+          scrollTrigger: {
+            trigger: transitionZone,
+            endTrigger: runway,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 0.6,
+          },
+        });
       }
     },
     { scope: stageRef }
