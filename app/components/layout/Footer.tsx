@@ -19,37 +19,37 @@ export default function Footer({ data }: FooterProps) {
   }, [data.event.couple.date]);
 
   return (
-    <footer className="bg-dark-charcoal border-t border-dark-slate mt-20">
+    <footer className="bg-navy-dark border-t border-cream-dark mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Couple Name */}
           <div>
-            <h3 className="text-2xl font-bold gradient-text mb-2">
+            <h3 className="text-2xl font-serif font-bold text-cream mb-2">
               {data.event.couple.names.join(' & ')}
             </h3>
-            <p className="text-gray-400">{data.event.couple.date}</p>
+            <p className="text-cream/70">{data.event.couple.date}</p>
           </div>
 
           {/* Venue */}
           <div>
-            <h4 className="text-neon-cyan font-bold mb-2">Location</h4>
-            <p className="text-gray-300">{data.venue.name}</p>
-            <p className="text-gray-400 text-sm">{data.venue.address}</p>
+            <h4 className="text-sage font-bold mb-2">Location</h4>
+            <p className="text-cream">{data.venue.name}</p>
+            <p className="text-cream/60 text-sm">{data.venue.address}</p>
           </div>
 
           {/* Countdown */}
           <div>
-            <h4 className="text-neon-pink font-bold mb-2">Days Until</h4>
-            <p className="text-4xl font-bold gradient-text">{daysLeft}</p>
+            <h4 className="text-burgundy font-bold mb-2">Days Until</h4>
+            <p className="text-4xl font-bold text-cream">{daysLeft}</p>
           </div>
         </div>
 
         {/* Divider */}
-        <div className="border-t border-dark-slate pt-8 flex justify-between items-center">
-          <p className="text-gray-500 text-sm">
+        <div className="border-t border-cream-dark pt-8 flex justify-between items-center">
+          <p className="text-cream/50 text-sm">
             © {new Date().getFullYear()}. Crafted with aloha.
           </p>
-          <p className="text-gray-500 text-sm">Made with love on Oahu 🌺</p>
+          <p className="text-cream/50 text-sm">Made with love on Oahu 🌺</p>
         </div>
       </div>
     </footer>

@@ -4,7 +4,7 @@ export default function HeroTitle() {
   return (
     <div className="max-w-[500px] animate-fade-up">
       {/* Script intro */}
-      <p className="font-script text-3xl md:text-4xl text-rose-light -rotate-2 mb-2 md:mb-3 [text-shadow:0_2px_12px_rgba(19,26,48,0.6)]">
+      <p className="font-script text-3xl md:text-4xl text-burgundy -rotate-2 mb-2 md:mb-3 [text-shadow:0_2px_12px_rgba(43,27,16,0.3)]">
         We&rsquo;re getting married!
       </p>
 
@@ -16,7 +16,7 @@ export default function HeroTitle() {
         <span className="relative block text-7xl sm:text-8xl md:text-[6.5rem] lg:text-[7rem] mt-1">
           <span
             aria-hidden="true"
-            className="absolute -top-8 left-1/2 -translate-x-1/2 font-script normal-case text-4xl md:text-5xl text-rose leading-none rotate-[-6deg] z-10 [text-shadow:0_2px_10px_rgba(19,26,48,0.7)]"
+            className="absolute -top-8 left-1/2 -translate-x-1/2 font-script normal-case text-4xl md:text-5xl text-burgundy leading-none rotate-[-6deg] z-10 [text-shadow:0_2px_10px_rgba(43,27,16,0.3)]"
           >
             and
           </span>
@@ -26,12 +26,12 @@ export default function HeroTitle() {
       </h1>
 
       {/* Venue subtitle */}
-      <p className="mt-4 md:mt-5 uppercase tracking-[0.28em] text-cream font-semibold text-sm md:text-base [text-shadow:0_2px_10px_rgba(19,26,48,0.7)]">
-        Kaimea Estates <span className="text-rose mx-1">&bull;</span> O&#699;ahu, Hawai&#699;i
+      <p className="mt-4 md:mt-5 uppercase tracking-[0.28em] text-cream font-semibold text-sm md:text-base [text-shadow:0_2px_10px_rgba(43,27,16,0.3)]">
+        Kaimea Estates <span className="text-burgundy mx-1">&bull;</span> O&#699;ahu, Hawai&#699;i
       </p>
 
       {/* Date */}
-      <p className="mt-1.5 md:mt-2 font-script text-4xl md:text-5xl text-rose [text-shadow:0_2px_12px_rgba(19,26,48,0.6)]">
+      <p className="mt-1.5 md:mt-2 font-script text-4xl md:text-5xl text-burgundy [text-shadow:0_2px_12px_rgba(43,27,16,0.3)]">
         October 16th, 2026
       </p>
 
@@ -46,9 +46,9 @@ export default function HeroTitle() {
       </svg>
 
       {/* Tagline */}
-      <p className="mt-2 md:mt-2.5 uppercase tracking-[0.22em] text-cream font-semibold text-xs md:text-sm [text-shadow:0_2px_10px_rgba(19,26,48,0.7)]">
-        Elegant <span className="text-rose mx-1">&bull;</span> Relaxed{' '}
-        <span className="text-rose mx-1">&bull;</span> Unforgettable
+      <p className="mt-2 md:mt-2.5 uppercase tracking-[0.22em] text-cream font-semibold text-xs md:text-sm [text-shadow:0_2px_10px_rgba(43,27,16,0.3)]">
+        Elegant <span className="text-burgundy mx-1">&bull;</span> Relaxed{' '}
+        <span className="text-burgundy mx-1">&bull;</span> Unforgettable
       </p>
     </div>
   );

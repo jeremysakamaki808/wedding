@@ -13,7 +13,7 @@ export default function HeroCTA() {
     <div className="max-w-[520px] mt-4 md:mt-5 animate-fade-up [animation-delay:0.8s]">
       <a
         href="#rsvp"
-        className="relative block rounded-xl border border-rose/60 bg-gradient-cta px-6 py-3.5 md:py-4 text-center overflow-hidden animate-pulse-soft transition-transform duration-300 hover:scale-[1.03] hover:shadow-glow"
+        className="relative block rounded-full border border-burgundy/60 bg-gradient-cta px-6 py-3.5 md:py-4 text-center overflow-hidden transition-all duration-300 hover:shadow-soft hover:border-burgundy/90"
       >
       {/* Palm decorations */}
       <PalmSilhouette className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 text-burgundy opacity-30" />

@@ -16,12 +16,12 @@ export default function Button({
   children,
   ...props
 }: ButtonProps) {
-  const baseStyles = 'font-bold font-display rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed';
+  const baseStyles = 'font-bold font-display rounded-full transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed';
 
   const variants = {
-    primary: 'bg-neon-pink text-white hover:shadow-glow hover:scale-105 active:scale-95',
-    secondary: 'bg-neon-cyan text-white hover:shadow-glow-cyan hover:scale-105 active:scale-95',
-    outline: 'border-2 border-neon-pink text-neon-pink hover:shadow-glow active:scale-95',
+    primary: 'bg-burgundy text-ivory hover:shadow-soft hover:bg-burgundy-light active:opacity-90',
+    secondary: 'bg-sage text-ivory hover:shadow-soft hover:bg-sage-light active:opacity-90',
+    outline: 'border-2 border-burgundy text-charcoal hover:shadow-soft active:opacity-90',
   };
 
   const sizes = {

@@ -33,7 +33,7 @@ function NavLink({
     <a
       href={href}
       onClick={onClick}
-      className={`uppercase tracking-[0.18em] font-semibold text-cream hover:text-terracotta-light transition-colors duration-300 ${className}`}
+      className={`uppercase tracking-[0.18em] font-semibold text-charcoal hover:text-burgundy transition-colors duration-300 ${className}`}
     >
       {label}
     </a>
@@ -56,7 +56,7 @@ export default function Navbar() {
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-500 animate-fade-down ${
         isScrolled
-          ? 'bg-navy-dark/90 backdrop-blur-md shadow-lg py-2'
+          ? 'bg-ivory/98 backdrop-blur-md border-b border-cream-dark shadow-soft py-2'
           : 'bg-transparent py-4'
       }`}
     >
@@ -70,7 +70,7 @@ export default function Navbar() {
           </nav>
 
           <Link href="/" aria-label="Home" className="justify-self-center">
-            <KJLogo className="w-16 h-16 text-cream hover:text-terracotta-light transition-colors duration-300" />
+            <KJLogo className="w-16 h-16 text-charcoal hover:text-burgundy transition-colors duration-300" />
           </Link>
 
           <nav className="flex items-center justify-start gap-8 lg:gap-12 text-xs lg:text-sm pl-8 lg:pl-12">
@@ -83,7 +83,7 @@ export default function Navbar() {
         {/* Mobile: logo + hamburger */}
         <div className="flex md:hidden items-center justify-between">
           <Link href="/" aria-label="Home">
-            <KJLogo className="w-12 h-12 text-cream" />
+            <KJLogo className="w-12 h-12 text-charcoal" />
           </Link>
 
           <button
@@ -91,7 +91,7 @@ export default function Navbar() {
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isMenuOpen}
             onClick={() => setIsMenuOpen(open => !open)}
-            className="p-2 text-cream hover:text-terracotta-light transition-colors"
+            className="p-2 text-charcoal hover:text-burgundy transition-colors"
           >
             <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
               {isMenuOpen ? (
@@ -106,7 +106,7 @@ export default function Navbar() {
 
       {/* Mobile menu overlay */}
       {isMenuOpen && (
-        <nav className="md:hidden absolute top-full left-0 w-full bg-navy-dark/95 backdrop-blur-lg border-t border-burgundy-light/30 shadow-lg">
+        <nav className="md:hidden absolute top-full left-0 w-full bg-ivory/95 backdrop-blur-lg border-t border-cream-dark shadow-lg">
           <div className="flex flex-col items-center gap-6 py-10 text-base">
             {ALL_LINKS.map(link => (
               <NavLink key={link.href} {...link} onClick={closeMenu} />

@@ -8,74 +8,86 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Muted wedding palette
+        // Victorian coastal estate garden wedding palette
         navy: {
-          DEFAULT: '#1B2440',
-          dark: '#131A30',
-          light: '#2A3454',
+          DEFAULT: '#1F2B4D',
+          dark: '#172243',
+          light: '#2E3D5C',
         },
         burgundy: {
-          DEFAULT: '#7A2E3F',
-          light: '#9C4257',
+          DEFAULT: '#560216',
+          light: '#8B2E47',
         },
         brown: {
-          DEFAULT: '#6B4A3A',
+          DEFAULT: '#2B1B10',
         },
         sage: {
-          DEFAULT: '#8FA98F',
-          light: '#AFC4AB',
+          DEFAULT: '#5D7466',
+          light: '#6F8E78',
         },
         terracotta: {
-          DEFAULT: '#C96F4A',
-          light: '#DA8E6B',
+          DEFAULT: '#B16A4C',
+          light: '#D4956B',
         },
         cream: {
-          DEFAULT: '#F5EDE0',
-          dark: '#E8DCC8',
+          DEFAULT: '#EFE7D8',
+          dark: '#D4C4B0',
+        },
+        ivory: {
+          DEFAULT: '#F8F5EF',
+        },
+        'garden-mist': {
+          DEFAULT: '#E4EBE3',
         },
         rose: {
-          DEFAULT: '#D98BA3',
-          light: '#E8AFC0',
+          DEFAULT: '#8B4A6B',
+          light: '#A85F86',
         },
         plum: {
           DEFAULT: '#2A1B3D',
           light: '#3D2A55',
         },
-        // Legacy aliases (used by existing sections) mapped to muted tones
+        charcoal: {
+          DEFAULT: '#3A2F2A',
+        },
+        // Legacy aliases (used by existing sections) mapped to warm tones
         neon: {
-          pink: '#D98BA3',       // muted rose
-          cyan: '#8FA98F',       // sage
-          purple: '#9C4257',     // burgundy light
-          orange: '#C96F4A',     // terracotta
-          lime: '#F5EDE0',       // cream
+          pink: '#8B4A6B',       // soft rose
+          cyan: '#5D7466',       // sage
+          purple: '#8B2E47',     // burgundy light
+          orange: '#B16A4C',     // terracotta
+          lime: '#F8F5EF',       // ivory
         },
         dark: {
-          navy: '#131A30',
-          charcoal: '#1B2440',
-          slate: '#2A3454',
+          navy: '#172243',
+          charcoal: '#3A2F2A',
+          slate: '#2E3D5C',
         },
         // Semantic colors
-        success: '#8FA98F',
-        warning: '#C96F4A',
-        error: '#9C4257',
+        success: '#5D7466',
+        warning: '#B16A4C',
+        error: '#8B2E47',
       },
       backgroundImage: {
         'hero-art': "url('/images/hero/new-background-hero.png')",
-        'gradient-hero': 'linear-gradient(135deg, rgba(19, 26, 48, 0.7) 0%, rgba(27, 36, 64, 0.7) 100%)',
-        'gradient-neon': 'linear-gradient(90deg, #D98BA3, #9C4257, #C96F4A)',
-        'gradient-sunset': 'linear-gradient(135deg, #DA8E6B, #D98BA3, #C96F4A)',
-        'gradient-cta': 'linear-gradient(135deg, #DA8E6B 0%, #D98BA3 55%, #C96F4A 100%)',
-        // GTA VI-style scroll overlay + matching Venue card gradient (same color family)
-        'gta-overlay': 'linear-gradient(160deg, rgba(42,27,61,0.95) 0%, rgba(122,46,63,0.85) 45%, rgba(201,111,74,0.75) 100%)',
-        'gradient-venue-card': 'linear-gradient(150deg, #2A1B3D 0%, #3D2A55 30%, #7A2E3F 62%, #C96F4A 100%)',
+        'gradient-hero': 'linear-gradient(135deg, rgba(23, 34, 67, 0.7) 0%, rgba(31, 43, 77, 0.7) 100%)',
+        'gradient-neon': 'linear-gradient(90deg, #8B4A6B, #8B2E47, #B16A4C)',
+        'gradient-sunset': 'linear-gradient(135deg, #D4956B, #8B4A6B, #B16A4C)',
+        'gradient-cta': 'linear-gradient(135deg, #B16A4C 0%, #8B4A6B 55%, #560216 100%)',
+        // Warm botanical scroll overlay with terracotta-to-burgundy transition
+        'gta-overlay': 'linear-gradient(160deg, rgba(43, 27, 16, 0.95) 0%, rgba(86, 2, 22, 0.85) 45%, rgba(177, 106, 76, 0.75) 100%)',
+        'gradient-venue-card': 'linear-gradient(150deg, #172243 0%, #2E3D5C 30%, #560216 62%, #B16A4C 100%)',
       },
       boxShadow: {
-        'glow': '0 0 20px rgba(217, 139, 163, 0.45)',
-        'glow-cyan': '0 0 20px rgba(143, 169, 143, 0.45)',
-        'glow-soft': '0 8px 30px rgba(201, 111, 74, 0.35)',
-        'neon': '0 0 10px rgba(156, 66, 87, 0.3), inset 0 0 10px rgba(156, 66, 87, 0.1)',
+        'soft': '0 2px 8px rgba(43, 27, 16, 0.08)',
+        'glow': '0 0 20px rgba(139, 74, 107, 0.35)',
+        'glow-cyan': '0 0 20px rgba(93, 116, 102, 0.35)',
+        'glow-soft': '0 8px 30px rgba(177, 106, 76, 0.25)',
+        'neon': '0 0 10px rgba(139, 46, 71, 0.2), inset 0 0 10px rgba(139, 46, 71, 0.08)',
       },
       fontFamily: {
+        serif: ['var(--font-serif)', 'Georgia', 'serif'],
+        body: ['var(--font-body)', 'Garamond', 'serif'],
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
         display: ['var(--font-display)', 'Impact', 'sans-serif'],
         script: ['var(--font-script)', 'cursive'],

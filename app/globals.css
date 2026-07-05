@@ -2,8 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Font variables (--font-sans, --font-display, --font-script) are set on <html>
-   by next/font in app/layout.tsx: Montserrat, Anton, Great Vibes. */
+/* Font variables set on <html> by next/font in app/layout.tsx:
+   --font-serif (Playfair Display), --font-body (Lora), --font-sans (Montserrat),
+   --font-display (Anton), --font-script (Great Vibes) */
 
 /* Smooth scroll behavior */
 html {
@@ -26,26 +27,26 @@ body {
 
 /* Gradient text reveal effect */
 .gradient-text {
-  background: linear-gradient(90deg, #da8e6b 0%, #d98ba3 50%, #afc4ab 100%);
+  background: linear-gradient(90deg, #B16A4C 0%, #8B4A6B 50%, #6F8E78 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Glow effect on hover */
+/* Soft hover effect */
 .btn-glow {
   @apply transition-all duration-300;
 }
 
 .btn-glow:hover {
-  @apply shadow-glow scale-105;
+  @apply shadow-soft;
 }
 
 /* Soft border glow */
 .neon-border {
   @apply border-2 border-sage;
-  box-shadow: inset 0 0 10px rgba(143, 169, 143, 0.2);
+  box-shadow: inset 0 0 10px rgba(93, 116, 102, 0.15);
 }
 
 .neon-border:focus {
@@ -61,24 +62,39 @@ body {
 input:focus,
 textarea:focus,
 select:focus {
-  @apply border-sage ring-0 outline-none shadow-glow-cyan;
+  @apply border-sage ring-0 outline-none shadow-soft;
 }
 
 /* Typography scale */
+h1,
+h2,
+h3,
+h4 {
+  @apply font-serif font-bold;
+}
+
 h1 {
-  @apply text-5xl md:text-6xl font-bold tracking-tighter;
+  @apply text-5xl md:text-6xl tracking-tight;
 }
 
 h2 {
-  @apply text-4xl md:text-5xl font-bold tracking-tight;
+  @apply text-4xl md:text-5xl tracking-normal;
 }
 
 h3 {
-  @apply text-2xl md:text-3xl font-bold tracking-tight;
+  @apply text-2xl md:text-3xl tracking-normal;
+}
+
+h4 {
+  @apply text-lg md:text-xl tracking-wide;
 }
 
 p {
-  @apply text-base md:text-lg leading-relaxed;
+  @apply text-base md:text-lg leading-relaxed font-body;
+}
+
+.label-text {
+  @apply text-xs md:text-sm font-semibold uppercase tracking-widest;
 }
 
 /* Reduced motion support */

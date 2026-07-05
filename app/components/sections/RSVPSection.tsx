@@ -17,48 +17,48 @@ export default function RSVPSection({ data }: RSVPSectionProps) {
   });
 
   return (
-    <section id="rsvp" className="py-20 bg-dark-charcoal">
+    <section id="rsvp" className="py-20 bg-cream">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4">
+          <h2 className="text-4xl md:text-5xl font-serif font-bold text-charcoal mb-4">
             RSVP
           </h2>
-          <p className="text-gray-400 text-lg mb-4">
+          <p className="text-charcoal/75 text-lg mb-4">
             Join us for the celebration of a lifetime
           </p>
-          <p className="text-neon-orange font-semibold">
+          <p className="text-burgundy font-semibold">
             Please respond by {formattedDeadline}
           </p>
         </div>
 
         {/* Form Placeholder */}
-        <div className="bg-dark-navy border border-dark-slate rounded-lg p-8">
+        <div className="bg-ivory border border-cream-dark rounded-lg p-8">
           <div className="space-y-6">
             {/* Name Input */}
             <div>
-              <label className="block text-sm font-semibold text-gray-200 mb-2">
-                Your Name <span className="text-neon-pink">*</span>
+              <label className="block text-sm font-semibold text-charcoal mb-2">
+                Your Name <span className="text-burgundy">*</span>
               </label>
-              <div className="w-full px-4 py-3 bg-dark-charcoal border-2 border-dark-slate rounded-lg text-gray-400 placeholder-gray-600">
+              <div className="w-full px-4 py-3 bg-cream/50 border-2 border-cream-dark rounded-lg text-brown/50 placeholder-brown/40">
                 [Form will be interactive in Phase 4]
               </div>
             </div>
 
             {/* Email Input */}
             <div>
-              <label className="block text-sm font-semibold text-gray-200 mb-2">
-                Email Address <span className="text-neon-pink">*</span>
+              <label className="block text-sm font-semibold text-charcoal mb-2">
+                Email Address <span className="text-burgundy">*</span>
               </label>
-              <div className="w-full px-4 py-3 bg-dark-charcoal border-2 border-dark-slate rounded-lg text-gray-400 placeholder-gray-600">
+              <div className="w-full px-4 py-3 bg-cream/50 border-2 border-cream-dark rounded-lg text-brown/50 placeholder-brown/40">
                 [Form will be interactive in Phase 4]
               </div>
             </div>
 
             {/* Radio Options */}
             <div>
-              <label className="block text-sm font-semibold text-gray-200 mb-4">
-                Will you be attending? <span className="text-neon-pink">*</span>
+              <label className="block text-sm font-semibold text-charcoal mb-4">
+                Will you be attending? <span className="text-burgundy">*</span>
               </label>
               <div className="space-y-3">
                 <div className="flex items-center">
@@ -66,9 +66,9 @@ export default function RSVPSection({ data }: RSVPSectionProps) {
                     type="radio"
                     id="yes"
                     disabled
-                    className="w-4 h-4 text-neon-pink cursor-pointer opacity-50"
+                    className="w-4 h-4 text-burgundy cursor-pointer opacity-50"
                   />
-                  <label htmlFor="yes" className="ml-3 text-gray-300 opacity-50">
+                  <label htmlFor="yes" className="ml-3 text-charcoal/50 opacity-50">
                     Yes, I'll be there!
                   </label>
                 </div>
@@ -77,9 +77,9 @@ export default function RSVPSection({ data }: RSVPSectionProps) {
                     type="radio"
                     id="no"
                     disabled
-                    className="w-4 h-4 text-neon-pink cursor-pointer opacity-50"
+                    className="w-4 h-4 text-burgundy cursor-pointer opacity-50"
                   />
-                  <label htmlFor="no" className="ml-3 text-gray-300 opacity-50">
+                  <label htmlFor="no" className="ml-3 text-charcoal/50 opacity-50">
                     No, I can't make it
                   </label>
                 </div>
@@ -88,10 +88,10 @@ export default function RSVPSection({ data }: RSVPSectionProps) {
 
             {/* Textarea */}
             <div>
-              <label className="block text-sm font-semibold text-gray-200 mb-2">
+              <label className="block text-sm font-semibold text-charcoal mb-2">
                 Leave a message for the happy couple
               </label>
-              <div className="w-full px-4 py-3 bg-dark-charcoal border-2 border-dark-slate rounded-lg text-gray-400 h-32">
+              <div className="w-full px-4 py-3 bg-cream/50 border-2 border-cream-dark rounded-lg text-brown/50 h-32">
                 [Form will be interactive in Phase 4]
               </div>
             </div>
@@ -99,13 +99,13 @@ export default function RSVPSection({ data }: RSVPSectionProps) {
             {/* Submit Button */}
             <button
               disabled
-              className="w-full px-6 py-3 bg-neon-pink text-white text-lg font-bold rounded-lg opacity-50 cursor-not-allowed"
+              className="w-full px-6 py-3 bg-burgundy text-ivory text-lg font-bold rounded-full opacity-50 cursor-not-allowed"
             >
               Submit RSVP
             </button>
 
             {/* Info Text */}
-            <p className="text-center text-gray-400 text-sm mt-4">
+            <p className="text-center text-charcoal/60 text-sm mt-4">
               Full form functionality will be available in Phase 4. Currently a static layout.
             </p>
           </div>
@@ -113,15 +113,15 @@ export default function RSVPSection({ data }: RSVPSectionProps) {
 
         {/* FAQ Section */}
         <div className="mt-16">
-          <h3 className="text-2xl font-bold text-neon-cyan mb-8 text-center">Questions?</h3>
+          <h3 className="text-2xl font-serif font-bold text-charcoal mb-8 text-center">Questions?</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {data.faqs.slice(0, 4).map((faq, index) => (
               <div
                 key={index}
-                className="bg-dark-navy p-6 rounded-lg border border-dark-slate hover:border-neon-purple transition-colors duration-300"
+                className="bg-ivory p-6 rounded-lg border border-sage/30 hover:border-sage transition-colors duration-300"
               >
-                <h4 className="text-lg font-bold text-neon-orange mb-2">{faq.question}</h4>
-                <p className="text-gray-300">{faq.answer}</p>
+                <h4 className="text-lg font-serif font-bold text-burgundy mb-2">{faq.question}</h4>
+                <p className="text-charcoal/75">{faq.answer}</p>
               </div>
             ))}
           </div>

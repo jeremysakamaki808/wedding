@@ -6,7 +6,7 @@ interface CardData {
   icon: React.ReactNode;
 }
 
-const ICON_CLASS = 'w-7 h-7 md:w-8 md:h-8 text-rose';
+const ICON_CLASS = 'w-7 h-7 md:w-8 md:h-8 text-burgundy';
 
 const CARDS: CardData[] = [
   {
@@ -44,7 +44,7 @@ export default function HeroCards() {
       {CARDS.map((card, index) => (
         <div
           key={card.title}
-          className={`flex flex-col items-center text-center gap-1.5 rounded-xl border border-burgundy-light/50 bg-navy-dark/55 backdrop-blur-md px-3 py-3.5 md:py-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-glow hover:border-rose/70 animate-fade-up ${
+          className={`flex flex-col items-center text-center gap-1.5 rounded-xl border border-burgundy/40 bg-navy-dark/55 backdrop-blur-md px-3 py-3.5 md:py-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-soft hover:border-burgundy/70 animate-fade-up ${
             index === 0
               ? '[animation-delay:0.35s]'
               : index === 1
@@ -53,7 +53,7 @@ export default function HeroCards() {
           }`}
         >
           {card.icon}
-          <h3 className="font-display uppercase tracking-[0.12em] text-base md:text-lg text-rose mt-1">
+          <h3 className="font-display uppercase tracking-[0.12em] text-base md:text-lg text-burgundy mt-1">
             {card.title}
           </h3>
           <div className="space-y-0.5">

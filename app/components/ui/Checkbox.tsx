@@ -19,9 +19,9 @@ export default function Checkbox({
       <input
         type="checkbox"
         className={`
-          w-5 h-5 mt-1 rounded bg-dark-charcoal border-2 border-dark-slate
-          text-neon-pink cursor-pointer transition-all duration-300
-          focus:border-neon-cyan focus:ring-2 focus:ring-neon-cyan
+          w-5 h-5 mt-1 rounded bg-ivory/90 border-2 border-cream-dark
+          text-burgundy cursor-pointer transition-all duration-300
+          focus:border-sage focus:ring-2 focus:ring-sage
           disabled:opacity-50 disabled:cursor-not-allowed
           ${error ? 'border-error' : ''}
           ${className}
@@ -29,7 +29,7 @@ export default function Checkbox({
         disabled={disabled}
         {...props}
       />
-      <label className={`ml-3 text-sm font-medium text-gray-200 cursor-pointer ${disabled ? 'opacity-50' : ''}`}>
+      <label className={`ml-3 text-sm font-medium text-charcoal cursor-pointer ${disabled ? 'opacity-50' : ''}`}>
         {label}
       </label>
       {error && <p className="text-error text-sm mt-1">{error}</p>}

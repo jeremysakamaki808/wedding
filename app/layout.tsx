@@ -1,6 +1,18 @@
 import type { Metadata } from 'next';
-import { Anton, Great_Vibes, Montserrat } from 'next/font/google';
+import { Anton, Great_Vibes, Montserrat, Playfair_Display, Lora } from 'next/font/google';
 import './globals.css';
+
+const playfair = Playfair_Display({
+  weight: ['400', '600', '700'],
+  subsets: ['latin'],
+  variable: '--font-serif',
+});
+
+const lora = Lora({
+  weight: ['400', '500', '600'],
+  subsets: ['latin'],
+  variable: '--font-body',
+});
 
 const anton = Anton({
   weight: '400',
@@ -42,11 +54,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${anton.variable} ${greatVibes.variable} ${montserrat.variable}`}
+      className={`${playfair.variable} ${lora.variable} ${anton.variable} ${greatVibes.variable} ${montserrat.variable}`}
     >
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#131A30" />
+        <meta name="theme-color" content="#172243" />
       </head>
       <body className="bg-navy-dark text-cream font-sans">{children}</body>
     </html>
