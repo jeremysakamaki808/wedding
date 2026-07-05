@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 import path from 'path';
-import Header from './components/layout/Header';
+import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Hero from './components/sections/Hero';
 import Venue from './components/sections/Venue';
@@ -18,8 +18,8 @@ export default function Home() {
 
   return (
     <main className="w-full bg-dark-navy text-gray-100">
-      <Header />
-      <Hero data={weddingData} />
+      <Navbar />
+      <Hero />
       <Venue data={weddingData} />
       <Timeline data={weddingData} />
       <WeddingParty data={weddingData} />

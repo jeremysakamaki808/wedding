@@ -1,8 +1,8 @@
 {
   "event": {
     "couple": {
-      "names": ["Jeremy", "Kelsey"],
-      "pronouns": ["he/him", "she/her"],
+      "names": ["Kelsey", "Jeremy"],
+      "pronouns": ["she/her", "he/him"],
       "date": "2026-10-16",
       "time": "3:30 PM",
       "timezone": "HST"

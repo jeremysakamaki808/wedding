@@ -1,13 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --font-sans: 'Space Grotesk', sans-serif;
-  --font-display: 'Bebas Neue', cursive;
-}
+/* Font variables (--font-sans, --font-display, --font-script) are set on <html>
+   by next/font in app/layout.tsx: Montserrat, Anton, Great Vibes. */
 
 /* Smooth scroll behavior */
 html {
@@ -16,12 +12,12 @@ html {
 
 /* Global body styles */
 body {
-  @apply bg-dark-navy text-gray-100;
+  @apply bg-navy-dark text-cream;
 }
 
-/* Gradient text reveal effect - Victorian estate aesthetic */
+/* Gradient text reveal effect */
 .gradient-text {
-  background: linear-gradient(90deg, #D4845E 0%, #C85A7C 50%, #7DB5B0 100%);
+  background: linear-gradient(90deg, #da8e6b 0%, #d98ba3 50%, #afc4ab 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -37,10 +33,10 @@ body {
   @apply shadow-glow scale-105;
 }
 
-/* Neon border glow */
+/* Soft border glow */
 .neon-border {
-  @apply border-2 border-neon-cyan;
-  box-shadow: inset 0 0 10px rgba(0, 206, 209, 0.2);
+  @apply border-2 border-sage;
+  box-shadow: inset 0 0 10px rgba(143, 169, 143, 0.2);
 }
 
 .neon-border:focus {
@@ -52,11 +48,11 @@ body {
   will-change: transform;
 }
 
-/* Form focus state with neon glow */
+/* Form focus state with soft glow */
 input:focus,
 textarea:focus,
 select:focus {
-  @apply border-neon-cyan ring-0 outline-none shadow-glow-cyan;
+  @apply border-sage ring-0 outline-none shadow-glow-cyan;
 }
 
 /* Typography scale */
@@ -73,7 +69,7 @@ h3 {
 }
 
 p {
-  @apply text-base md:text-lg leading-relaxed text-gray-300;
+  @apply text-base md:text-lg leading-relaxed;
 }
 
 /* Reduced motion support */
