@@ -12,17 +12,17 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
  * GTA VI-style scroll stage: one pinned hero viewport whose layers crossfade
  * through the whole Hero -> Our Story -> Venue journey.
  *
- *  A. Hero pins; a quick camera push-in zooms toward the couple's faces while
- *     the color overlay builds and the hero UI fades out.
- *  B. "Our Story" scrolls over the darkened artwork; the overlay keeps
- *     creeping toward near-solid (0.96 — almost, but not quite).
+ *  A. Hero pins; the camera pushes in and pans up toward the couple's faces
+ *     while the color overlay builds and the hero UI fades out.
+ *  B. "Our Story" scrolls over the darkened artwork; the zoom keeps creeping
+ *     in (1.45 -> 1.6) and the overlay toward near-solid (0.96 — not quite).
  *  C. Dissolve: the venue flip-book layer fades in beneath the veil, then the
  *     overlay thins back out to transparent, revealing the animated scene.
- *  D. Camera dollies forward + tilts down over the scene while scroll scrubs
- *     the flip-book frames; the Venue card scrolls up over the top.
+ *  D. Opposite move: the venue camera continuously zooms OUT (1.35 -> 1) while
+ *     scroll scrubs the flip-book frames; the Venue card scrolls up over it.
  *
  * Children contract (queried via data attributes inside this stage):
- *  - [data-hero-bg]           hero background artwork (scaled 1 -> 1.45)
+ *  - [data-hero-bg]           hero background artwork (scaled 1 -> 1.6, pans up)
  *  - [data-hero-bg-b]         optional "heads turned" frame (crossfaded in)
  *  - [data-hero-content]      hero UI (faded/drifted out)
  *  - [data-hero-overlay]      color overlay (0 -> 0.8 -> 0.96 -> 0)
@@ -64,10 +64,13 @@ export default function HeroScrollStage({ children }: { children: React.ReactNod
           },
         });
 
+        // Zoom in while panning the camera up toward the faces (content drifts
+        // down as the frame reframes on the couple). yPercent stays below the
+        // top-edge overshoot from the scale, so no gap ever opens at the top.
         tl.fromTo(
           bg,
-          { scale: 1, transformOrigin: '62% 38%' },
-          { scale: 1.45, ease: 'none', duration: 1 },
+          { scale: 1, transformOrigin: '62% 38%', yPercent: 0 },
+          { scale: 1.45, yPercent: 10, ease: 'none', duration: 1 },
           0
         );
 
@@ -124,6 +127,27 @@ export default function HeroScrollStage({ children }: { children: React.ReactNod
             }
           );
         }
+
+        if (bg) {
+          // The push-in never stops: keep zooming toward the faces (slower now)
+          // for the whole Our Story pass, until the dissolve takes over.
+          gsap.fromTo(
+            bg,
+            { scale: 1.45, yPercent: 10 },
+            {
+              scale: 1.6,
+              yPercent: 14,
+              ease: 'none',
+              immediateRender: false,
+              scrollTrigger: {
+                trigger: story,
+                start: 'top 30%',
+                end: 'bottom top',
+                scrub: 0.6,
+              },
+            }
+          );
+        }
       }
 
       // ---- C. Dissolve: scene fades in beneath the veil, veil thins out ----
@@ -163,15 +187,15 @@ export default function HeroScrollStage({ children }: { children: React.ReactNod
         };
 
         // Camera runs across the dissolve AND the runway, so the scene is
-        // already alive while it's being revealed. The frame image is 135%
-        // tall; the negative yPercent reveals the foreground as the "camera"
-        // tips downward while pushing forward.
+        // already alive while it's being revealed. Opposite of the hero: the
+        // scene starts pushed-in on the foreground and continuously zooms OUT,
+        // pulling back and settling on the full vista as scroll progresses.
         gsap.fromTo(
           venueCam,
-          { scale: 1, yPercent: 0, transformOrigin: '50% 35%' },
+          { scale: 1.35, yPercent: -18, transformOrigin: '50% 35%' },
           {
-            scale: 1.15,
-            yPercent: -22,
+            scale: 1,
+            yPercent: 0,
             ease: 'none',
             scrollTrigger: {
               trigger: transitionZone,

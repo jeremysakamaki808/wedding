@@ -7,10 +7,11 @@ import { venueFrames } from '@/app/config/venueFrames';
  * Starts fully transparent; HeroScrollStage fades it in through the thinning
  * color overlay, then scrubs it:
  *  - flip-book frame sequence ([data-venue-frame] src swaps with scroll)
- *  - dolly-forward + tilt-down camera move ([data-venue-cam] transform)
+ *  - continuous zoom-OUT camera move ([data-venue-cam] transform), the
+ *    opposite of the hero's push-in: starts tight on the scene, pulls back
  *
- * The frame image is ~135% viewport height, so the initial view sits on the
- * horizon; as the camera tilts down, the foreground grounds are revealed.
+ * The frame image is ~135% viewport height so the camera has headroom to
+ * translate during the pull-back without exposing edges.
  */
 export default function VenueBackdrop() {
   return (
