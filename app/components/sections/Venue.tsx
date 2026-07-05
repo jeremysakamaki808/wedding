@@ -65,7 +65,7 @@ export default function Venue({ data }: VenueProps) {
                   <p className="text-neon-pink font-bold">{venue.ceremony}</p>
                 </div>
                 <div className="flex-grow border-l-2 border-neon-cyan pl-4 pb-4">
-                  <p className="text-gray-300">The moment we say "I do"</p>
+                  <p className="text-gray-300">The moment we say &ldquo;I do&rdquo;</p>
                 </div>
               </div>
 

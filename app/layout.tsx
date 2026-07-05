@@ -1,24 +1,5 @@
 import type { Metadata } from 'next';
-import { Anton, Great_Vibes, Montserrat } from 'next/font/google';
 import './globals.css';
-
-const anton = Anton({
-  weight: '400',
-  subsets: ['latin'],
-  variable: '--font-display',
-});
-
-const greatVibes = Great_Vibes({
-  weight: '400',
-  subsets: ['latin'],
-  variable: '--font-script',
-});
-
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-sans',
-});
 
 export const metadata: Metadata = {
   title: 'Kelsey & Jeremy | October 16, 2026 | Oʻahu, Hawaiʻi',
@@ -40,10 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${anton.variable} ${greatVibes.variable} ${montserrat.variable}`}
-    >
+    <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#131A30" />
