@@ -12,17 +12,19 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
  * GTA VI-style scroll stage: one pinned hero viewport whose layers crossfade
  * through the whole Hero -> Our Story -> Venue journey.
  *
- *  A. Hero pins; the camera pushes in and pans up toward the couple's faces
- *     while the color overlay builds and the hero UI fades out.
- *  B. "Our Story" scrolls over the darkened artwork; the zoom keeps creeping
- *     in (1.45 -> 1.6) and the overlay toward near-solid (0.96 — not quite).
+ *  0. ONE continuous zoom drives the hero artwork from page top to the end of
+ *     the dissolve — constant rate, zero pauses — pushing in and panning up
+ *     toward the couple's faces (ends ~2.4-2.6x depending on story height).
+ *  A. Meanwhile the hero UI fades out and the color overlay builds (0 -> 0.8).
+ *  B. "Our Story" scrolls over the darkened artwork; the overlay keeps
+ *     creeping toward near-solid (0.96 — almost, but not quite).
  *  C. Dissolve: the venue flip-book layer fades in beneath the veil, then the
  *     overlay thins back out to transparent, revealing the animated scene.
  *  D. Opposite move: the venue camera continuously zooms OUT (1.35 -> 1) while
  *     scroll scrubs the flip-book frames; the Venue card scrolls up over it.
  *
  * Children contract (queried via data attributes inside this stage):
- *  - [data-hero-bg]           hero background artwork (scaled 1 -> 1.6, pans up)
+ *  - [data-hero-bg]           hero background artwork (continuous zoom + pan-up)
  *  - [data-hero-bg-b]         optional "heads turned" frame (crossfaded in)
  *  - [data-hero-content]      hero UI (faded/drifted out)
  *  - [data-hero-overlay]      color overlay (0 -> 0.8 -> 0.96 -> 0)
@@ -53,8 +55,41 @@ export default function HeroScrollStage({ children }: { children: React.ReactNod
       const transitionZone = stage.querySelector('[data-venue-transition]');
       const runway = stage.querySelector('[data-venue-runway]');
 
-      // ---- A. Hero push-in: quick zoom toward the faces, overlay builds ----
-      if (bg) {
+      // ---- Continuous zoom: ONE tween from page top to end of dissolve -----
+      // The push toward the faces never pauses. The end scale is derived from
+      // the actual scroll distance so the RATE stays constant (the hero-phase
+      // rate: 0.45 scale per 80vh) no matter how tall Our Story is. The pan
+      // (yPercent) keeps a fixed ratio to the zoom and stays below the
+      // (scale-1)*38 top-edge overshoot, so no gap ever opens at the top.
+      if (bg && transitionZone) {
+        const ZOOM_RATE = 0.45 / 0.8; // scale units per viewport-height
+        const PAN_RATIO = 22.2; // yPercent per scale unit (1.45 <-> 10)
+        const endScale = () => {
+          const distancePx = window.scrollY + transitionZone.getBoundingClientRect().bottom;
+          return 1 + ZOOM_RATE * (distancePx / window.innerHeight);
+        };
+
+        gsap.fromTo(
+          bg,
+          { scale: 1, transformOrigin: '62% 38%', yPercent: 0 },
+          {
+            scale: endScale,
+            yPercent: () => (endScale() - 1) * PAN_RATIO,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: stage,
+              endTrigger: transitionZone,
+              start: 'top top',
+              end: 'bottom top',
+              scrub: 0.6,
+              invalidateOnRefresh: true,
+            },
+          }
+        );
+      }
+
+      // ---- A. Hero intro release: UI fades out, overlay builds ------------
+      {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: stage,
@@ -63,16 +98,6 @@ export default function HeroScrollStage({ children }: { children: React.ReactNod
             scrub: 0.6,
           },
         });
-
-        // Zoom in while panning the camera up toward the faces (content drifts
-        // down as the frame reframes on the couple). yPercent stays below the
-        // top-edge overshoot from the scale, so no gap ever opens at the top.
-        tl.fromTo(
-          bg,
-          { scale: 1, transformOrigin: '62% 38%', yPercent: 0 },
-          { scale: 1.45, yPercent: 10, ease: 'none', duration: 1 },
-          0
-        );
 
         // Optional second frame (heads turned toward viewer) crossfades in mid-zoom
         if (bgB) {
@@ -121,27 +146,6 @@ export default function HeroScrollStage({ children }: { children: React.ReactNod
               scrollTrigger: {
                 trigger: story,
                 start: 'top 30%', // after trigger A has fully released the overlay
-                end: 'bottom top',
-                scrub: 0.6,
-              },
-            }
-          );
-        }
-
-        if (bg) {
-          // The push-in never stops: keep zooming toward the faces (slower now)
-          // for the whole Our Story pass, until the dissolve takes over.
-          gsap.fromTo(
-            bg,
-            { scale: 1.45, yPercent: 10 },
-            {
-              scale: 1.6,
-              yPercent: 14,
-              ease: 'none',
-              immediateRender: false,
-              scrollTrigger: {
-                trigger: story,
-                start: 'top 30%',
                 end: 'bottom top',
                 scrub: 0.6,
               },
