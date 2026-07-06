@@ -10,7 +10,7 @@ export default function OurStory() {
       <div data-story-content className="max-w-6xl mx-auto w-full">
         {/* Header — sits over the darkened hero artwork, so text stays light */}
         <div className="max-w-2xl mb-12 md:mb-16">
-          <p className="font-script text-4xl md:text-5xl text-terracotta-light -rotate-2 mb-3 [text-shadow:0_2px_12px_rgba(19,26,48,0.6)]">
+          <p className="font-script text-4xl md:text-5xl text-gold-light -rotate-2 mb-3 [text-shadow:0_2px_12px_rgba(19,26,48,0.6)]">
             How we got here
           </p>
           <h2 className="font-serif uppercase text-5xl md:text-6xl lg:text-7xl text-cream leading-[1.05] [text-shadow:0_6px_24px_rgba(19,26,48,0.55)]">
@@ -32,7 +32,7 @@ export default function OurStory() {
               become each other&rsquo;s favorite person. And now, surrounded by the people we
               love most, we&rsquo;re ready for our biggest adventure yet.
             </p>
-            <p className="font-script text-3xl md:text-4xl text-terracotta-light pt-2 [text-shadow:0_2px_12px_rgba(19,26,48,0.6)]">
+            <p className="font-script text-3xl md:text-4xl text-gold-light pt-2 [text-shadow:0_2px_12px_rgba(19,26,48,0.6)]">
               And so, we&rsquo;re headed to the island&hellip;
             </p>
             {/* Gold thread leading the eye down toward the dissolve */}

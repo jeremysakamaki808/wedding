@@ -76,7 +76,7 @@ export default function Footer({ data }: FooterProps) {
 
           {/* Countdown */}
           <div>
-            <h4 className="text-terracotta-light font-bold mb-2">Days Until</h4>
+            <h4 className="text-gold-light font-bold mb-2">Days Until</h4>
             <p className="text-4xl font-bold text-cream">{daysLeft}</p>
           </div>
         </div>

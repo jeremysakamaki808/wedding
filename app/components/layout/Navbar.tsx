@@ -34,7 +34,7 @@ function NavLink({
   // Over the dark hero (transparent bar) the links must be light; once the
   // bar gains its ivory background they flip to dark charcoal.
   const palette = light
-    ? 'text-cream hover:text-terracotta-light [text-shadow:0_1px_8px_rgba(23,34,67,0.7)]'
+    ? 'text-cream hover:text-gold-light [text-shadow:0_1px_8px_rgba(23,34,67,0.7)]'
     : 'text-charcoal hover:text-burgundy';
   return (
     <a
@@ -81,7 +81,7 @@ export default function Navbar() {
           <Link href="/" aria-label="Home" className="justify-self-center">
             <KJLogo
               className={`w-16 h-16 transition-colors duration-300 ${
-                isScrolled ? 'text-charcoal hover:text-burgundy' : 'text-cream hover:text-terracotta-light'
+                isScrolled ? 'text-charcoal hover:text-burgundy' : 'text-cream hover:text-gold-light'
               }`}
             />
           </Link>
@@ -105,7 +105,7 @@ export default function Navbar() {
             aria-expanded={isMenuOpen}
             onClick={() => setIsMenuOpen(open => !open)}
             className={`p-2 transition-colors ${
-              isScrolled ? 'text-charcoal hover:text-burgundy' : 'text-cream hover:text-terracotta-light'
+              isScrolled ? 'text-charcoal hover:text-burgundy' : 'text-cream hover:text-gold-light'
             }`}
           >
             <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
