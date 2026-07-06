@@ -3,8 +3,12 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import type { WeddingData } from '@/types';
 import Lantern from '@/components/ui/Lantern';
+import Vignette from '@/components/timeline/Vignettes';
+import Keepsakes from '@/components/timeline/Keepsakes';
+import usePrefersReducedMotion from '@/lib/usePrefersReducedMotion';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -59,6 +63,22 @@ const STARS_TL_B = [
   [83, 250], [90, 200], [15, 20], [69, 20], [96, 330],
 ]
   .map(([x, y]) => `${x}vw ${y}px 0 0.85px rgba(231,207,159,0.8)`)
+  .join(', ');
+
+/* Pre-dawn stars over the section's dark cap — the night the venue scene
+   left off in continues across the seam, dissolving as first light comes */
+const STARS_DAWN = [
+  [6, 24], [14, 90], [22, 40], [30, 130], [37, 18], [44, 74], [52, 120],
+  [60, 36], [67, 96], [75, 22], [83, 110], [90, 58], [96, 140], [26, 200],
+  [58, 180], [88, 205],
+]
+  .map(([x, y]) => `${x}vw ${y}px 0 0.6px rgba(248,245,239,0.7)`)
+  .join(', ');
+
+const STARS_DAWN_B = [
+  [10, 150], [34, 60], [48, 20], [70, 160], [80, 44], [93, 92], [18, 170],
+]
+  .map(([x, y]) => `${x}vw ${y}px 0 0.85px rgba(231,207,159,0.75)`)
   .join(', ');
 
 /* Firefly motes over the dusk rows: [left %, drift duration s, delay s] */
@@ -185,6 +205,17 @@ function EventGlyph({ icon }: { icon: string }) {
 export default function Timeline({ data }: TimelineProps) {
   const { timeline } = data;
   const containerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const reducedMotion = usePrefersReducedMotion();
+
+  // First light breaking at the dawn horizon as the section scrolls in —
+  // the glow swells up out of the dark band that ties us to the venue scene
+  const { scrollYProgress: dawnProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start 95%', 'start 25%'],
+  });
+  const glowOpacity = useTransform(dawnProgress, [0, 1], [0, 0.9]);
+  const glowY = useTransform(dawnProgress, [0, 1], [56, 0]);
 
   useEffect(() => {
     const items = gsap.utils.toArray('.timeline-item') as HTMLElement[];
@@ -300,12 +331,43 @@ export default function Timeline({ data }: TimelineProps) {
   return (
     // overflow-x-clip: items enter from x:±60, which would otherwise widen
     // the page and allow sideways panning on mobile while they wait offscreen
-    <section id="timeline" className="relative py-20 overflow-x-clip">
-      {/* The sky: scrolling the schedule scrolls the day — October-afternoon
-          ivory through golden hour and ember dusk into starlit navy */}
+    <section ref={sectionRef} id="timeline" className="relative pb-20 overflow-x-clip">
+      {/* The sky, part one — the day begins before dawn. The cap's top edge
+          is the exact navy of the venue stage above (#172243), so there is
+          no seam at all: the ocean night simply carries on, then first
+          light breaks — plum, rose, sunrise gold — into the afternoon. */}
       <div
         aria-hidden
-        className="absolute inset-0 [background:linear-gradient(to_bottom,#F8F5EF_0%,#F5EDDD_24%,#EDDBB2_42%,#DFAF83_56%,#B06A5E_67%,#5C3A5C_76%,#28304F_86%,#172243_100%)]"
+        className="absolute inset-x-0 top-0 h-[34vh] md:h-[52vh] [background:linear-gradient(to_bottom,#172243_0%,#1F2B4D_16%,#2A1B3D_34%,#5C3A5C_50%,#8B4A6B_63%,#C98B72_77%,#EFDFC6_90%,#F8F5EF_100%)]"
+      />
+      {/* The sky, part two: October-afternoon ivory through golden hour and
+          ember dusk into starlit navy — scrolling the schedule scrolls the day */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 bottom-0 top-[34vh] md:top-[52vh] [background:linear-gradient(to_bottom,#F8F5EF_0%,#F5EDDD_24%,#EDDBB2_42%,#DFAF83_56%,#B06A5E_67%,#5C3A5C_76%,#28304F_86%,#172243_100%)]"
+      />
+
+      {/* Last stars of the night before, dissolving as dawn comes */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-[26vh] md:h-[34vh] hidden sm:block motion-reduce:!hidden pointer-events-none [mask-image:linear-gradient(to_bottom,black_30%,transparent_95%)]"
+      >
+        <span
+          className="absolute top-0 left-0 w-px h-px rounded-full [animation:twinkle_5.8s_ease-in-out_infinite]"
+          style={{ boxShadow: STARS_DAWN }}
+        />
+        <span
+          className="absolute top-0 left-0 w-px h-px rounded-full [animation:twinkle_7.8s_ease-in-out_1.4s_infinite]"
+          style={{ boxShadow: STARS_DAWN_B }}
+        />
+      </div>
+
+      {/* First light: a warm glow swelling up from the dawn horizon,
+          scroll-driven so morning arrives as you do */}
+      <motion.div
+        aria-hidden
+        className="absolute inset-x-0 mx-auto top-[calc(34vh-110px)] md:top-[calc(52vh-130px)] w-[130vw] sm:w-[80vw] h-44 rounded-[100%] pointer-events-none blur-2xl [background:radial-gradient(ellipse_at_center,rgba(212,149,107,0.5)_0%,rgba(212,149,107,0.16)_45%,transparent_70%)]"
+        style={reducedMotion ? { opacity: 0.9 } : { opacity: glowOpacity, y: glowY }}
       />
 
       {/* Stars settle over the evening rows (masked in from nothing so the
@@ -335,7 +397,9 @@ export default function Timeline({ data }: TimelineProps) {
         ))}
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Content sits below the dawn: the header greets you in the morning
+          ivory, right where the first light settles */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-[30vh] md:pt-[46vh]">
         {/* Section Header */}
         <div className="text-center mb-16">
           <p className="kicker-lines label-text text-sage mb-3">October 16, 2026</p>
@@ -413,24 +477,36 @@ export default function Timeline({ data }: TimelineProps) {
                       </div>
                       <h3 className="text-2xl font-serif font-bold text-charcoal mb-2">{item.event}</h3>
                       <p className="text-charcoal/75">{item.description}</p>
+                      {/* The field note rides inside the card on mobile,
+                          where the vignette half doesn't render */}
+                      {item.note && (
+                        <p className="md:hidden !text-sm italic font-body text-charcoal/60 mt-3">
+                          {item.note}
+                        </p>
+                      )}
                     </div>
                   </div>
 
-                  {/* Route lantern on the spine */}
-                  <div className="hidden md:flex md:w-1/2 justify-center items-start pt-6">
+                  {/* Route lantern + the stop's engraved vignette */}
+                  <div className="hidden md:flex md:w-1/2 flex-col items-center gap-5 pt-6">
                     <span
                       data-tl-stop
-                      className={`flex items-center justify-center w-9 h-9 rounded-full border border-gold/50 bg-ivory text-charcoal/70 transition-[border-color,box-shadow] duration-700 ${
+                      className={`flex items-center justify-center w-9 h-9 rounded-full border border-gold/50 bg-ivory text-charcoal/70 transition-[border-color,box-shadow] duration-700 flex-shrink-0 ${
                         phase === 'night' ? 'lantern-night' : ''
                       }`}
                     >
                       <Lantern className="w-5 h-7" />
                     </span>
+                    <Vignette index={index} phase={phase} note={item.note} />
                   </div>
                 </div>
               );
             })}
           </div>
+
+          {/* Keepsakes from the day, scattered through the quiet corners —
+              pick one up and move it if you like */}
+          <Keepsakes constraintsRef={containerRef} venueImage={data.venue.images[0]} />
         </div>
       </div>
     </section>

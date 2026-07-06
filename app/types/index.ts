@@ -47,6 +47,9 @@ export interface TimelineItem {
   event: string;
   description: string;
   icon: string;
+  /** Optional one-line practical tip shown as a "field note" beneath the
+      stop's engraved vignette (desktop) or inside the card (mobile) */
+  note?: string;
 }
 
 export interface WeddingPartyMember {

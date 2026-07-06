@@ -303,6 +303,16 @@ export default function HeroScrollStage({ children }: { children: React.ReactNod
   return (
     <div ref={stageRef} className="relative bg-navy-dark">
       {children}
+      {/* Nightfall veil: the pinned venue footage still fills the viewport
+          behind the stage's last stretch, so its teal ocean would meet the
+          Timeline's navy in a visible line. This fade settles the scene to
+          solid navy-dark before the boundary — above the video (z-10),
+          beneath the Venue folio (z-30) — so the next section's pre-dawn
+          sky continues from the identical color and the seam disappears. */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 bottom-0 h-[55vh] z-10 pointer-events-none [background:linear-gradient(to_bottom,transparent_0%,rgba(23,34,67,0.55)_45%,#172243_82%,#172243_100%)]"
+      />
     </div>
   );
 }

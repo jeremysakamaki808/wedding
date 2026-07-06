@@ -1,8 +1,14 @@
 {
   "event": {
     "couple": {
-      "names": ["Kelsey", "Jeremy"],
-      "pronouns": ["she/her", "he/him"],
+      "names": [
+        "Kelsey",
+        "Jeremy"
+      ],
+      "pronouns": [
+        "she/her",
+        "he/him"
+      ],
       "date": "2026-10-16",
       "time": "3:30 PM",
       "timezone": "HST"
@@ -10,7 +16,6 @@
     "tagline": "Two souls, one island, forever aloha",
     "description": "Welcome! We're so excited to celebrate with you. We've created this website to share details about our wedding and help you make the most of the weekend. We can't wait to spend this special day with our favorite people."
   },
-
   "venue": {
     "name": "Kaimea Estates",
     "address": "Aina Haina, Honolulu, HI",
@@ -19,7 +24,10 @@
       "username": "jeremysakamaki",
       "styleId": "cmr8jtaiq002k01stflex9jk9",
       "tilesetId": "jeremysakamaki.ka729fipga43",
-      "coordinates": [21.2789, -157.754],
+      "coordinates": [
+        21.2789,
+        -157.754
+      ],
       "zoom": 12.15,
       "pitch": 62,
       "bearing": 338
@@ -50,52 +58,57 @@
       }
     ]
   },
-
   "timeline": [
     {
       "time": "2:30 PM",
       "event": "Shuttle Pickup",
       "description": "Please arrive at your designated shuttle location. Pickups from Kahala Mall, Mānoa Marketplace, and Ala Moana Shopping Center.",
-      "icon": "🚗"
+      "icon": "🚗",
+      "note": "Shuttles depart promptly — arrive 15 minutes early."
     },
     {
       "time": "3:00 PM",
       "event": "Guest Arrival",
       "description": "Welcome to Kaimea Estates. Settle in and enjoy the beautiful grounds.",
-      "icon": "👋"
+      "icon": "👋",
+      "note": "Wander the grounds — the ocean lawn is open for photos."
     },
     {
       "time": "3:30 PM",
       "event": "Ceremony",
       "description": "The big moment. Two become one.",
-      "icon": "💍"
+      "icon": "💍",
+      "note": "The lawn faces west over the Pacific — sunglasses welcome."
     },
     {
       "time": "4:00 PM",
       "event": "Cocktail Hour",
       "description": "Celebrate with champagne, appetizers, and toasts.",
-      "icon": "🥂"
+      "icon": "🥂",
+      "note": "Champagne, island pūpūs, and a pair of signature cocktails."
     },
     {
       "time": "5:00 PM",
       "event": "Reception",
       "description": "Self-guided dining with small plates, open bar, lawn games, and mingling.",
-      "icon": "🎉"
+      "icon": "🎉",
+      "note": "Grass underfoot — wedges over stilettos."
     },
     {
       "time": "8:00 PM",
       "event": "Evening Celebration",
       "description": "Special dances, good company, and lasting memories.",
-      "icon": "✨"
+      "icon": "✨",
+      "note": "Sunset at 6:07 — dancing under string lights and stars."
     },
     {
       "time": "8:00 PM",
       "event": "Shuttle Departure",
       "description": "Return shuttles available to your original pickup location.",
-      "icon": "🌙"
+      "icon": "🌙",
+      "note": "Return shuttles serve all three morning pickup points."
     }
   ],
-
   "wedding_party": [
     {
       "id": "party-1",
@@ -106,7 +119,6 @@
       "bio": "To be announced. Our trusted friend and supporter."
     }
   ],
-
   "faqs": [
     {
       "question": "What should I wear?",
@@ -149,7 +161,6 @@
       "answer": "We'll be sharing a few special dances, but don't expect a packed dance floor! We're designed this celebration to be more about spending quality time with the people we love. Expect lawn games, comfortable lounge spaces, and plenty of opportunities to mingle."
     }
   ],
-
   "rsvp": {
     "deadline": "2026-09-16",
     "endpoint": "/api/rsvp",
@@ -173,14 +184,23 @@
         "type": "radio",
         "label": "Will you be attending?",
         "required": true,
-        "options": ["Yes, I'll be there!", "No, I can't make it"]
+        "options": [
+          "Yes, I'll be there!",
+          "No, I can't make it"
+        ]
       },
       {
         "id": "party_size",
         "type": "select",
         "label": "How many guests (including yourself)?",
         "required": true,
-        "options": ["1", "2", "3", "4", "5+"],
+        "options": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5+"
+        ],
         "conditional_on": "attendance",
         "show_if": "Yes, I'll be there!"
       },
@@ -188,7 +208,13 @@
         "id": "dietary",
         "type": "checkbox",
         "label": "Any dietary restrictions? (select all that apply)",
-        "options": ["Vegetarian", "Vegan", "Gluten-free", "Shellfish allergy", "Other"],
+        "options": [
+          "Vegetarian",
+          "Vegan",
+          "Gluten-free",
+          "Shellfish allergy",
+          "Other"
+        ],
         "conditional_on": "attendance",
         "show_if": "Yes, I'll be there!"
       },
