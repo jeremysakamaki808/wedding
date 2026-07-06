@@ -40,7 +40,9 @@ function NavLink({
     <a
       href={href}
       onClick={onClick}
-      className={`uppercase tracking-[0.18em] font-semibold transition-colors duration-300 ${palette} ${className}`}
+      className={`relative uppercase tracking-[0.18em] font-semibold transition-colors duration-300
+        after:absolute after:left-0 after:right-0 after:-bottom-1 after:h-px after:bg-gold after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100
+        ${palette} ${className}`}
     >
       {label}
     </a>

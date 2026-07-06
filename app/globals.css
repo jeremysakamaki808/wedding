@@ -79,6 +79,145 @@ p {
   @apply text-xs md:text-sm font-semibold uppercase tracking-widest;
 }
 
+/* ---------------------------------------------------------------------------
+   "Ink & Ember" design system — candlelit manuscript utilities.
+   Gold is an accent (hairlines, seals, foil), never a surface.
+--------------------------------------------------------------------------- */
+
+/* Paper grain: SVG turbulence noise layered over any surface via ::after.
+   Element needs position:relative (or the utility supplies it). */
+.grain {
+  position: relative;
+}
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  border-radius: inherit;
+}
+
+/* Aged parchment ground — layered ivory-to-cream radial wash (pair with .grain) */
+.parchment {
+  background:
+    radial-gradient(120% 90% at 50% 38%, #f8f5ef 0%, #f4eee0 55%, #ece2cd 100%);
+}
+
+/* Gold-foil text: gradient clipped to glyphs; catches light on hover */
+.text-foil {
+  background-image: linear-gradient(
+    105deg,
+    #8c6f3f 0%,
+    #c9a66b 30%,
+    #e7cf9f 48%,
+    #c9a66b 62%,
+    #8c6f3f 100%
+  );
+  background-size: 200% 100%;
+  background-position: 85% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: background-position 1.2s ease;
+}
+.text-foil:hover {
+  background-position: 0% 0;
+}
+
+/* Letterpress: type pressed into parchment (light catches the upper edge) */
+.text-engraved {
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.55),
+    0 -1px 0 rgba(43, 27, 16, 0.22);
+}
+/* Inverse for navy/night surfaces */
+.text-engraved-dark {
+  text-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.45),
+    0 -1px 0 rgba(231, 207, 159, 0.18);
+}
+
+/* Chapter-head kicker: gold hairlines flanking a .label-text eyebrow */
+.kicker-lines {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9em;
+}
+.kicker-lines::before,
+.kicker-lines::after {
+  content: '';
+  width: 26px;
+  height: 1px;
+  background: rgba(201, 166, 107, 0.65);
+}
+
+/* Candle flame flicker — irregular, never mechanical */
+@keyframes flicker {
+  0%, 100% { opacity: 1; filter: blur(0px); }
+  38% { opacity: 0.82; filter: blur(0.3px); }
+  54% { opacity: 0.96; }
+  71% { opacity: 0.75; filter: blur(0.4px); }
+  86% { opacity: 0.9; }
+}
+
+/* Firefly motes drifting up through the lower frame */
+@keyframes mote-drift {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  12% { opacity: 0.7; }
+  60% { opacity: 0.45; }
+  100% { transform: translateY(-46vh) translateX(3vw); opacity: 0; }
+}
+
+/* Star twinkle */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 0.3; }
+}
+
+/* Whole-frame candle-grade breathing (very low amplitude) */
+@keyframes ember-breathe {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+/* Hanging-lantern sway (scroll cue) */
+@keyframes lantern-sway {
+  0%, 100% { transform: rotate(3deg); }
+  50% { transform: rotate(-3deg); }
+}
+
+/* Night sky settling in: stars fade up after first paint */
+@keyframes stars-settle {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Lantern route: flame + glow rest dark until the ink path reaches them */
+.lantern-flame,
+.lantern-glow {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+.lantern-lit .lantern-flame {
+  opacity: 1;
+  animation: flicker 2.8s ease-in-out infinite;
+}
+.lantern-lit .lantern-glow {
+  opacity: 1;
+}
+
+/* Botanical linework that draws itself when scrolled into view */
+.flourish-path {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  transition: stroke-dashoffset 1.8s ease-out;
+}
+.flourish-drawn .flourish-path {
+  stroke-dashoffset: 0;
+}
+
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -88,5 +227,15 @@ p {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* Ambience rests in its finished state: flourishes drawn, flames as
+     steady glows, no drifting particles */
+  .flourish-path {
+    stroke-dashoffset: 0;
+  }
+  .lantern-lit .lantern-flame {
+    animation: none;
+    opacity: 1;
   }
 }

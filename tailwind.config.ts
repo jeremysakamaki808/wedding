@@ -33,6 +33,12 @@ const config: Config = {
           DEFAULT: '#EFE7D8',
           dark: '#D4C4B0',
         },
+        // Antique gold — accent only: hairlines, seals, foil. Never a surface.
+        gold: {
+          DEFAULT: '#C9A66B',
+          dark: '#8C6F3F',
+          light: '#E7CF9F',
+        },
         ivory: {
           DEFAULT: '#F8F5EF',
         },
@@ -81,6 +87,8 @@ const config: Config = {
       },
       boxShadow: {
         'soft': '0 2px 8px rgba(43, 27, 16, 0.08)',
+        'plate': '0 6px 24px rgba(43, 27, 16, 0.14)',
+        'ember': '0 0 24px rgba(201, 166, 107, 0.35)',
         'card': '0 24px 60px rgba(23, 34, 67, 0.35)',
         'glow': '0 0 20px rgba(139, 74, 107, 0.35)',
         'glow-cyan': '0 0 20px rgba(93, 116, 102, 0.35)',

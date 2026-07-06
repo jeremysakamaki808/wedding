@@ -21,8 +21,8 @@ export default function RSVPSection({ data }: RSVPSectionProps) {
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <p className="label-text text-sage mb-3">Kindly reply</p>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-charcoal mb-4">
+          <p className="kicker-lines label-text text-sage mb-3">Kindly reply</p>
+          <h2 className="text-engraved text-4xl md:text-5xl font-serif font-bold text-charcoal mb-4">
             RSVP
           </h2>
           <p className="text-charcoal/75 text-lg mb-4">
@@ -31,8 +31,8 @@ export default function RSVPSection({ data }: RSVPSectionProps) {
           <p className="text-burgundy font-semibold">
             Please respond by {formattedDeadline}
           </p>
-          <div className="relative mx-auto mt-5 h-px w-16 bg-terracotta/50">
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rotate-45 bg-terracotta/60" />
+          <div className="relative mx-auto mt-5 h-px w-16 bg-gold/60">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rotate-45 bg-gold/70" />
           </div>
         </div>
 
@@ -100,10 +100,11 @@ export default function RSVPSection({ data }: RSVPSectionProps) {
               </div>
             </div>
 
-            {/* Submit Button */}
+            {/* Submit Button — brass nameplate (disabled until Phase 4) */}
             <button
               disabled
-              className="w-full px-6 py-3 bg-burgundy text-ivory text-lg font-bold rounded-full opacity-50 cursor-not-allowed"
+              className="relative w-full px-6 py-3 bg-burgundy text-ivory text-lg font-bold uppercase tracking-[0.14em] rounded-full border border-gold/60 opacity-50 cursor-not-allowed
+                after:absolute after:inset-1 after:rounded-full after:border after:border-gold/30 after:pointer-events-none"
             >
               Submit RSVP
             </button>

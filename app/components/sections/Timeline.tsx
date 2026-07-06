@@ -55,13 +55,13 @@ export default function Timeline({ data }: TimelineProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <p className="label-text text-sage mb-3">October 16, 2026</p>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-charcoal mb-4">
+          <p className="kicker-lines label-text text-sage mb-3">October 16, 2026</p>
+          <h2 className="text-engraved text-4xl md:text-5xl font-serif font-bold text-charcoal mb-4">
             Day Timeline
           </h2>
           <p className="text-charcoal/70 text-lg">How the celebration unfolds</p>
-          <div className="relative mx-auto mt-5 h-px w-16 bg-terracotta/50">
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rotate-45 bg-terracotta/60" />
+          <div className="relative mx-auto mt-5 h-px w-16 bg-gold/60">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rotate-45 bg-gold/70" />
           </div>
         </div>
 

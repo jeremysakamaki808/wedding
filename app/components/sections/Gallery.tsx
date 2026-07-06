@@ -1,5 +1,7 @@
 'use client';
 
+import WaxSeal from '@/components/ui/WaxSeal';
+
 export default function Gallery() {
   // Temporary gallery — reuses the three Kaimea Estates venue photos (hotlinked
   // from Kaimea's CDN, mirroring public/data/wedding.json). Swap for the
@@ -27,13 +29,13 @@ export default function Gallery() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <p className="label-text text-sage mb-3">Captured moments</p>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-charcoal mb-4">
+          <p className="kicker-lines label-text text-sage mb-3">Captured moments</p>
+          <h2 className="text-engraved text-4xl md:text-5xl font-serif font-bold text-charcoal mb-4">
             Photo Gallery
           </h2>
           <p className="text-charcoal/70 text-lg">Moments from our Hawaiian celebration</p>
-          <div className="relative mx-auto mt-5 h-px w-16 bg-terracotta/50">
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rotate-45 bg-terracotta/60" />
+          <div className="relative mx-auto mt-5 h-px w-16 bg-gold/60">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rotate-45 bg-gold/70" />
           </div>
         </div>
 
@@ -48,16 +50,22 @@ export default function Gallery() {
             >
               {image.url ? (
                 <>
-                  {/* Real Image */}
+                  {/* Estate plate: warm film grade, hairline gold frame */}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={image.url}
                     alt={image.alt}
-                    className="w-full h-64 lg:h-96 object-cover"
+                    className="w-full h-64 lg:h-96 object-cover sepia-[.08] saturate-[1.05] transition-[filter,transform] duration-500 group-hover:sepia-0 group-hover:scale-[1.02]"
                   />
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-navy-dark/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span className="text-ivory font-serif tracking-[0.14em] uppercase text-lg">View</span>
+                  <div aria-hidden className="absolute inset-2 ring-1 ring-gold/40 pointer-events-none rounded-[2px]" />
+                  {index === 0 && (
+                    <WaxSeal className="absolute top-3 right-3 w-12 h-12 drop-shadow-md rotate-6" />
+                  )}
+                  {/* Rising caption plate */}
+                  <div className="absolute bottom-0 inset-x-0 bg-ivory/95 py-2.5 px-3 text-center translate-y-full group-hover:translate-y-0 transition-transform duration-400 ease-out">
+                    <span className="text-charcoal/80 uppercase tracking-[0.2em] text-[10px] md:text-xs font-semibold">
+                      {image.alt}
+                    </span>
                   </div>
                 </>
               ) : (

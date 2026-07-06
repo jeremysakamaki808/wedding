@@ -11,9 +11,12 @@ function PalmSilhouette({ className }: { className: string }) {
 export default function HeroCTA() {
   return (
     <div className="max-w-[520px] mt-4 md:mt-5 animate-fade-up [animation-delay:0.8s]">
+      {/* Brass nameplate: double gold hairline + one-shot shimmer sweep on hover */}
       <a
         href="#rsvp"
-        className="relative block rounded-full border border-terracotta-light/40 bg-burgundy px-6 py-3.5 md:py-4 text-center overflow-hidden transition-all duration-300 hover:bg-burgundy-light hover:shadow-soft"
+        className="relative block rounded-full border border-gold/60 bg-burgundy px-6 py-3.5 md:py-4 text-center overflow-hidden transition-all duration-300 hover:bg-burgundy-light hover:shadow-ember
+          after:absolute after:inset-1 after:rounded-full after:border after:border-gold/30 after:pointer-events-none
+          before:absolute before:inset-0 before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-700 before:ease-out before:bg-gradient-to-r before:from-transparent before:via-gold-light/20 before:to-transparent before:pointer-events-none"
       >
       {/* Palm decorations */}
       <PalmSilhouette className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 text-ivory opacity-10" />
