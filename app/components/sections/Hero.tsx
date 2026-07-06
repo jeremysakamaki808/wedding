@@ -35,13 +35,12 @@ export default function Hero() {
   return (
     <section id="home" className="sticky top-0 h-screen overflow-hidden">
       {/* Background layer — scaled by HeroScrollStage on scroll. The artwork
-          is a 6s cinemagraph (locked camera, ambient motion) that HeroScrollStage
-          scrubs GTA VI-style: scroll progress maps straight to the video's
-          currentTime, locked to the zoom across the whole hero->story->dissolve
-          journey. The GSAP zoom/pan transform lands on this wrapper; the
-          currentTime scrub lands on the child video. The original artwork stays
-          as the wrapper's CSS background: it paints instantly, matches the
-          clip's first frame, and is the fallback if the video can't load.
+          is a seamless ~9s cinemagraph (locked camera, ambient motion) that
+          autoplays muted on a loop; it runs on its own clock while the GSAP
+          zoom/pan transform lands on this wrapper — scroll drives only the
+          push-in, never the playback. The first frame stays as the wrapper's
+          CSS background: it paints instantly, matches the clip, and is the
+          fallback if the video can't load or autoplay is blocked.
           Portrait phones crop to 62% 38% — the couple's faces, the same point
           the scroll zoom anchors to, so the push-in stays locked on them.
           Landscape/desktop keeps the full centered composition; the
@@ -52,6 +51,8 @@ export default function Hero() {
       >
         <video
           data-hero-video
+          autoPlay
+          loop
           muted
           playsInline
           preload="auto"

@@ -1,20 +1,17 @@
 /**
- * Hero background loop — a 6s seamless cinemagraph (locked camera, ambient
- * motion only) that replaces the static hero artwork. Unlike the venue clip
- * this is NOT scroll-scrubbed: it autoplays muted on a loop while
+ * Hero background loop — a seamless ~9s cinemagraph (locked camera, ambient
+ * motion only). It autoplays muted on a loop, running on its own clock while
  * HeroScrollStage applies the scroll zoom/pan transform to the wrapping
- * [data-hero-bg] layer, exactly as it did to the still image.
+ * [data-hero-bg] layer. The hero video is NOT scroll-scrubbed (only the venue
+ * video is).
  *
  * WebM (VP9) listed first — browsers take the first playable source and the
  * VP9 file is smaller; Safari falls through to the MP4. The poster is the
- * clip's first frame so the pre-scrub paint (and the idle-at-top frame) is
+ * clip's first frame, so the pre-play paint (and the reduced-motion / failed-
+ * autoplay fallback via the wrapper's bg-hero-art background) is
  * indistinguishable from the running video.
- *
- * HeroScrollStage scrubs this GTA VI-style: scroll progress maps straight to
- * currentTime across the hero->story->dissolve journey, locked to the zoom.
  */
 export const heroVideo = {
-  duration: 6.04, // seconds — fallback until loadedmetadata supplies the real value
   poster: '/videos/hero-poster.jpg',
   sources: [
     { src: '/videos/hero-loop.webm', type: 'video/webm' },
