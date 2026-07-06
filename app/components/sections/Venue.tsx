@@ -4,7 +4,9 @@ import React, { useRef } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import { motion } from 'framer-motion';
 import type { WeddingData } from '@/types';
+import usePrefersReducedMotion from '@/lib/usePrefersReducedMotion';
 import EstatePlate from '@/components/ui/EstatePlate';
 import Lantern from '@/components/ui/Lantern';
 import CornerFlourish from '@/components/ui/CornerFlourish';
@@ -63,6 +65,73 @@ function MapEmbedFallback({ src }: { src: string }) {
 /** Plate tilts as complete literal classes (Tailwind JIT scans source) */
 const PLATE_TILTS = ['md:-rotate-1', 'md:rotate-[0.75deg]', 'md:-rotate-[0.5deg]'];
 
+/**
+ * The shuttle rides as a kraft luggage tag: clipped-corner manila stock,
+ * brass eyelet with a twine loop, the heading rubber-stamped at a slight
+ * angle. Hovering sets it swinging gently from the eyelet.
+ */
+function LuggageTag({ note }: { note: string }) {
+  const reduced = usePrefersReducedMotion();
+
+  const body = (
+    <div className="relative mt-5 mr-1">
+      {/* twine looping away from the eyelet */}
+      <svg
+        viewBox="0 0 60 44"
+        className="absolute -top-7 -left-6 w-16 h-12 text-charcoal/45"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M52 38 C40 28, 24 12, 11 7 C4.5 4.8, 2.5 9, 6.5 11 C14 14.5, 34 26, 48 36"
+          stroke="currentColor"
+          strokeWidth="1.1"
+          strokeLinecap="round"
+        />
+        <path
+          d="M52 40 C38 31, 22 15, 10 9"
+          stroke="currentColor"
+          strokeWidth="0.8"
+          strokeLinecap="round"
+          opacity="0.65"
+        />
+      </svg>
+
+      <div
+        className="paper-kraft grain relative rounded-sm py-3.5 pl-12 pr-5 shadow-soft rotate-[1.5deg]"
+        style={{
+          clipPath:
+            'polygon(16px 0, 100% 0, 100% 100%, 16px 100%, 0 calc(100% - 16px), 0 16px)',
+        }}
+      >
+        {/* printed hairline border, cut with the corners */}
+        <div aria-hidden className="absolute inset-1.5 border border-[#8c6f3f]/35 rounded-[1px] pointer-events-none" />
+        {/* brass eyelet + reinforcement ring */}
+        <span aria-hidden className="absolute left-2.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full border border-gold-dark/40" />
+        <span aria-hidden className="absolute left-[15px] top-1/2 -translate-y-1/2 w-4 h-4 rounded-full border-2 border-gold-dark bg-ivory shadow-[inset_0_1px_2px_rgba(43,27,16,0.35)]" />
+
+        {/* rubber-stamped heading */}
+        <p className="text-[10px] md:text-[11px] uppercase tracking-[0.24em] font-bold text-gold-dark mb-1 rotate-[-1.5deg] opacity-90">
+          <span className="mr-2">№ 047</span>Complimentary Shuttle
+        </p>
+        <p className="text-charcoal/80 text-sm md:text-base">{note}</p>
+      </div>
+    </div>
+  );
+
+  if (reduced) return body;
+
+  return (
+    <motion.div
+      whileHover={{ rotate: -1.4 }}
+      transition={{ type: 'spring', stiffness: 130, damping: 6 }}
+      style={{ transformOrigin: '26px 45%' }}
+    >
+      {body}
+    </motion.div>
+  );
+}
+
 export default function Venue({ data }: VenueProps) {
   const { venue } = data;
   const routeRef = useRef<HTMLDivElement>(null);
@@ -111,7 +180,7 @@ export default function Venue({ data }: VenueProps) {
   return (
     <section id="venue" className="relative z-30 px-4 sm:px-6 lg:px-8 pb-24">
       {/* Parchment folio floating over the animated venue scene */}
-      <div className="parchment grain relative mx-auto max-w-7xl rounded-3xl border border-cream-dark overflow-hidden shadow-card">
+      <div className="paper grain relative mx-auto max-w-7xl rounded-3xl border border-cream-dark overflow-hidden shadow-card">
         <PalmFrond className="absolute -top-10 -right-10 w-56 h-56 md:w-72 md:h-72 text-sage opacity-[0.12] rotate-[18deg] pointer-events-none" />
         <PalmFrond className="absolute -bottom-14 -left-12 w-64 h-64 md:w-80 md:h-80 text-sage opacity-[0.12] -rotate-[24deg] -scale-x-100 pointer-events-none" />
 
@@ -140,6 +209,7 @@ export default function Venue({ data }: VenueProps) {
                   key={image.id}
                   caption={image.alt}
                   seal={i === 0}
+                  mount={i === 1 ? 'tape' : 'corners'}
                   tilt={PLATE_TILTS[i % PLATE_TILTS.length]}
                 >
                   {image.url ? (
@@ -169,16 +239,8 @@ export default function Venue({ data }: VenueProps) {
                 </h3>
                 <p className="text-charcoal text-lg mb-2">{venue.address}</p>
 
-                {/* Complimentary shuttle — the estate ticket */}
-                <div className="grain relative mt-4 bg-cream/70 border border-cream-dark rounded-sm py-3 pl-7 pr-4
-                  before:absolute before:-left-2 before:top-1/2 before:-translate-y-1/2 before:w-4 before:h-4 before:rounded-full before:bg-ivory before:border before:border-cream-dark">
-                  {/* Perforated edge */}
-                  <div aria-hidden className="absolute left-3 top-2 bottom-2 border-l-2 border-dotted border-charcoal/20" />
-                  <p className="text-[10px] md:text-[11px] uppercase tracking-[0.24em] font-bold text-gold-dark mb-1">
-                    <span className="mr-2">№</span>Complimentary Shuttle
-                  </p>
-                  <p className="text-charcoal/75 text-sm md:text-base">{venue.parking}</p>
-                </div>
+                {/* Complimentary shuttle — the kraft luggage tag */}
+                <LuggageTag note={venue.parking} />
               </div>
 
               {/* The Lantern Route: the day's journey through the estate */}

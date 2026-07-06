@@ -65,7 +65,7 @@ export default function Navbar() {
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-500 animate-fade-down ${
         isScrolled
-          ? 'bg-ivory/95 backdrop-blur-md border-b border-cream-dark shadow-soft py-2'
+          ? 'paper-nav backdrop-blur-md border-b border-cream-dark shadow-soft py-2'
           : 'bg-transparent py-4'
       }`}
     >
@@ -121,7 +121,7 @@ export default function Navbar() {
 
       {/* Mobile menu overlay */}
       {isMenuOpen && (
-        <nav className="md:hidden absolute top-full left-0 w-full bg-ivory/95 backdrop-blur-lg border-t border-cream-dark shadow-lg">
+        <nav className="md:hidden absolute top-full left-0 w-full paper-nav backdrop-blur-lg border-t border-cream-dark shadow-lg">
           <div className="flex flex-col items-center gap-6 py-10 text-base">
             {ALL_LINKS.map(link => (
               <NavLink key={link.href} {...link} onClick={closeMenu} />

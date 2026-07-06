@@ -279,20 +279,45 @@ export default function HeroScrollStage({ children }: { children: React.ReactNod
         // A proxy tween (rather than a bare onUpdate) so scrub's 0.6s easing
         // smooths the scrub — fast scrolling glides the video instead of
         // jump-cutting between times.
+        //
+        // The scrub runs all the way to the STAGE bottom, not just the
+        // runway, so the camera never freezes while the folio is read.
+        // Pacing is piecewise: the first ~75% of the footage plays across
+        // the dissolve + runway (the dramatic approach, same feel as
+        // before), and the final ~25% glides slowly beneath the Venue
+        // folio, coming to rest right as the nightfall veil hands the
+        // scene to the Timeline. F — the scroll fraction where the runway
+        // ends — is measured on refresh so the split survives resizes.
+        const RUNWAY_SHARE = 0.75;
+        let runwayFrac = 0.6; // refined by onRefresh before first paint
+        const pace = (p: number) => {
+          const F = Math.min(0.95, Math.max(0.05, runwayFrac));
+          return p <= F
+            ? (p / F) * RUNWAY_SHARE
+            : RUNWAY_SHARE + ((p - F) / (1 - F)) * (1 - RUNWAY_SHARE);
+        };
         const proxy = { p: 0 };
         gsap.fromTo(proxy, { p: 0 }, {
           p: 1,
           ease: 'none',
           onUpdate: () => {
-            if (videoFailed) setFrame(proxy.p);
-            else seek(proxy.p * duration());
+            const t = pace(proxy.p);
+            if (videoFailed) setFrame(t);
+            else seek(t * duration());
           },
           scrollTrigger: {
             trigger: transitionZone,
-            endTrigger: runway,
+            endTrigger: stage,
             start: 'top top',
-            end: 'bottom top',
+            end: 'bottom bottom',
             scrub: 0.6,
+            onRefresh: self => {
+              // Scroll position where the runway's bottom crosses the
+              // viewport top — the old scrub's end — as a fraction of the
+              // new, longer range.
+              const runwayCut = runway.getBoundingClientRect().bottom + window.scrollY;
+              runwayFrac = (runwayCut - self.start) / Math.max(1, self.end - self.start);
+            },
           },
         });
       }

@@ -105,6 +105,67 @@ p {
     radial-gradient(120% 90% at 50% 38%, #f8f5ef 0%, #f4eee0 55%, #ece2cd 100%);
 }
 
+/* ---------------------------------------------------------------------------
+   Handmade cotton-rag paper — a procedural stand-in built the way a real
+   scan reads: large soft fiber mottling, a medium paper tooth, and faint
+   vertical chain lines over the parchment wash. When the Luma paper scan
+   lands, add url('/textures/paper.jpg') as the top background-image layer
+   (multiply blend) and halve the two turbulence layers' alpha.
+--------------------------------------------------------------------------- */
+.paper {
+  background-color: #f4eee0;
+  background-image:
+    /* chain lines: the laid mould's wires, barely-there verticals */
+    repeating-linear-gradient(
+      90deg,
+      rgba(58, 47, 42, 0.025) 0px,
+      rgba(58, 47, 42, 0.025) 1px,
+      transparent 1px,
+      transparent 26px
+    ),
+    /* fiber blotches: large, soft warm mottling (low-frequency turbulence) */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='3' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.64 0 0 0 0 0.56 0 0 0 0 0.44 0 0 0 0.35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E"),
+    /* paper tooth: medium-frequency surface texture */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.09' numOctaves='2' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.45 0 0 0 0 0.4 0 0 0 0 0.32 0 0 0 0.16 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23t)'/%3E%3C/svg%3E"),
+    /* base tint: the parchment radial wash */
+    radial-gradient(120% 90% at 50% 38%, #f8f5ef 0%, #f4eee0 55%, #ece2cd 100%);
+  background-blend-mode: normal, multiply, multiply, normal;
+}
+
+/* Navbar variant: same sheet, slightly translucent so backdrop-blur keeps
+   working while the bar reads as the top edge of the site's paper */
+.paper-nav {
+  background-color: rgba(248, 245, 239, 0.94);
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgba(58, 47, 42, 0.02) 0px,
+      rgba(58, 47, 42, 0.02) 1px,
+      transparent 1px,
+      transparent 26px
+    ),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='3' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.64 0 0 0 0 0.56 0 0 0 0 0.44 0 0 0 0.28 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.09' numOctaves='2' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.45 0 0 0 0 0.4 0 0 0 0 0.32 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23t)'/%3E%3C/svg%3E");
+  background-blend-mode: normal, multiply, multiply;
+}
+
+/* Kraft variant: the luggage tag's manila stock — same fibers, tan wash */
+.paper-kraft {
+  background-color: #cdb083;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgba(58, 47, 42, 0.04) 0px,
+      rgba(58, 47, 42, 0.04) 1px,
+      transparent 1px,
+      transparent 22px
+    ),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012' numOctaves='3' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.52 0 0 0 0 0.42 0 0 0 0 0.28 0 0 0 0.4 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.09' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.4 0 0 0 0 0.32 0 0 0 0 0.2 0 0 0 0.2 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23t)'/%3E%3C/svg%3E"),
+    radial-gradient(120% 90% at 50% 35%, #d8bf96 0%, #cdb083 55%, #b8975e 100%);
+  background-blend-mode: normal, multiply, multiply, normal;
+}
+
 /* Gold-foil text: gradient clipped to glyphs; catches light on hover */
 .text-foil {
   background-image: linear-gradient(
