@@ -12,6 +12,99 @@ interface TimelineProps {
   data: WeddingData;
 }
 
+/* ---- Daylight to Lanternlight --------------------------------------------
+   The section background is the wedding day itself: scrolling the schedule
+   scrolls the sky, from October-afternoon ivory through golden hour and an
+   ember dusk into starlit navy by the last shuttle. Each row is staged by
+   its hour — rows after sunset (~6:07 PM on Oʻahu that evening) become
+   lantern-lit, their parchment cards glowing like paper held to a flame. */
+type Phase = 'day' | 'golden' | 'night';
+const SUNSET_MIN = 18 * 60 + 7; // 6:07 PM HST — Oct 16, 2026 sunset
+const GOLDEN_MIN = 16 * 60; // golden hour begins ~4:00 PM
+
+function timePhase(time: string): Phase {
+  const m = time.match(/(\d+):(\d+)\s*(AM|PM)/i);
+  if (!m) return 'day';
+  let mins = (parseInt(m[1], 10) % 12) * 60 + parseInt(m[2], 10);
+  if (/pm/i.test(m[3])) mins += 12 * 60;
+  if (mins >= SUNSET_MIN) return 'night';
+  if (mins >= GOLDEN_MIN) return 'golden';
+  return 'day';
+}
+
+/* Card dressing per hour: daylight rows stay plain parchment, golden-hour
+   rows warm at the edges, night rows carry a candle glow that deepens on
+   hover (the lanterns have taken over from the sun). */
+const CARD_PHASE: Record<Phase, string> = {
+  day: 'border-cream-dark hover:border-gold/60',
+  golden: 'border-gold/30 hover:border-gold/60 shadow-[0_10px_28px_rgba(212,149,107,0.13)]',
+  night:
+    'border-gold/40 hover:border-gold/75 shadow-[0_0_34px_rgba(201,166,107,0.24)] hover:shadow-[0_0_46px_rgba(201,166,107,0.34)]',
+};
+
+/* Stars over the evening rows — box-shadow constellations like the hero's
+   (x in vw so the sky breathes with the viewport; y in px within the fixed-
+   height layer anchored to the section's night end). Second layer is warmer
+   gold and twinkles out of phase. */
+const STARS_TL = [
+  [4, 40], [11, 150], [17, 60], [24, 210], [31, 95], [38, 25], [45, 170],
+  [52, 60], [59, 230], [66, 120], [72, 30], [79, 190], [86, 80], [93, 150],
+  [97, 40], [8, 300], [48, 320], [88, 290],
+]
+  .map(([x, y]) => `${x}vw ${y}px 0 0.6px rgba(248,245,239,0.75)`)
+  .join(', ');
+
+const STARS_TL_B = [
+  [7, 90], [21, 260], [35, 140], [42, 55], [56, 300], [63, 180], [76, 100],
+  [83, 250], [90, 200], [15, 20], [69, 20], [96, 330],
+]
+  .map(([x, y]) => `${x}vw ${y}px 0 0.85px rgba(231,207,159,0.8)`)
+  .join(', ');
+
+/* Firefly motes over the dusk rows: [left %, drift duration s, delay s] */
+const TL_MOTES: Array<[number, number, number]> = [
+  [16, 17, 0],
+  [50, 20, 6],
+  [82, 15, 3],
+];
+
+/** Engraved sun medallion that rides the ink down the spine until sunset */
+function SunMedallion({ className }: { className: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.4}
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="4.3" />
+      <path d="M12 2.6 V5.1 M12 18.9 V21.4 M2.6 12 H5.1 M18.9 12 H21.4 M5.3 5.3 L7.1 7.1 M16.9 16.9 L18.7 18.7 M18.7 5.3 L16.9 7.1 M7.1 16.9 L5.3 18.7" />
+    </svg>
+  );
+}
+
+/** Engraved crescent (same linework as the shuttle-departure glyph) */
+function MoonMedallion({ className }: { className: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.3}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M18.5 14.8 A8 8 0 1 1 9.2 5.5 A6.5 6.5 0 0 0 18.5 14.8 Z" />
+      <path d="M17.5 5.5 L17.9 6.8 L19.2 7.2 L17.9 7.6 L17.5 8.9 L17.1 7.6 L15.8 7.2 L17.1 6.8 Z" strokeWidth={0.9} />
+    </svg>
+  );
+}
+
 /**
  * Engraved line icons keyed by the emoji in wedding.json — the data stays
  * untouched; these are the manuscript's inked pictograms. Unknown icons
@@ -121,21 +214,64 @@ export default function Timeline({ data }: TimelineProps) {
       );
     });
 
-    // ---- Lantern path: ink draws down the spine, lanterns catch flame ----
-    // Same pattern as the venue route: one scrubbed trigger; passed spine
-    // renders solid ink over the faint dashed road; each lantern lights as
-    // the ink reaches its row. Reduced motion renders the path complete.
+    // ---- Lantern path + the traveling sun --------------------------------
+    // One scrubbed trigger: ink draws down the spine (aging from charcoal to
+    // lantern-gold via the masked layers below), lanterns catch flame as the
+    // ink reaches them, and the sun medallion rides the ink tip — arcing off
+    // the road and slipping behind the horizon hairline, where the moon
+    // fades up to finish the journey. Reduced motion renders the completed
+    // night: path drawn, lanterns lit, moon out.
     const root = containerRef.current;
     let inkTrigger: ScrollTrigger | undefined;
     if (root) {
       const stops = Array.from(root.querySelectorAll('[data-tl-stop]'));
-      const ink = root.querySelector<HTMLElement>('[data-tl-ink]');
+      const inks = Array.from(root.querySelectorAll<HTMLElement>('[data-tl-ink]'));
+      const sun = root.querySelector<HTMLElement>('[data-tl-sun]');
+      const moon = root.querySelector<HTMLElement>('[data-tl-moon]');
+      const sunClip = root.querySelector<HTMLElement>('[data-tl-sun-clip]');
+      const horizon = root.querySelector<HTMLElement>('[data-tl-horizon]');
+
+      // The horizon sits midway between the last golden row and the first
+      // night row — measured, so it tracks real card heights across
+      // breakpoints. The sun's clip ends there: crossing it, it "sets".
+      let H = 1;
+      let horizonY = 1;
+      const measure = () => {
+        H = Math.max(1, root.offsetHeight);
+        const rows = Array.from(root.querySelectorAll<HTMLElement>('.timeline-item'));
+        const firstNight = rows.findIndex(r => r.dataset.phase === 'night');
+        if (firstNight > 0) {
+          const rootTop = root.getBoundingClientRect().top;
+          const above = rows[firstNight - 1].getBoundingClientRect().bottom;
+          const below = rows[firstNight].getBoundingClientRect().top;
+          horizonY = (above + below) / 2 - rootTop;
+        } else {
+          horizonY = 0.66 * H;
+        }
+        if (horizon) horizon.style.top = `${horizonY}px`;
+        if (sunClip) sunClip.style.height = `${horizonY}px`;
+      };
+
       const apply = (p: number) => {
-        if (ink) gsap.set(ink, { scaleY: p });
+        inks.forEach(ink => gsap.set(ink, { scaleY: p }));
         stops.forEach((stop, i) =>
           stop.classList.toggle('lantern-lit', p >= (stops.length > 1 ? i / (stops.length - 1) : 0) * 0.92)
         );
+        const y = p * H;
+        if (sun) {
+          gsap.set(sun, { y, x: Math.sin(Math.min(y / horizonY, 1) * Math.PI) * 76 });
+        }
+        if (moon) {
+          const pm = gsap.utils.clamp(0, 1, (y - horizonY) / Math.max(1, H - horizonY));
+          gsap.set(moon, {
+            y,
+            x: -Math.sin(pm * Math.PI) * 44,
+            opacity: gsap.utils.clamp(0, 1, (y - horizonY) / 70),
+          });
+        }
       };
+
+      measure();
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         apply(1);
       } else {
@@ -146,6 +282,10 @@ export default function Timeline({ data }: TimelineProps) {
           end: 'bottom 62%',
           scrub: 0.6,
           onUpdate: self => apply(self.progress),
+          onRefresh: self => {
+            measure();
+            apply(self.progress);
+          },
         });
       }
     }
@@ -160,8 +300,42 @@ export default function Timeline({ data }: TimelineProps) {
   return (
     // overflow-x-clip: items enter from x:±60, which would otherwise widen
     // the page and allow sideways panning on mobile while they wait offscreen
-    <section id="timeline" className="py-20 bg-ivory overflow-x-clip">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="timeline" className="relative py-20 overflow-x-clip">
+      {/* The sky: scrolling the schedule scrolls the day — October-afternoon
+          ivory through golden hour and ember dusk into starlit navy */}
+      <div
+        aria-hidden
+        className="absolute inset-0 [background:linear-gradient(to_bottom,#F8F5EF_0%,#F5EDDD_24%,#EDDBB2_42%,#DFAF83_56%,#B06A5E_67%,#5C3A5C_76%,#28304F_86%,#172243_100%)]"
+      />
+
+      {/* Stars settle over the evening rows (masked in from nothing so the
+          dusk band stays clean). Hidden for reduced motion, like the hero's. */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 bottom-4 h-[400px] hidden sm:block motion-reduce:!hidden pointer-events-none [mask-image:linear-gradient(to_bottom,transparent,black_45%)]"
+      >
+        <span
+          className="absolute top-0 left-0 w-px h-px rounded-full [animation:twinkle_5.2s_ease-in-out_infinite]"
+          style={{ boxShadow: STARS_TL }}
+        />
+        <span
+          className="absolute top-0 left-0 w-px h-px rounded-full [animation:twinkle_7.4s_ease-in-out_2s_infinite]"
+          style={{ boxShadow: STARS_TL_B }}
+        />
+      </div>
+
+      {/* Fireflies drifting up through the dusk rows (desktop only) */}
+      <div aria-hidden className="absolute inset-x-0 bottom-0 h-[30%] hidden md:block motion-reduce:!hidden pointer-events-none">
+        {TL_MOTES.map(([left, dur, delay]) => (
+          <span
+            key={left}
+            className="absolute bottom-[6%] w-1 h-1 rounded-full bg-gold-light/70 blur-[1px]"
+            style={{ left: `${left}%`, animation: `mote-drift ${dur}s linear ${delay}s infinite` }}
+          />
+        ))}
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
           <p className="kicker-lines label-text text-sage mb-3">October 16, 2026</p>
@@ -176,46 +350,86 @@ export default function Timeline({ data }: TimelineProps) {
 
         {/* Timeline Items */}
         <div ref={containerRef} className="timeline-container relative">
-          {/* The spine: faint dashed road with ink drawing down it on scroll */}
+          {/* The spine: dashed road + drawn ink, each in two masked layers so
+              the linework ages from charcoal in daylight to lantern-gold in
+              the night sky (a single charcoal line would vanish on navy) */}
           <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-px h-full">
-            <div className="absolute inset-0 [background:repeating-linear-gradient(to_bottom,rgba(58,47,42,0.28)_0_4px,transparent_4px_9px)]" />
-            <div data-tl-ink className="absolute inset-0 origin-top scale-y-0 bg-charcoal/60" />
+            <div className="absolute inset-0 [background:repeating-linear-gradient(to_bottom,rgba(58,47,42,0.28)_0_4px,transparent_4px_9px)] [mask-image:linear-gradient(to_bottom,black_55%,transparent_78%)]" />
+            <div className="absolute inset-0 [background:repeating-linear-gradient(to_bottom,rgba(231,207,159,0.45)_0_4px,transparent_4px_9px)] [mask-image:linear-gradient(to_bottom,transparent_55%,black_78%)]" />
+            <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,black_55%,transparent_78%)]">
+              <div data-tl-ink className="absolute inset-0 origin-top scale-y-0 bg-charcoal/60" />
+            </div>
+            <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent_55%,black_78%)]">
+              <div data-tl-ink className="absolute inset-0 origin-top scale-y-0 bg-gold-light/70" />
+            </div>
+          </div>
+
+          {/* The heavens: sun rides the ink tip, arcs off the road, and slips
+              behind the horizon hairline; the moon fades up below it.
+              Positions are driven from the ink trigger's apply(). */}
+          <div aria-hidden className="hidden md:block absolute inset-0 pointer-events-none">
+            <div
+              data-tl-horizon
+              className="absolute inset-x-6 top-[66%] h-px [background:linear-gradient(to_right,transparent,rgba(201,166,107,0.45)_18%,rgba(201,166,107,0.45)_82%,transparent)]"
+            />
+            <div data-tl-sun-clip className="absolute inset-x-0 top-0 overflow-hidden">
+              <span
+                data-tl-sun
+                className="absolute left-[calc(50%-1rem)] -top-4 w-8 h-8 text-gold-dark [filter:drop-shadow(0_0_10px_rgba(201,166,107,0.55))]"
+              >
+                <SunMedallion className="w-8 h-8" />
+              </span>
+            </div>
+            <span
+              data-tl-moon
+              className="absolute left-[calc(50%-0.875rem)] -top-3.5 w-7 h-7 text-gold-light opacity-0 [filter:drop-shadow(0_0_9px_rgba(231,207,159,0.5))]"
+            >
+              <MoonMedallion className="w-7 h-7" />
+            </span>
           </div>
 
           {/* Timeline Items Grid */}
           <div className="space-y-12">
-            {timeline.map((item, index) => (
-              <div
-                key={index}
-                className={`timeline-item flex flex-col md:flex-row gap-8 opacity-0 ${
-                  index % 2 === 0 ? 'md:flex-row-reverse' : ''
-                }`}
-              >
-                {/* Content */}
-                <div className="md:w-1/2 flex flex-col justify-center">
-                  <div className="grain bg-cream p-6 rounded-lg border border-cream-dark hover:border-gold/60 transition-colors duration-300">
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="flex items-center justify-center w-11 h-11 rounded-full border border-gold/50 bg-ivory text-charcoal/75 flex-shrink-0">
-                        <EventGlyph icon={item.icon} />
-                      </span>
-                      <p className="text-burgundy font-bold text-lg">{item.time}</p>
+            {timeline.map((item, index) => {
+              const phase = timePhase(item.time);
+              return (
+                <div
+                  key={index}
+                  data-phase={phase}
+                  className={`timeline-item flex flex-col md:flex-row gap-8 opacity-0 ${
+                    index % 2 === 0 ? 'md:flex-row-reverse' : ''
+                  }`}
+                >
+                  {/* Content */}
+                  <div className="md:w-1/2 flex flex-col justify-center">
+                    <div
+                      className={`grain bg-cream p-6 rounded-lg border transition-[border-color,box-shadow] duration-300 ${CARD_PHASE[phase]}`}
+                    >
+                      <div className="flex items-center gap-3 mb-3">
+                        <span className="flex items-center justify-center w-11 h-11 rounded-full border border-gold/50 bg-ivory text-charcoal/75 flex-shrink-0">
+                          <EventGlyph icon={item.icon} />
+                        </span>
+                        <p className="text-burgundy font-bold text-lg">{item.time}</p>
+                      </div>
+                      <h3 className="text-2xl font-serif font-bold text-charcoal mb-2">{item.event}</h3>
+                      <p className="text-charcoal/75">{item.description}</p>
                     </div>
-                    <h3 className="text-2xl font-serif font-bold text-charcoal mb-2">{item.event}</h3>
-                    <p className="text-charcoal/75">{item.description}</p>
+                  </div>
+
+                  {/* Route lantern on the spine */}
+                  <div className="hidden md:flex md:w-1/2 justify-center items-start pt-6">
+                    <span
+                      data-tl-stop
+                      className={`flex items-center justify-center w-9 h-9 rounded-full border border-gold/50 bg-ivory text-charcoal/70 transition-[border-color,box-shadow] duration-700 ${
+                        phase === 'night' ? 'lantern-night' : ''
+                      }`}
+                    >
+                      <Lantern className="w-5 h-7" />
+                    </span>
                   </div>
                 </div>
-
-                {/* Route lantern on the spine */}
-                <div className="hidden md:flex md:w-1/2 justify-center items-start pt-6">
-                  <span
-                    data-tl-stop
-                    className="flex items-center justify-center w-9 h-9 rounded-full border border-gold/50 bg-ivory text-charcoal/70"
-                  >
-                    <Lantern className="w-5 h-7" />
-                  </span>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
