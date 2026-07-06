@@ -7,10 +7,14 @@
  *
  * WebM (VP9) listed first — browsers take the first playable source and the
  * VP9 file is smaller; Safari falls through to the MP4. The poster is the
- * clip's first frame so the pre-play paint is indistinguishable from the
- * running video.
+ * clip's first frame so the pre-scrub paint (and the idle-at-top frame) is
+ * indistinguishable from the running video.
+ *
+ * HeroScrollStage scrubs this GTA VI-style: scroll progress maps straight to
+ * currentTime across the hero->story->dissolve journey, locked to the zoom.
  */
 export const heroVideo = {
+  duration: 6.04, // seconds — fallback until loadedmetadata supplies the real value
   poster: '/videos/hero-poster.jpg',
   sources: [
     { src: '/videos/hero-loop.webm', type: 'video/webm' },

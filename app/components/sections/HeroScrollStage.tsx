@@ -6,6 +6,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { venueFrames } from '@/app/config/venueFrames';
 import { venueVideo } from '@/app/config/venueVideo';
+import { heroVideo } from '@/app/config/heroVideo';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -48,6 +49,7 @@ export default function HeroScrollStage({ children }: { children: React.ReactNod
 
       const bg = stage.querySelector('[data-hero-bg]');
       const bgB = stage.querySelector('[data-hero-bg-b]');
+      const heroVid = stage.querySelector<HTMLVideoElement>('[data-hero-video]');
       const content = stage.querySelectorAll('[data-hero-content]');
       const overlay = stage.querySelector('[data-hero-overlay]');
       const story = stage.querySelector('[data-story-content]');
@@ -88,6 +90,69 @@ export default function HeroScrollStage({ children }: { children: React.ReactNod
             },
           }
         );
+      }
+
+      // ---- Hero cinemagraph: GTA VI scrub, locked to the zoom --------------
+      // Scroll progress maps straight to the hero video's currentTime across
+      // the SAME range as the zoom, so the ambient motion and the push-in move
+      // as one. The clip never plays on its own (no autoplay/loop) — it only
+      // steps forward/back as you scroll, and rests on frame 0 (== the poster)
+      // while idle at the top.
+      if (heroVid && transitionZone) {
+        // Seeks are async: if one is still in flight (or metadata hasn't
+        // arrived), remember the latest target and apply it when ready so fast
+        // scrolling never strands the video at a stale frame.
+        let pendingTime: number | null = null;
+        const duration = () =>
+          isFinite(heroVid.duration) && heroVid.duration > 0 ? heroVid.duration : heroVideo.duration;
+        const seek = (t: number) => {
+          if (heroVid.readyState < 1 || heroVid.seeking) {
+            pendingTime = t;
+            return;
+          }
+          if (Math.abs(heroVid.currentTime - t) < 0.02) return;
+          heroVid.currentTime = t;
+        };
+        const flushPending = () => {
+          if (pendingTime !== null) {
+            const t = pendingTime;
+            pendingTime = null;
+            seek(t);
+          }
+        };
+        heroVid.addEventListener('seeked', flushPending);
+        heroVid.addEventListener('loadedmetadata', flushPending);
+
+        // If no source is playable, hide the video so the wrapper's poster
+        // background shows through — degrades to the original static hero.
+        const activateFallback = () => {
+          heroVid.style.display = 'none';
+          console.warn('Hero video failed to load; falling back to the static poster background');
+        };
+        heroVid.addEventListener('error', activateFallback);
+        heroVid.querySelector('source:last-of-type')?.addEventListener('error', activateFallback);
+
+        // The hero is visible at page top, so prime immediately (preload="auto"
+        // is already buffering). The muted play()+pause() primes mobile Safari,
+        // which won't paint seeked frames until playback has started once.
+        heroVid.play().then(() => heroVid.pause()).catch(() => {});
+
+        // Proxy tween (not a bare onUpdate) so scrub's 0.6s easing glides the
+        // video on fast scrolling instead of jump-cutting between times.
+        const proxy = { p: 0 };
+        gsap.fromTo(proxy, { p: 0 }, {
+          p: 1,
+          ease: 'none',
+          onUpdate: () => seek(proxy.p * duration()),
+          scrollTrigger: {
+            trigger: stage,
+            endTrigger: transitionZone,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 0.6,
+            invalidateOnRefresh: true,
+          },
+        });
       }
 
       // ---- Overlay veil: ONE driver for the whole 0 -> 0.8 -> 0.96 -> 0 arc.
