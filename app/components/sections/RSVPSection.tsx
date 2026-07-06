@@ -8,14 +8,32 @@ interface RSVPSectionProps {
   data: WeddingData;
 }
 
+const MONTHS = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December',
+];
+
+/**
+ * Format a bare "YYYY-MM-DD" deadline without touching `Date`.
+ *
+ * `new Date("2026-09-16").toLocaleDateString()` is a hydration trap: the
+ * date-only string parses as UTC midnight, so a viewer west of UTC (Hawaii
+ * is UTC-10) formats the *previous* calendar day while the UTC build/server
+ * formats the correct one — the server and client HTML disagree and React
+ * throws hydration errors (#418/#423/#425). Building the string straight
+ * from the Y-M-D parts is timezone- and locale-independent, so every render
+ * agrees.
+ */
+function formatDeadline(iso: string): string {
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso);
+  if (!m) return iso;
+  const [, year, month, day] = m;
+  return `${MONTHS[Number(month) - 1]} ${Number(day)}, ${year}`;
+}
+
 export default function RSVPSection({ data }: RSVPSectionProps) {
   const { rsvp } = data;
-  const deadlineDate = new Date(rsvp.deadline);
-  const formattedDeadline = deadlineDate.toLocaleDateString('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  });
+  const formattedDeadline = formatDeadline(rsvp.deadline);
 
   return (
     <section id="rsvp" className="py-20 bg-cream">
