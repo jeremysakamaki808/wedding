@@ -2,6 +2,7 @@
 
 import React from 'react';
 import type { WeddingData } from '@/types';
+import WaxSeal from '@/components/ui/WaxSeal';
 
 interface RSVPSectionProps {
   data: WeddingData;
@@ -36,13 +37,18 @@ export default function RSVPSection({ data }: RSVPSectionProps) {
           </div>
         </div>
 
-        {/* Form Placeholder */}
-        <div className="bg-ivory border border-cream-dark rounded-lg p-8">
+        {/* Reply card — deckled stationery edge, letterpress labels */}
+        <div className="grain relative bg-ivory border border-cream-dark rounded-lg p-8">
+          {/* Deckled top edge */}
+          <div
+            aria-hidden
+            className="absolute -top-[5px] inset-x-3 h-[6px] [background:radial-gradient(circle_at_50%_100%,#F8F5EF_0,#F8F5EF_4.5px,transparent_5px)] [background-size:13px_6px] [background-repeat:repeat-x]"
+          />
           <div className="space-y-6">
             {/* Name Input */}
             <div>
-              <label className="block text-sm font-semibold text-charcoal mb-2">
-                Your Name <span className="text-burgundy">*</span>
+              <label className="block text-xs font-semibold uppercase tracking-[0.18em] text-charcoal mb-2">
+                Your Name <span className="text-gold-dark">*</span>
               </label>
               <div className="w-full px-4 py-3 bg-cream/50 border-2 border-cream-dark rounded-lg text-brown/50 placeholder-brown/40">
                 [Form will be interactive in Phase 4]
@@ -51,8 +57,8 @@ export default function RSVPSection({ data }: RSVPSectionProps) {
 
             {/* Email Input */}
             <div>
-              <label className="block text-sm font-semibold text-charcoal mb-2">
-                Email Address <span className="text-burgundy">*</span>
+              <label className="block text-xs font-semibold uppercase tracking-[0.18em] text-charcoal mb-2">
+                Email Address <span className="text-gold-dark">*</span>
               </label>
               <div className="w-full px-4 py-3 bg-cream/50 border-2 border-cream-dark rounded-lg text-brown/50 placeholder-brown/40">
                 [Form will be interactive in Phase 4]
@@ -61,8 +67,8 @@ export default function RSVPSection({ data }: RSVPSectionProps) {
 
             {/* Radio Options */}
             <div>
-              <label className="block text-sm font-semibold text-charcoal mb-4">
-                Will you be attending? <span className="text-burgundy">*</span>
+              <label className="block text-xs font-semibold uppercase tracking-[0.18em] text-charcoal mb-4">
+                Will you be attending? <span className="text-gold-dark">*</span>
               </label>
               <div className="space-y-3">
                 <div className="flex items-center">
@@ -92,7 +98,7 @@ export default function RSVPSection({ data }: RSVPSectionProps) {
 
             {/* Textarea */}
             <div>
-              <label className="block text-sm font-semibold text-charcoal mb-2">
+              <label className="block text-xs font-semibold uppercase tracking-[0.18em] text-charcoal mb-2">
                 Leave a message for the happy couple
               </label>
               <div className="w-full px-4 py-3 bg-cream/50 border-2 border-cream-dark rounded-lg text-brown/50 h-32">
@@ -100,13 +106,16 @@ export default function RSVPSection({ data }: RSVPSectionProps) {
               </div>
             </div>
 
-            {/* Submit Button — brass nameplate (disabled until Phase 4) */}
+            {/* Submit — the wax seal that will stamp the reply (disabled until Phase 4) */}
             <button
               disabled
-              className="relative w-full px-6 py-3 bg-burgundy text-ivory text-lg font-bold uppercase tracking-[0.14em] rounded-full border border-gold/60 opacity-50 cursor-not-allowed
-                after:absolute after:inset-1 after:rounded-full after:border after:border-gold/30 after:pointer-events-none"
+              aria-label="Submit RSVP (available in Phase 4)"
+              className="group mx-auto flex flex-col items-center gap-2 pt-2 opacity-60 cursor-not-allowed"
             >
-              Submit RSVP
+              <WaxSeal variant="button" className="w-20 h-20 drop-shadow-md" />
+              <span className="uppercase tracking-[0.2em] text-sm font-bold text-burgundy">
+                Submit RSVP
+              </span>
             </button>
 
             {/* Info Text */}
@@ -116,18 +125,26 @@ export default function RSVPSection({ data }: RSVPSectionProps) {
           </div>
         </div>
 
-        {/* FAQ Section */}
+        {/* FAQ — folded notes: the question on the outside, unfold for the answer */}
         <div className="mt-16">
-          <h3 className="text-2xl font-serif font-bold text-charcoal mb-8 text-center">Questions?</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <h3 className="text-engraved text-2xl font-serif font-bold text-charcoal mb-8 text-center">Questions?</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
             {data.faqs.slice(0, 4).map((faq, index) => (
-              <div
+              <details
                 key={index}
-                className="bg-ivory p-6 rounded-lg border border-sage/30 hover:border-sage transition-colors duration-300"
+                className="group grain bg-ivory rounded-lg border border-sage/30 hover:border-gold/50 open:border-gold/50 open:shadow-soft transition-all duration-300"
               >
-                <h4 className="text-lg font-serif font-bold text-burgundy mb-2">{faq.question}</h4>
-                <p className="text-charcoal/75">{faq.answer}</p>
-              </div>
+                <summary className="flex items-center justify-between gap-4 p-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                  <h4 className="text-lg font-serif font-bold text-burgundy">{faq.question}</h4>
+                  <span
+                    aria-hidden
+                    className="flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full border border-gold/50 text-gold-dark text-sm leading-none transition-transform duration-300 group-open:rotate-45"
+                  >
+                    +
+                  </span>
+                </summary>
+                <p className="px-6 pb-6 -mt-1 text-charcoal/75">{faq.answer}</p>
+              </details>
             ))}
           </div>
         </div>

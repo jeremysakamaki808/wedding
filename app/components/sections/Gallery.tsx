@@ -44,8 +44,12 @@ export default function Gallery() {
           {imageData.map((image, index) => (
             <div
               key={image.id}
-              className={`relative rounded-lg overflow-hidden cursor-pointer group border border-cream-dark ${
-                index === 0 ? 'lg:col-span-2 lg:row-span-2' : ''
+              className={`relative rounded-lg overflow-hidden cursor-pointer group border border-cream-dark transition-transform duration-500 hover:rotate-0 hover:z-10 ${
+                index === 0
+                  ? 'lg:col-span-2 lg:row-span-2'
+                  : index % 2
+                    ? 'md:rotate-[0.6deg]'
+                    : 'md:-rotate-[0.5deg]'
               }`}
             >
               {image.url ? (

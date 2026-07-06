@@ -91,11 +91,14 @@ export default function WeddingParty({ data }: WeddingPartyProps) {
               key={member.id}
               className="party-card group relative bg-ivory rounded-lg overflow-hidden border border-sage/30 hover:border-sage transition-all duration-300 cursor-pointer opacity-0"
             >
-              {/* Image Placeholder */}
-              <div className="w-full h-64 bg-garden-mist border-b border-cream-dark flex items-center justify-center overflow-hidden">
-                <div className="text-center">
-                  <p className="text-sage uppercase tracking-[0.18em] text-sm font-semibold">Photo</p>
-                  <p className="text-brown/50 text-xs mt-1 uppercase tracking-[0.14em]">Placeholder</p>
+              {/* Victorian cameo portrait frame (real photos will fill the oval) */}
+              <div className="grain w-full h-64 bg-garden-mist border-b border-cream-dark flex items-center justify-center overflow-hidden">
+                <div className="relative w-40 h-52 flex items-center justify-center bg-ivory/70 border border-gold/50 [border-radius:50%_50%_50%_50%/42%_42%_58%_58%]">
+                  <div aria-hidden className="absolute inset-1.5 border border-gold/30 [border-radius:inherit]" />
+                  <div className="text-center px-4">
+                    <p className="text-sage uppercase tracking-[0.18em] text-sm font-semibold">Photo</p>
+                    <p className="text-brown/50 text-xs mt-1 uppercase tracking-[0.14em]">Placeholder</p>
+                  </div>
                 </div>
               </div>
 
@@ -106,9 +109,9 @@ export default function WeddingParty({ data }: WeddingPartyProps) {
                 <p className="text-charcoal/75 text-sm">{member.bio}</p>
               </div>
 
-              {/* Side Badge */}
-              <div className="absolute top-4 right-4 px-3 py-1 bg-burgundy rounded-full text-xs font-bold text-ivory">
-                {member.side === 'bride' ? '👰' : '🤵'}
+              {/* Embroidered side badge */}
+              <div className="absolute top-4 right-4 px-3 py-1 bg-ivory/95 rounded-full border border-gold/60 text-[10px] font-bold uppercase tracking-[0.16em] text-burgundy shadow-soft">
+                {member.side === 'bride' ? "K's side" : "J's side"}
               </div>
             </div>
           ))}
