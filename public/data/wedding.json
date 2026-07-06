@@ -23,20 +23,20 @@
     "images": [
       {
         "id": "venue-1",
-        "url": "/images/venue/venue-1.jpg",
-        "alt": "Kaimea Estates lush gardens with coastal views",
+        "url": "https://images.squarespace-cdn.com/content/v1/60a29d738b4b396e23140532/10aeee3b-6d3a-4903-9a69-268ab87ccce1/image-asset.jpeg?format=1500w",
+        "alt": "Kaimea Estates lush tropical gardens",
         "credit": "Photo courtesy of Kaimea Estates"
       },
       {
         "id": "venue-2",
-        "url": "/images/venue/venue-2.jpg",
+        "url": "https://images.squarespace-cdn.com/content/v1/60a29d738b4b396e23140532/6d7e839b-98cb-4fb4-8b79-1d7a9976dfc6/IMG_4640+%281%29.JPG?format=1500w",
         "alt": "Elegant estate garden decorated for celebration",
         "credit": "Photo courtesy of Kaimea Estates"
       },
       {
         "id": "venue-3",
-        "url": "/images/venue/venue-3.jpg",
-        "alt": "Ceremony lawn at Kaimea Estates",
+        "url": "https://images.squarespace-cdn.com/content/v1/60a29d738b4b396e23140532/961639d7-2f87-48f1-a900-977bb415ffbd/IMG_8615.JPG?format=1500w",
+        "alt": "Oceanfront ceremony lawn at Kaimea Estates",
         "credit": "Photo courtesy of Kaimea Estates"
       }
     ]

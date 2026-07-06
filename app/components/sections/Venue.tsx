@@ -41,15 +41,25 @@ export default function Venue({ data }: VenueProps) {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             <div className="space-y-4">
               {venue.images.map((image) => (
-                <div
+                <figure
                   key={image.id}
                   className="w-full h-64 md:h-80 rounded-2xl overflow-hidden flex items-center justify-center border border-cream-dark bg-garden-mist"
                 >
-                  <div className="text-center px-6">
-                    <p className="text-sage uppercase tracking-[0.18em] text-sm font-semibold">{image.alt}</p>
-                    <p className="text-brown/50 text-xs mt-2 uppercase tracking-[0.14em]">Placeholder Image</p>
-                  </div>
-                </div>
+                  {image.url ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={image.url}
+                      alt={image.alt}
+                      loading="lazy"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="text-center px-6">
+                      <p className="text-sage uppercase tracking-[0.18em] text-sm font-semibold">{image.alt}</p>
+                      <p className="text-brown/50 text-xs mt-2 uppercase tracking-[0.14em]">Placeholder Image</p>
+                    </div>
+                  )}
+                </figure>
               ))}
             </div>
 

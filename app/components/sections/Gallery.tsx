@@ -1,21 +1,26 @@
 'use client';
 
-import React from 'react';
-import Image from 'next/image';
-
 export default function Gallery() {
-  // Gallery images — replace with real images as they become available
-  // For now, using placeholders; update imageData array with real URLs when ready
+  // Temporary gallery — reuses the three Kaimea Estates venue photos (hotlinked
+  // from Kaimea's CDN, mirroring public/data/wedding.json). Swap for the
+  // couple's own photos when available; extra slots fall back to placeholders.
   const imageData = [
-    { id: 'gallery-1', url: null, alt: 'Gallery image 1' },
-    { id: 'gallery-2', url: null, alt: 'Gallery image 2' },
-    { id: 'gallery-3', url: null, alt: 'Gallery image 3' },
-    { id: 'gallery-4', url: null, alt: 'Gallery image 4' },
-    { id: 'gallery-5', url: null, alt: 'Gallery image 5' },
-    { id: 'gallery-6', url: null, alt: 'Gallery image 6' },
-    { id: 'gallery-7', url: null, alt: 'Gallery image 7' },
-    { id: 'gallery-8', url: null, alt: 'Gallery image 8' },
-  ];
+    {
+      id: 'gallery-1',
+      url: 'https://images.squarespace-cdn.com/content/v1/60a29d738b4b396e23140532/10aeee3b-6d3a-4903-9a69-268ab87ccce1/image-asset.jpeg?format=1500w',
+      alt: 'Kaimea Estates lush tropical gardens',
+    },
+    {
+      id: 'gallery-2',
+      url: 'https://images.squarespace-cdn.com/content/v1/60a29d738b4b396e23140532/961639d7-2f87-48f1-a900-977bb415ffbd/IMG_8615.JPG?format=1500w',
+      alt: 'Oceanfront ceremony lawn at Kaimea Estates',
+    },
+    {
+      id: 'gallery-3',
+      url: 'https://images.squarespace-cdn.com/content/v1/60a29d738b4b396e23140532/6d7e839b-98cb-4fb4-8b79-1d7a9976dfc6/IMG_4640+%281%29.JPG?format=1500w',
+      alt: 'Elegant estate garden decorated for celebration',
+    },
+  ] as { id: string; url: string | null; alt: string }[];
 
   return (
     <section id="gallery" className="py-20 bg-ivory">
@@ -44,6 +49,7 @@ export default function Gallery() {
               {image.url ? (
                 <>
                   {/* Real Image */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={image.url}
                     alt={image.alt}

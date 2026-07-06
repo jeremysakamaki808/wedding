@@ -2,54 +2,43 @@
 
 This document tracks the source, permissions, and licensing for all imagery used on the Kelsey & Jeremy wedding website.
 
-## Venue Photography (Permanent)
+## Venue Photography (Kaimea Estates)
 
-### venue-1.jpg — Lush Gardens with Coastal Views
-- **Source:** Kaimea Estates
-- **Website:** https://kaimeaestates.com/
-- **Date Sourced:** [DATE TO BE FILLED IN]
-- **Permission:** [STATUS: PENDING / APPROVED / CONDITIONAL]
-- **Contact Name/Email:** [TO BE FILLED IN]
-- **License Type:** [e.g., "Permanent license for wedding website use"]
-- **Photographer:** [If credited on Kaimea site]
-- **Dimensions:** 600×400px
-- **File Size:** [KB]
-- **Format:** JPG (Progressive encoding, quality 85%)
+**Hosting note:** These images are currently **hotlinked** directly from Kaimea
+Estates' Squarespace CDN (`images.squarespace-cdn.com`) rather than stored
+locally. This cloud build environment cannot download or receive image files,
+so the site references the live URLs. To make them permanent and
+self-hosted, download each URL, optimize it (600×400, ~85% quality, <250 KB),
+save into `public/images/venue/`, and repoint `public/data/wedding.json` at the
+local paths.
 
-### venue-2.jpg — Elegant Decorated Garden/Pavilion
-- **Source:** Kaimea Estates
-- **Website:** https://kaimeaestates.com/
-- **Date Sourced:** [DATE TO BE FILLED IN]
-- **Permission:** [STATUS: PENDING / APPROVED / CONDITIONAL]
-- **Contact Name/Email:** [TO BE FILLED IN]
-- **License Type:** [e.g., "Permanent license for wedding website use"]
-- **Photographer:** [If credited on Kaimea site]
-- **Dimensions:** 600×400px
-- **File Size:** [KB]
-- **Format:** JPG (Progressive encoding, quality 85%)
+| Slot | Section alt text | Source image | Live URL |
+|------|------------------|--------------|----------|
+| venue-1 | Kaimea Estates lush tropical gardens | Garden pergola swing / grounds | `.../image-asset.jpeg?format=1500w` |
+| venue-2 | Elegant estate garden decorated for celebration | Reception table w/ floral garland | `.../IMG_4640+%281%29.JPG?format=1500w` |
+| venue-3 | Oceanfront ceremony lawn at Kaimea Estates | Ceremony arch, petal aisle, ocean | `.../IMG_8615.JPG?format=1500w` |
 
-### venue-3.jpg — Ceremony Lawn at Kaimea Estates
-- **Source:** Kaimea Estates
-- **Website:** https://kaimeaestates.com/
-- **Date Sourced:** [DATE TO BE FILLED IN]
-- **Permission:** [STATUS: PENDING / APPROVED / CONDITIONAL]
-- **Contact Name/Email:** [TO BE FILLED IN]
-- **License Type:** [e.g., "Permanent license for wedding website use"]
-- **Photographer:** [If credited on Kaimea site]
-- **Dimensions:** 600×400px
-- **File Size:** [KB]
-- **Format:** JPG (Progressive encoding, quality 85%)
+Full URLs (base `https://images.squarespace-cdn.com/content/v1/60a29d738b4b396e23140532/`):
+- **venue-1:** `10aeee3b-6d3a-4903-9a69-268ab87ccce1/image-asset.jpeg?format=1500w`
+- **venue-2:** `6d7e839b-98cb-4fb4-8b79-1d7a9976dfc6/IMG_4640+%281%29.JPG?format=1500w`
+- **venue-3:** `961639d7-2f87-48f1-a900-977bb415ffbd/IMG_8615.JPG?format=1500w`
+
+- **Source:** Kaimea Estates — https://kaimeaestates.com/gallery
+- **Date Sourced:** July 6, 2026
+- **Permission:** PENDING — recommend confirming written permission with the venue
+- **Photographer:** [If credited on Kaimea site — TBD]
 
 ---
 
-## Gallery Photography (Temporary - To Be Replaced)
+## Gallery Photography (Temporary)
 
-*Gallery images are currently placeholders. When couple provides professional wedding/venue photos, replace these entries.*
+The 8-slot gallery grid currently **reuses the three Kaimea venue photos above**
+(same hotlinked URLs) for the first three tiles; remaining tiles fall back to
+styled placeholders. Replace all of these with the couple's own professional
+wedding/venue photography when available.
 
-- **gallery-1.jpg through gallery-8.jpg**
-- **Status:** [PLACEHOLDER / SOURCED / FINAL]
+- **Status:** TEMPORARY — reusing Kaimea venue photos
 - **Photographer:** [TBD — Couple's professional photographer]
-- **Permission:** [TBD]
 - **Expected Date:** [TBD]
 
 ---

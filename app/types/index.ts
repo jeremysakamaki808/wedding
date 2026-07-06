@@ -16,7 +16,7 @@ export interface VenueImage {
   id: string;
   url: string;
   alt: string;
-  prompt: string;
+  credit?: string;
 }
 
 export interface Venue {
