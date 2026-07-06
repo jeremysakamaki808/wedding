@@ -15,6 +15,15 @@
     "name": "Kaimea Estates",
     "address": "Aina Haina, Honolulu, HI",
     "mapEmbed": "https://maps.google.com/maps?q=Kaimea+Estates,+Aina+Haina,+Honolulu,+HI&output=embed",
+    "mapbox": {
+      "username": "jeremysakamaki",
+      "styleId": "cmr8jtaiq002k01stflex9jk9",
+      "tilesetId": "jeremysakamaki.ka729fipga43",
+      "coordinates": [21.2875, -157.7833],
+      "zoom": 12.15,
+      "pitch": 62,
+      "bearing": 338
+    },
     "description": "Kaimea Estates captures the timeless charm of historic estates with lush grounds and a stunning coastal setting. The venue perfectly balances elegance and relaxation—creating an atmosphere where guests can truly enjoy themselves.",
     "arrival": "2:30 PM – Shuttle pickup from designated locations",
     "ceremony": "3:30 PM – Ceremony",

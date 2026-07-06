@@ -8,6 +8,7 @@ import type { WeddingData } from '@/types';
 import EstatePlate from '@/components/ui/EstatePlate';
 import Lantern from '@/components/ui/Lantern';
 import CornerFlourish from '@/components/ui/CornerFlourish';
+import MapboxMap from '@/components/ui/MapboxMap';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -37,6 +38,25 @@ function CompassRose({ className }: { className: string }) {
         N
       </text>
     </svg>
+  );
+}
+
+/** Old Google embed, kept as the fallback when Mapbox is unavailable.
+    The sepia survey wash (lifting on hover/focus) applies only here — the
+    custom Mapbox style is the couple's own design and renders untinted. */
+function MapEmbedFallback({ src }: { src: string }) {
+  return (
+    <iframe
+      src={src}
+      width="100%"
+      height="300"
+      style={{ border: 0, display: 'block' }}
+      className="transition-[filter] duration-500 [filter:sepia(0.25)_saturate(0.85)] group-hover:filter-none group-focus-within:filter-none"
+      allowFullScreen
+      loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
+      title="Map to Kaimea Estates"
+    />
   );
 }
 
@@ -216,18 +236,24 @@ export default function Venue({ data }: VenueProps) {
                   noGrade
                   caption="ʻĀina Haina, Oʻahu — surveyed for the sixteenth of October"
                 >
-                  {/* Sepia survey wash lifts on hover/focus so the map stays usable */}
+                  {/* The couple's custom "Midnight Aloha 3D" Mapbox style; the
+                      old Google embed stays behind it as the no-token /
+                      style-failure fallback. */}
                   <div className="group relative">
-                    <iframe
-                      src={venue.mapEmbed}
-                      width="100%"
-                      height="300"
-                      style={{ border: 0, display: 'block' }}
-                      className="transition-[filter] duration-500 [filter:sepia(0.25)_saturate(0.85)] group-hover:filter-none group-focus-within:filter-none"
-                      allowFullScreen
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                    />
+                    {venue.mapbox && process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN ? (
+                      <MapboxMap
+                        accessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
+                        username={venue.mapbox.username}
+                        styleId={venue.mapbox.styleId}
+                        coordinates={venue.mapbox.coordinates}
+                        zoom={venue.mapbox.zoom}
+                        pitch={venue.mapbox.pitch}
+                        bearing={venue.mapbox.bearing}
+                        fallback={<MapEmbedFallback src={venue.mapEmbed} />}
+                      />
+                    ) : (
+                      <MapEmbedFallback src={venue.mapEmbed} />
+                    )}
                     <CompassRose className="absolute top-2.5 right-2.5 w-9 h-9 text-gold-dark/80 pointer-events-none drop-shadow-sm" />
                   </div>
                 </EstatePlate>

@@ -23,6 +23,17 @@ export interface Venue {
   name: string;
   address: string;
   mapEmbed: string;
+  mapbox?: {
+    username: string;
+    styleId: string;
+    /** Studio dataset tileset backing the custom style (reference only —
+        the style already includes it as a source) */
+    tilesetId?: string;
+    coordinates: [number, number];
+    zoom: number;
+    pitch: number;
+    bearing: number;
+  };
   description: string;
   arrival: string;
   ceremony: string;
