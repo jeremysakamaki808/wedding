@@ -1,0 +1,88 @@
+{
+  "type": "FeatureCollection",
+  "note": "Wedding pins + shuttle routes for the venue map. Studio style uploads reject inline geojson sources, so these live here and are added to the map at runtime by MapboxMap.tsx. Coordinates are [lng, lat]. The Kaimea Estates pin is a manual placement on the Kalanianaole Hwy / Aina Haina corridor and should be visually confirmed in Mapbox.",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kaimea Estates",
+        "kind": "venue",
+        "subtitle": "Ceremony & reception",
+        "address": "5223 Kalanianaole Hwy, Honolulu, HI 96821"
+      },
+      "geometry": { "type": "Point", "coordinates": [-157.754, 21.2789] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kahala Mall",
+        "kind": "shuttle",
+        "subtitle": "2:30 PM shuttle pickup",
+        "address": "4211 Waialae Avenue, Honolulu, HI 96816"
+      },
+      "geometry": { "type": "Point", "coordinates": [-157.7862834, 21.2765357] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Manoa Marketplace",
+        "kind": "shuttle",
+        "subtitle": "2:30 PM shuttle pickup",
+        "address": "2752 Woodlawn Dr, Honolulu, HI 96822"
+      },
+      "geometry": { "type": "Point", "coordinates": [-157.8107712, 21.3083571] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ala Moana Center",
+        "kind": "shuttle",
+        "subtitle": "2:30 PM shuttle pickup",
+        "address": "1450 Ala Moana Boulevard, Honolulu, HI 96814"
+      },
+      "geometry": { "type": "Point", "coordinates": [-157.8437734, 21.2914727] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Kahala Mall to Kaimea Estates", "kind": "shuttle-route" },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-157.7862834, 21.2765357],
+          [-157.776, 21.2774],
+          [-157.765, 21.2782],
+          [-157.754, 21.2789]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Manoa Marketplace to Kaimea Estates", "kind": "shuttle-route" },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-157.8107712, 21.3083571],
+          [-157.805, 21.298],
+          [-157.793, 21.286],
+          [-157.7862834, 21.2765357],
+          [-157.754, 21.2789]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Ala Moana Center to Kaimea Estates", "kind": "shuttle-route" },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-157.8437734, 21.2914727],
+          [-157.825, 21.292],
+          [-157.807, 21.291],
+          [-157.792, 21.283],
+          [-157.7862834, 21.2765357],
+          [-157.754, 21.2789]
+        ]
+      }
+    }
+  ]
+}
