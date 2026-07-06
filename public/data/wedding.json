@@ -23,21 +23,21 @@
     "images": [
       {
         "id": "venue-1",
-        "url": "/images/placeholder-venue-1.jpg",
+        "url": "/images/venue/venue-1.jpg",
         "alt": "Kaimea Estates lush gardens with coastal views",
-        "prompt": "Hyper-stylized GTA VI cover aesthetic: Kaimea Estates historic estate with lush tropical gardens and ocean views in golden afternoon light, neon-pink horizon, digital art style, high contrast, vibrant greens and teals, cinematic composition, trending on ArtStation"
+        "credit": "Photo courtesy of Kaimea Estates"
       },
       {
         "id": "venue-2",
-        "url": "/images/placeholder-venue-2.jpg",
+        "url": "/images/venue/venue-2.jpg",
         "alt": "Elegant estate garden decorated for celebration",
-        "prompt": "GTA VI neon noir aesthetic: Kaimea Estates garden pavilion decorated with Victorian-inspired florals and elegant setup at golden hour, cyberpunk color grading with deep blues and warm terracotta accents, dramatic lighting, digital painting style"
+        "credit": "Photo courtesy of Kaimea Estates"
       },
       {
         "id": "venue-3",
-        "url": "/images/placeholder-venue-3.jpg",
+        "url": "/images/venue/venue-3.jpg",
         "alt": "Ceremony lawn at Kaimea Estates",
-        "prompt": "GTA VI hyper-stylized estate landscape: expansive lawn ceremony space at Kaimea Estates surrounded by lush greenery, dramatic sky with warm orange and pink tones, neon accents, high-contrast digital illustration"
+        "credit": "Photo courtesy of Kaimea Estates"
       }
     ]
   },

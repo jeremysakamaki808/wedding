@@ -1,12 +1,21 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 
 export default function Gallery() {
-  const placeholderImages = Array.from({ length: 8 }, (_, i) => ({
-    id: `gallery-${i}`,
-    alt: `Gallery image ${i + 1}`,
-  }));
+  // Gallery images — replace with real images as they become available
+  // For now, using placeholders; update imageData array with real URLs when ready
+  const imageData = [
+    { id: 'gallery-1', url: null, alt: 'Gallery image 1' },
+    { id: 'gallery-2', url: null, alt: 'Gallery image 2' },
+    { id: 'gallery-3', url: null, alt: 'Gallery image 3' },
+    { id: 'gallery-4', url: null, alt: 'Gallery image 4' },
+    { id: 'gallery-5', url: null, alt: 'Gallery image 5' },
+    { id: 'gallery-6', url: null, alt: 'Gallery image 6' },
+    { id: 'gallery-7', url: null, alt: 'Gallery image 7' },
+    { id: 'gallery-8', url: null, alt: 'Gallery image 8' },
+  ];
 
   return (
     <section id="gallery" className="py-20 bg-ivory">
@@ -25,25 +34,37 @@ export default function Gallery() {
 
         {/* Gallery Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {placeholderImages.map((image, index) => (
+          {imageData.map((image, index) => (
             <div
               key={image.id}
               className={`relative rounded-lg overflow-hidden cursor-pointer group border border-cream-dark ${
                 index === 0 ? 'lg:col-span-2 lg:row-span-2' : ''
               }`}
             >
-              {/* Placeholder Image */}
-              <div className="w-full h-64 lg:h-96 bg-garden-mist flex items-center justify-center">
-                <div className="text-center">
-                  <p className="text-sage uppercase tracking-[0.18em] text-sm font-semibold">Photo</p>
-                  <p className="text-brown/50 text-xs mt-1 uppercase tracking-[0.14em]">Placeholder {index + 1}</p>
-                </div>
-              </div>
-
-              {/* Hover Overlay */}
-              <div className="absolute inset-0 bg-navy-dark/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <span className="text-ivory font-serif tracking-[0.14em] uppercase text-lg">View</span>
-              </div>
+              {image.url ? (
+                <>
+                  {/* Real Image */}
+                  <img
+                    src={image.url}
+                    alt={image.alt}
+                    className="w-full h-64 lg:h-96 object-cover"
+                  />
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-navy-dark/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span className="text-ivory font-serif tracking-[0.14em] uppercase text-lg">View</span>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {/* Placeholder */}
+                  <div className="w-full h-64 lg:h-96 bg-garden-mist flex items-center justify-center">
+                    <div className="text-center">
+                      <p className="text-sage uppercase tracking-[0.18em] text-sm font-semibold">Photo</p>
+                      <p className="text-brown/50 text-xs mt-1 uppercase tracking-[0.14em]">Placeholder {index + 1}</p>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           ))}
         </div>

@@ -45,11 +45,16 @@ export default function Footer({ data }: FooterProps) {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-cream-dark pt-8 flex justify-between items-center">
-          <p className="text-cream/50 text-sm">
-            © {new Date().getFullYear()}. Crafted with aloha.
+        <div className="border-t border-cream-dark pt-8">
+          <p className="text-cream/50 text-sm mb-3">
+            Venue photography courtesy of <a href="https://kaimeaestates.com/" target="_blank" rel="noopener noreferrer" className="text-sage-light hover:text-sage transition-colors">Kaimea Estates</a>
           </p>
-          <p className="text-cream/50 text-sm">Made with love on Oahu 🌺</p>
+          <div className="flex justify-between items-center">
+            <p className="text-cream/50 text-sm">
+              © {new Date().getFullYear()}. Crafted with aloha.
+            </p>
+            <p className="text-cream/50 text-sm">Made with love on Oahu 🌺</p>
+          </div>
         </div>
       </div>
     </footer>
