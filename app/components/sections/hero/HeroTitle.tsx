@@ -8,20 +8,30 @@ export default function HeroTitle() {
         We&rsquo;re getting married!
       </p>
 
-      {/* Names — gold-foil fill that catches the light on hover */}
-      <h1 className="relative font-display text-cream uppercase leading-[0.95] tracking-tight -rotate-2 [text-shadow:0_6px_24px_rgba(19,26,48,0.55)]">
+      {/* Names — upright engraved serif in cream, the same letterpress
+          language as the section headers ("The Venue", "Day Timeline").
+          Gold stays an accent (the ampersand + hairlines), never a foil
+          surface. The layered shadow reads as pressed-in type while keeping
+          the names legible over the video. */}
+      <h1
+        className="font-display text-cream uppercase leading-[1.05]"
+        style={{
+          textShadow:
+            '0 1px 0 rgba(0,0,0,0.45), 0 -1px 0 rgba(231,207,159,0.18), 0 6px 24px rgba(19,26,48,0.6)',
+        }}
+      >
         <span className="block text-6xl sm:text-7xl md:text-[5.5rem] lg:text-[6rem]">
-          <span className="text-foil">Kelsey</span>
+          Kelsey
         </span>
-        <span className="relative block text-6xl sm:text-7xl md:text-[5.5rem] lg:text-[6rem] mt-1">
-          <span
-            aria-hidden="true"
-            className="absolute -top-8 left-1/2 -translate-x-1/2 font-script normal-case text-4xl md:text-5xl text-gold-light leading-none rotate-[-6deg] z-10 [text-shadow:0_2px_10px_rgba(19,26,48,0.7)]"
-          >
-            and
-          </span>
-          <span className="sr-only">and </span>
-          <span className="text-foil">Jeremy</span>
+        <span
+          aria-hidden="true"
+          className="block font-serif normal-case text-gold-light text-3xl md:text-4xl leading-none my-1 md:my-1.5"
+        >
+          &amp;
+        </span>
+        <span className="sr-only">and </span>
+        <span className="block text-6xl sm:text-7xl md:text-[5.5rem] lg:text-[6rem]">
+          Jeremy
         </span>
       </h1>
 

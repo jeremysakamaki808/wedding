@@ -340,6 +340,17 @@ export default function Timeline({ data }: TimelineProps) {
         aria-hidden
         className="absolute inset-x-0 top-0 h-[34vh] md:h-[52vh] [background:linear-gradient(to_bottom,#172243_0%,#1F2B4D_16%,#2A1B3D_34%,#5C3A5C_50%,#8B4A6B_63%,#C98B72_77%,#EFDFC6_90%,#F8F5EF_100%)]"
       />
+      {/* Photographic pre-dawn sky (Jeremy's Luma render) laid over the CSS
+          dawn cap, which stays underneath as the fallback if the image can't
+          load. Anchored to the top so the render's deep-navy crown is flush
+          with the venue night above (no seam); masked at both ends so it melts
+          into that navy and dissolves into the morning ivory below. The stars
+          and first-light glow layer on top of it. */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-[34vh] md:h-[52vh] bg-cover bg-no-repeat bg-[position:center_top] [mask-image:linear-gradient(to_bottom,transparent_0%,black_7%,black_68%,transparent_97%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_7%,black_68%,transparent_97%)]"
+        style={{ backgroundImage: "url('/textures/dawn-sky.jpg')" }}
+      />
       {/* The sky, part two: October-afternoon ivory through golden hour and
           ember dusk into starlit navy — scrolling the schedule scrolls the day */}
       <div
