@@ -1,7 +1,5 @@
 import React from 'react';
 import HeroTitle from '@/components/sections/hero/HeroTitle';
-import HeroCards from '@/components/sections/hero/HeroCards';
-import HeroCTA from '@/components/sections/hero/HeroCTA';
 import OahuBadge from '@/components/sections/hero/OahuBadge';
 import VenueBackdrop from '@/components/sections/VenueBackdrop';
 import Lantern from '@/components/ui/Lantern';
@@ -117,14 +115,14 @@ export default function Hero() {
         <CornerFlourish flip className="absolute top-20 right-4 md:top-24 md:right-8 w-16 h-16 md:w-24 md:h-24 text-cream/30 z-10" />
       </div>
 
-      {/* Left-aligned hero content */}
+      {/* Left-aligned hero content, anchored to the lower third so the starry
+          sky breathes up top and the invitation clears the nav. Bottom offset
+          keeps it above the "Begin" lantern and the Oʻahu badge. */}
       <div
         data-hero-content
-        className="relative z-10 h-full px-5 sm:px-8 md:pl-[6vw] pt-24 md:pt-[8vh] pb-24 md:pb-14"
+        className="relative z-10 h-full flex flex-col justify-end px-5 sm:px-8 md:pl-[6vw] pt-24 pb-[13vh] md:pb-[14vh]"
       >
         <HeroTitle />
-        <HeroCards />
-        <HeroCTA />
       </div>
 
       <div data-hero-content>
