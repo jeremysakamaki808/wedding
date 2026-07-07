@@ -8,6 +8,7 @@ import type { WeddingData } from '@/types';
 import TimelineStop from '@/components/timeline/TimelineStop';
 import CornerFlourish from '@/components/ui/CornerFlourish';
 import PalmFrond from '@/components/ui/PalmFrond';
+import PreDawnSky from '@/components/ui/PreDawnSky';
 import usePrefersReducedMotion from '@/lib/usePrefersReducedMotion';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -53,22 +54,6 @@ const STARS_TL_B = [
   [83, 250], [90, 200], [15, 20], [69, 20], [96, 330],
 ]
   .map(([x, y]) => `${x}vw ${y}px 0 0.85px rgba(231,207,159,0.8)`)
-  .join(', ');
-
-/* Pre-dawn stars over the section's dark cap — the night the venue scene
-   left off in continues across the seam, dissolving as first light comes */
-const STARS_DAWN = [
-  [6, 24], [14, 90], [22, 40], [30, 130], [37, 18], [44, 74], [52, 120],
-  [60, 36], [67, 96], [75, 22], [83, 110], [90, 58], [96, 140], [26, 200],
-  [58, 180], [88, 205],
-]
-  .map(([x, y]) => `${x}vw ${y}px 0 0.6px rgba(248,245,239,0.7)`)
-  .join(', ');
-
-const STARS_DAWN_B = [
-  [10, 150], [34, 60], [48, 20], [70, 160], [80, 44], [93, 92], [18, 170],
-]
-  .map(([x, y]) => `${x}vw ${y}px 0 0.85px rgba(231,207,159,0.75)`)
   .join(', ');
 
 /* Firefly motes over the dusk rows: [left %, drift duration s, delay s] */
@@ -257,16 +242,15 @@ export default function Timeline({ data }: TimelineProps) {
         aria-hidden
         className="absolute inset-x-0 top-0 h-[34vh] md:h-[52vh] [background:linear-gradient(to_bottom,#172243_0%,#1F2B4D_16%,#2A1B3D_34%,#5C3A5C_50%,#8B4A6B_63%,#C98B72_77%,#EFDFC6_90%,#F8F5EF_100%)]"
       />
-      {/* Photographic pre-dawn sky (Jeremy's Luma render) laid over the CSS
-          dawn cap, which stays underneath as the fallback if the image can't
-          load. Anchored to the top so the render's deep-navy crown is flush
-          with the venue night above (no seam); masked at both ends so it melts
-          into that navy and dissolves into the morning ivory below. The stars
-          and first-light glow layer on top of it. */}
-      <div
-        aria-hidden
-        className="absolute inset-x-0 top-0 h-[34vh] md:h-[52vh] bg-cover bg-no-repeat bg-[position:center_top] [mask-image:linear-gradient(to_bottom,transparent_0%,black_7%,black_68%,transparent_97%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_7%,black_68%,transparent_97%)]"
-        style={{ backgroundImage: "url('/textures/dawn-sky.jpg')" }}
+      {/* Photographic pre-dawn sky (the shared PreDawnSky, laid over the CSS
+          dawn cap which stays underneath as the no-image fallback). FULLY
+          OPAQUE at the top edge: the venue section above ends on the same
+          asset mirrored, so the section boundary is a mirror plane of the
+          identical crown pixels — the seam cannot show. Dissolves into the
+          morning ivory below; stars ride inside the component. */}
+      <PreDawnSky
+        className="absolute inset-x-0 top-0 h-[34vh] md:h-[52vh]"
+        mask="linear-gradient(to bottom, black 0%, black 68%, transparent 97%)"
       />
       {/* The sky, part two: October-afternoon ivory through golden hour and
           ember dusk into starlit navy — scrolling the schedule scrolls the day */}
@@ -274,21 +258,6 @@ export default function Timeline({ data }: TimelineProps) {
         aria-hidden
         className="absolute inset-x-0 bottom-0 top-[34vh] md:top-[52vh] [background:linear-gradient(to_bottom,#F8F5EF_0%,#F5EDDD_24%,#EDDBB2_42%,#DFAF83_56%,#B06A5E_67%,#5C3A5C_76%,#28304F_86%,#172243_100%)]"
       />
-
-      {/* Last stars of the night before, dissolving as dawn comes */}
-      <div
-        aria-hidden
-        className="absolute inset-x-0 top-0 h-[26vh] md:h-[34vh] hidden sm:block motion-reduce:!hidden pointer-events-none [mask-image:linear-gradient(to_bottom,black_30%,transparent_95%)]"
-      >
-        <span
-          className="absolute top-0 left-0 w-px h-px rounded-full [animation:twinkle_5.8s_ease-in-out_infinite]"
-          style={{ boxShadow: STARS_DAWN }}
-        />
-        <span
-          className="absolute top-0 left-0 w-px h-px rounded-full [animation:twinkle_7.8s_ease-in-out_1.4s_infinite]"
-          style={{ boxShadow: STARS_DAWN_B }}
-        />
-      </div>
 
       {/* First light: a warm glow swelling up from the dawn horizon,
           scroll-driven so morning arrives as you do */}

@@ -11,6 +11,7 @@ import EstatePlate from '@/components/ui/EstatePlate';
 import Lantern from '@/components/ui/Lantern';
 import CornerFlourish from '@/components/ui/CornerFlourish';
 import PalmFrond from '@/components/ui/PalmFrond';
+import PreDawnSky from '@/components/ui/PreDawnSky';
 import MapboxMap from '@/components/ui/MapboxMap';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -324,7 +325,17 @@ export default function Venue({ data }: VenueProps) {
           Timeline's dawn cap opens on, so the two sections read continuous. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-screen h-80 z-10 [background:linear-gradient(to_bottom,transparent_0%,rgba(23,34,67,0.55)_44%,rgba(23,34,67,0.92)_72%,#172243_90%)]"
+        className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-screen h-80 md:h-[56vh] z-10 [background:linear-gradient(to_bottom,transparent_0%,rgba(23,34,67,0.1)_16%,rgba(23,34,67,0.32)_33%,rgba(23,34,67,0.55)_48%,rgba(23,34,67,0.74)_62%,rgba(23,34,67,0.88)_75%,rgba(23,34,67,0.96)_86%,#172243_96%)]"
+      />
+      {/* ...and the night has texture: the venue scene comes to rest on the
+          SAME pre-dawn sky the Day Timeline opens on, mirrored so the section
+          boundary is a mirror plane of identical crown pixels (same asset,
+          same full-bleed width, same box height — bg-cover scales match, so
+          flat navy never butts against textured navy). The seam disappears. */}
+      <PreDawnSky
+        flip
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-screen h-[34vh] md:h-[52vh] z-20"
+        mask="linear-gradient(to bottom, transparent 0%, transparent 24%, rgba(0,0,0,0.08) 36%, rgba(0,0,0,0.22) 47%, rgba(0,0,0,0.42) 58%, rgba(0,0,0,0.64) 68%, rgba(0,0,0,0.84) 78%, rgba(0,0,0,0.95) 88%, black 96%)"
       />
     </section>
   );
