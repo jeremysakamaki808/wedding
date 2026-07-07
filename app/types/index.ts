@@ -50,6 +50,11 @@ export interface TimelineItem {
   /** Optional one-line practical tip shown as a "field note" beneath the
       stop's engraved vignette (desktop) or inside the card (mobile) */
   note?: string;
+  /** Painterly scene art for this moment. When absent, the stop falls back
+      to the engraved line vignette so the section ships before assets land. */
+  image?: string;
+  /** Practical detail rows revealed by the card's "What to expect" disclosure */
+  details?: { label: string; value: string }[];
 }
 
 export interface WeddingPartyMember {

@@ -188,7 +188,7 @@ export default function Venue({ data }: VenueProps) {
         <CornerFlourish className="absolute top-5 left-5 w-20 h-20 md:w-28 md:h-28 text-gold-dark/35 pointer-events-none" />
         <CornerFlourish flip className="absolute bottom-5 right-5 w-20 h-20 md:w-28 md:h-28 rotate-180 -scale-y-100 text-gold-dark/35 pointer-events-none" />
 
-        <div className="relative px-6 py-14 sm:px-10 md:px-14 lg:px-16 md:py-16">
+        <div className="relative px-6 pt-14 pb-44 sm:px-10 md:px-14 md:pt-16 md:pb-64 lg:px-16">
           <div className="max-w-3xl mb-12 md:mb-16">
             <p className="kicker-lines uppercase tracking-[0.3em] text-sage text-xs md:text-sm font-semibold mb-3">
               Where we say &ldquo;I do&rdquo;
@@ -324,6 +324,15 @@ export default function Venue({ data }: VenueProps) {
           </div>
         </div>
       </div>
+
+      {/* Night rises over the foot of the page: the folio's empty parchment
+          tail darkens into the timeline's pre-dawn navy so the paper dissolves
+          into the night with no hard edge. #172243 is the exact tone the
+          Timeline's dawn cap opens on, so the two sections read continuous. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-screen h-80 z-10 [background:linear-gradient(to_bottom,transparent_0%,rgba(23,34,67,0.55)_44%,rgba(23,34,67,0.92)_72%,#172243_90%)]"
+      />
     </section>
   );
 }

@@ -64,49 +64,91 @@
       "event": "Shuttle Pickup",
       "description": "Please arrive at your designated shuttle location. Pickups from Kahala Mall, Mānoa Marketplace, and Ala Moana Shopping Center.",
       "icon": "🚗",
-      "note": "Shuttles depart promptly — arrive 15 minutes early."
+      "note": "Shuttles depart promptly — arrive 15 minutes early.",
+      "image": "/images/timeline/stop-0.jpg",
+      "details": [
+        { "label": "Pickups", "value": "Kahala Mall · Mānoa Marketplace · Ala Moana Center" },
+        { "label": "Arrive by", "value": "2:15 PM — shuttles leave promptly at 2:30" },
+        { "label": "Parking", "value": "None at the estate; rideshare to your shuttle stop" }
+      ]
     },
     {
       "time": "3:00 PM",
       "event": "Guest Arrival",
       "description": "Welcome to Kaimea Estates. Settle in and enjoy the beautiful grounds.",
       "icon": "👋",
-      "note": "Wander the grounds — the ocean lawn is open for photos."
+      "note": "Wander the grounds — the ocean lawn is open for photos.",
+      "image": "/images/timeline/stop-1.jpg",
+      "details": [
+        { "label": "Attire", "value": "Estate garden attire — dressy and outdoor-ready" },
+        { "label": "Where", "value": "Kaimea Estates, the oceanfront grounds" },
+        { "label": "Tip", "value": "The ocean lawn is open for photos before we begin" }
+      ]
     },
     {
       "time": "3:30 PM",
       "event": "Ceremony",
       "description": "The big moment. Two become one.",
       "icon": "💍",
-      "note": "The lawn faces west over the Pacific — sunglasses welcome."
+      "note": "The lawn faces west over the Pacific — sunglasses welcome.",
+      "image": "/images/timeline/stop-2.jpg",
+      "details": [
+        { "label": "Where", "value": "The oceanfront lawn, facing west over the Pacific" },
+        { "label": "Seating", "value": "Open seating — please arrive a few minutes early" },
+        { "label": "Tip", "value": "Afternoon sun off the water — sunglasses welcome" }
+      ]
     },
     {
       "time": "4:00 PM",
       "event": "Cocktail Hour",
       "description": "Celebrate with champagne, appetizers, and toasts.",
       "icon": "🥂",
-      "note": "Champagne, island pūpūs, and a pair of signature cocktails."
+      "note": "Champagne, island pūpūs, and a pair of signature cocktails.",
+      "image": "/images/timeline/stop-3.jpg",
+      "details": [
+        { "label": "Sips", "value": "Champagne, two signature cocktails, and a full bar" },
+        { "label": "Bites", "value": "Island pūpūs passed on the lanai" },
+        { "label": "Where", "value": "The garden terrace beside the lawn" }
+      ]
     },
     {
       "time": "5:00 PM",
       "event": "Reception",
       "description": "Self-guided dining with small plates, open bar, lawn games, and mingling.",
       "icon": "🎉",
-      "note": "Grass underfoot — wedges over stilettos."
+      "note": "Grass underfoot — wedges over stilettos.",
+      "image": "/images/timeline/stop-4.jpg",
+      "details": [
+        { "label": "Dining", "value": "Self-guided small plates, open bar, and lawn games" },
+        { "label": "Footwear", "value": "Grass underfoot — wedges over stilettos" },
+        { "label": "Where", "value": "The main lawn and lanai" }
+      ]
     },
     {
       "time": "8:00 PM",
       "event": "Evening Celebration",
       "description": "Special dances, good company, and lasting memories.",
       "icon": "✨",
-      "note": "Sunset at 6:07 — dancing under string lights and stars."
+      "note": "Sunset at 6:07 — dancing under string lights and stars.",
+      "image": "/images/timeline/stop-5.jpg",
+      "details": [
+        { "label": "Highlights", "value": "First dance, toasts, and dancing under the stars" },
+        { "label": "Sunset", "value": "6:07 PM over the Pacific — golden hour before the lights" },
+        { "label": "Where", "value": "The lawn beneath the string lights" }
+      ]
     },
     {
       "time": "8:00 PM",
       "event": "Shuttle Departure",
       "description": "Return shuttles available to your original pickup location.",
       "icon": "🌙",
-      "note": "Return shuttles serve all three morning pickup points."
+      "note": "Return shuttles serve all three morning pickup points.",
+      "image": "/images/timeline/stop-6.jpg",
+      "details": [
+        { "label": "Return", "value": "Shuttles to all three morning pickup points" },
+        { "label": "Timing", "value": "Continuous departures through the evening" },
+        { "label": "Tip", "value": "No need to rush — catch the coach when you're ready" }
+      ]
     }
   ],
   "wedding_party": [
