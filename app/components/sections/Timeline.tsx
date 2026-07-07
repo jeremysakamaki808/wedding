@@ -6,6 +6,8 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import type { WeddingData } from '@/types';
 import TimelineStop from '@/components/timeline/TimelineStop';
+import CornerFlourish from '@/components/ui/CornerFlourish';
+import PalmFrond from '@/components/ui/PalmFrond';
 import usePrefersReducedMotion from '@/lib/usePrefersReducedMotion';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -140,19 +142,23 @@ export default function Timeline({ data }: TimelineProps) {
       },
     });
 
+    // Each stop settles quietly onto the page — a short fade and rise rather
+    // than the old sideways slide, so the motion matches the venue folio's
+    // calm scrubbed ink-draw instead of reading as a different site.
     items.forEach((item, index) => {
       timeline.fromTo(
         item,
         {
           opacity: 0,
-          x: index % 2 === 0 ? -60 : 60,
+          y: 28,
         },
         {
           opacity: 1,
-          x: 0,
-          duration: 0.6,
+          y: 0,
+          duration: 0.7,
+          ease: 'power2.out',
         },
-        index * 0.15
+        index * 0.12
       );
     });
 
@@ -336,6 +342,20 @@ export default function Timeline({ data }: TimelineProps) {
 
         {/* Timeline Items */}
         <div ref={containerRef} className="timeline-container relative">
+          {/* Folio echoes: the same fern flourishes and palm watermark that
+              frame the venue folio, plus a faint parchment wash down the
+              center, so the timeline reads as the next page of that document
+              rather than loose cards on open sky. Kept low enough that the
+              day-to-night sky still breathes through. */}
+          <div
+            aria-hidden
+            className="hidden md:block absolute inset-y-0 left-1/2 -translate-x-1/2 w-[46rem] max-w-full pointer-events-none [background:radial-gradient(ellipse_58%_50%_at_center,rgba(245,237,221,0.11),transparent_75%)] [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]"
+          />
+          <PalmFrond className="hidden md:block absolute top-20 -left-12 w-56 h-56 text-sage opacity-[0.08] rotate-[18deg] pointer-events-none" />
+          <PalmFrond className="hidden md:block absolute bottom-24 -right-14 w-64 h-64 text-sage opacity-[0.07] -rotate-[24deg] -scale-x-100 pointer-events-none" />
+          <CornerFlourish className="hidden md:block absolute -top-3 left-0 w-24 h-24 text-gold-dark/25 pointer-events-none" />
+          <CornerFlourish flip className="hidden md:block absolute -bottom-3 right-0 w-24 h-24 rotate-180 -scale-y-100 text-gold-dark/25 pointer-events-none" />
+
           {/* The spine: dashed road + drawn ink, each in two masked layers so
               the linework ages from charcoal in daylight to lantern-gold in
               the night sky (a single charcoal line would vanish on navy) */}
@@ -374,8 +394,8 @@ export default function Timeline({ data }: TimelineProps) {
             </span>
           </div>
 
-          {/* Timeline Items Grid */}
-          <div className="space-y-12">
+          {/* Timeline Items Grid — seated above the folio ornament */}
+          <div className="relative z-10 space-y-12">
             {timeline.map((item, index) => (
               <TimelineStop key={index} item={item} index={index} phase={timePhase(item.time)} />
             ))}
